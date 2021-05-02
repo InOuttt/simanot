@@ -4,9 +4,12 @@ services:
   #Laravel App
   simanot-app:
     build:
-      context: .
+      args:
+        user: inot
+        uid: 1000
+      context: ./
       dockerfile: Dockerfile
-    image: hakase-labs/laravel
+    image: inouttt/laravel
     container_name: simanot-app-container
     restart: unless-stopped
     tty: true

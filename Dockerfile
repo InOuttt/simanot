@@ -1,6 +1,10 @@
 # Set master image
 FROM php:7.4-fpm-alpine
 
+# Arguments defined in docker-compose.yml
+ARG user
+ARG uid
+
 # Copy composer.lock and composer.json
 COPY composer.lock composer.json /var/www/html/
 
@@ -39,12 +43,13 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Remove Cache
 RUN rm -rf /var/cache/apk/*
 
-# Change current user to www
-USER root
+# Create system user to run Composer and Artisan Commands
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
 
-RUN composer install
-RUN php artisan key:generate
-RUN php artisan migrate --seed
+
+USER $user
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
