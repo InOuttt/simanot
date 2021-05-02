@@ -35,6 +35,7 @@ RUN docker-php-ext-enable pdo_mysql
 # Install PHP Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+
 # Remove Cache
 RUN rm -rf /var/cache/apk/*
 
@@ -46,6 +47,10 @@ COPY --chown=www-data:www-data . /var/www/html
 
 # Change current user to www
 USER www-data
+
+RUN composer install
+RUN php artisan key:generate
+RUN php artisan migrate --seed
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000

@@ -26,10 +26,10 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: laraveldb
-      MYSQL_USER: laravel
-      MYSQL_PASSWORD: laravelpassworddb
-      MYSQL_ROOT_PASSWORD: rootpasswordmysql
+      MYSQL_DATABASE: simanot
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 
+      MYSQL_ROOT_PASSWORD: 
     volumes:
       - mysqldata:/var/lib/mysql/
     networks:
