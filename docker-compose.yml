@@ -14,24 +14,6 @@ services:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
     working_dir: /var/www/html
-    volumes:
-      - ./:/var/www/html
-    networks:
-      - mynet
-
-  #Nginx Service
-  nginx:
-    image: nginx:alpine
-    container_name: simanot-nginx
-    restart: unless-stopped
-    tty: true
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./:/var/www/html
-      - ./nginx/conf.d/:/etc/nginx/conf.d/
-      - ./nginx/ssl/:/etc/nginx/ssl/
     networks:
       - mynet
 
