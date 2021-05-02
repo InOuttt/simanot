@@ -6,8 +6,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: InOuttt/laravel
-    container_name: app
+    image: hakase-labs/laravel
+    container_name: simanot-app
     restart: unless-stopped
     tty: true
     environment:
@@ -22,7 +22,7 @@ services:
   #Nginx Service
   nginx:
     image: nginx:alpine
-    container_name: nginx
+    container_name: simanot-nginx
     restart: unless-stopped
     tty: true
     ports:
@@ -38,7 +38,7 @@ services:
   #MySQL Service
   db:
     image: mysql:5.7
-    container_name: db
+    container_name: simanot-db
     restart: unless-stopped
     tty: true
     ports:
