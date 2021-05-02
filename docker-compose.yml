@@ -2,25 +2,43 @@ version: '3'
 services:
 
   #Laravel App
-  app:
+  simanot-app:
     build:
       context: .
       dockerfile: Dockerfile
     image: hakase-labs/laravel
-    container_name: simanot-app
+    container_name: simanot-app-container
     restart: unless-stopped
     tty: true
     environment:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
     working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
     networks:
       - mynet
 
+  #Nginx Service
+  # nginx:
+  #   image: nginx:alpine
+  #   container_name: simanot-nginx
+  #   restart: unless-stopped
+  #   tty: true
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./:/var/www/html
+  #     - ./nginx/conf.d/:/etc/nginx/conf.d/
+  #     - ./nginx/ssl/:/etc/nginx/ssl/
+  #   networks:
+  #     - mynet
+
   #MySQL Service
-  db:
+  simanot-db:
     image: mysql:5.7
-    container_name: simanot-db
+    container_name: simanot-db-container
     restart: unless-stopped
     tty: true
     ports:
