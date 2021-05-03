@@ -22,15 +22,14 @@ services:
     networks:
       - mynet
 
-  Nginx Service
+  #~Nginx Service
   simanot-nginx:
     image: nginx:alpine
     container_name: simanot-nginx-container
     restart: unless-stopped
     tty: true
     ports:
-      - "9000:9000"
-      - "4430:443"
+      - "80:80"
     volumes:
       - ./:/var/www/html
       - ./nginx/conf.d/:/etc/nginx/conf.d/
@@ -48,9 +47,7 @@ services:
       - "3306:3306"
     environment:
       MYSQL_DATABASE: simanot
-      MYSQL_USER: root
-      MYSQL_PASSWORD: 
-      MYSQL_ROOT_PASSWORD: 
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
     volumes:
       - mysqldata:/var/lib/mysql/
     networks:
