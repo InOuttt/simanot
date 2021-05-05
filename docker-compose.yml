@@ -42,11 +42,14 @@ services:
     image: node:12-alpine
     container_name: npm
     working_dir: /var/www/html
+    entrypoint:
+      - /init-scripts/node_start.sh
     volumes:
       - ./:/var/www/html
-    entrypoint: ['npm', '--no-bin-links']
+      - ./docker/init-scripts/:/init-scripts/
     networks: 
       - mynet
+        # entrypoint: ['npm', '--no-bin-links']
 
   #MySQL Service
   simanot-db:
