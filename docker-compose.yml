@@ -2,12 +2,15 @@ version: '3'
 services:
 
   #Laravel App
-  app:
+  simanot-app:
     build:
-      context: .
+      args:
+        user: inot
+        uid: 1000
+      context: ./
       dockerfile: Dockerfile
-    image: InOuttt/laravel
-    container_name: app
+    image: inouttt/laravel
+    container_name: simanot-app-container
     restart: unless-stopped
     tty: true
     environment:
@@ -19,35 +22,46 @@ services:
     networks:
       - mynet
 
-  #Nginx Service
-  nginx:
+  #~Nginx Service
+  simanot-nginx:
     image: nginx:alpine
-    container_name: nginx
+    container_name: simanot-nginx-container
     restart: unless-stopped
     tty: true
     ports:
       - "80:80"
-      - "443:443"
     volumes:
       - ./:/var/www/html
       - ./nginx/conf.d/:/etc/nginx/conf.d/
       - ./nginx/ssl/:/etc/nginx/ssl/
     networks:
       - mynet
+  
+  # node
+  npm:
+    image: node:12-alpine
+    container_name: npm
+    working_dir: /var/www/html
+    entrypoint:
+      - /init-scripts/node_start.sh
+    volumes:
+      - ./:/var/www/html
+      - ./docker/init-scripts/:/init-scripts/
+    networks: 
+      - mynet
+        # entrypoint: ['npm', '--no-bin-links']
 
   #MySQL Service
-  db:
+  simanot-db:
     image: mysql:5.7
-    container_name: db
+    container_name: simanot-db-container
     restart: unless-stopped
     tty: true
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: laraveldb
-      MYSQL_USER: laravel
-      MYSQL_PASSWORD: laravelpassworddb
-      MYSQL_ROOT_PASSWORD: rootpasswordmysql
+      MYSQL_DATABASE: simanot
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
     volumes:
       - mysqldata:/var/lib/mysql/
     networks:

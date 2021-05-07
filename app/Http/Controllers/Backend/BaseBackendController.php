@@ -47,10 +47,4 @@ class BaseBackendController extends Controller
         return view($this->view_create);
     }
 
-    /**
-     * @return mixed
-     * @throws \App\Exceptions\GeneralException
-     * @throws \Throwable
-     */
-
 }

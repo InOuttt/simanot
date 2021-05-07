@@ -19,24 +19,24 @@ class CreateMNotarisTable extends Migration
             $table->text('address')->nullable();
             $table->text('domicile')->nullable();
             $table->string('couple_name')->nullable();
+            $table->integer('pending_akta')->default(0);
 
             $table->timestamps();
         });
         Schema::create('akta_hutang', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_notaris');
-            $table->string('name');
             $table->string('no_covernote')->nullable();
             $table->date('tanggal_covernote')->nullable();
             $table->integer('durasi')->nullable();
             $table->date('jatuh_tempo')->nullable();
             $table->integer('os')->nullable();
-            $table->tinyInteger('is_perpanjangan_sertifikat')->nullable();
+            $table->enum('is_perpanjangan_sertifikat', ['Y', 'T'])->default('T');
             $table->string('cluster')->nullable();
             $table->string('nama_debitur')->nullable();
             $table->string('nama_dokumen')->nullable();
             $table->string('nomor_tanggal_dokumen')->nullable();
-            $table->enum('status_dokumen', ['terima', 'belum terima']);
+            $table->enum('status_dokumen', ['terima', 'belum terima'])->default('belum terima');
             $table->date('tanggal_terima_dokumen')->nullable();
             $table->integer('jumlah_salinan')->nullable();
             $table->date('tanggal_selesai')->nullable();
