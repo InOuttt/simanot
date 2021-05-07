@@ -13,10 +13,10 @@ class AktaNotarisController extends BaseBackendController
     public function __construct(AktaNotarisService $service)
     {
         $this->service = $service;
-        $this->view_index = 'backend.akta.notaris.index';
+        $this->view_index = 'backend.akta_notaris.index';
         $this->route_view_index = 'akta.notaris.index';
-        $this->view_edit = 'backend.akta.notaris.edit';
-        $this->view_create = 'backend.akta.notaris.create';
+        $this->view_edit = 'backend.akta_notaris.edit';
+        $this->view_create = 'backend.akta_notaris.create';
     }
 
     /**
@@ -26,10 +26,16 @@ class AktaNotarisController extends BaseBackendController
      */
     public function store(AktaNotarisRequest $request)
     {
-        
+        // dd($request->all());
         $this->service->store($request->validated());
 
         return redirect()->route($this->route_view_index)->withFlashSuccess(__('The Data was successfully created.'));
+    }
+
+    public function view(AktaNotaris $data)
+    {
+        return view('backend.auth_user.view')
+            ->withData($data);
     }
 
     public function edit(BaseRequest $request, AktaNotaris $notaris)

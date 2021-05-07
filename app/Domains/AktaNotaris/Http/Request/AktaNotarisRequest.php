@@ -18,7 +18,10 @@ class AktaNotarisRequest extends FormRequest
     {
         return true;
     }
-
+    protected function prepareForValidation()
+    {
+        // dd($this->all());
+    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -27,10 +30,23 @@ class AktaNotarisRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'max:255'],
-            'couple_name' => ['max:255'],
-            'address' => ['max:1000'],
-            'domicile' => ['max:1000'],
+            'id_notaris' => ['required', 'max:255'],
+            'no_covernote' => ['required', 'string', 'max:255'],
+            'tanggal_covernote' => ['date', 'date_format:Y-m-d'],
+            'durasi' => ['numeric'],
+            'jatuh_tempo' => ['date', 'date_format:Y-m-d'],
+            'os' => ['numeric'],
+            'is_perpanjangan_sertifikat' => ['in:Y,T'],
+            'cluster' => ['string', 'nullable'],
+            'nama_debitur' => ['string'],
+            'nama_dokumen' => ['string'],
+            'nomor_tanggal_dokumen' => ['string'],
+            'status_dokumen' => ['in:terima,belum terima'],
+            'tanggal_terima_dokumen' => ['date_format:Y-m-d', 'nullable'],
+            'jumlah_salinan' => ['numeric', 'nullable'],
+            'tanggal_selesai' => ['date_format:Y-m-d', 'nullable'],
+            'tanggal_kirim_salinan' => ['date_format:Y-m-d', 'nullable'],
         ];
     }
+
 }

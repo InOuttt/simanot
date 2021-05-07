@@ -33,14 +33,37 @@
         )
             <li class="c-sidebar-nav-title">@lang('System')</li>
 
-            <li class="c-sidebar-nav-dropdown {{ activeClass(Route::is('admin.auth.user.*') || Route::is('admin.auth.role.*'), 'c-open c-show') }}">
+            <li class="c-sidebar-nav-dropdown {{ 
+                activeClass(Route::is('admin.auth.user.*') || Route::is('admin.auth.role.*') || Route::is('admin.access.notaris*'), 
+                'c-open c-show') 
+            }}">
                 <x-utils.link
                     href="#"
-                    icon="c-sidebar-nav-icon cil-user"
+                    icon="c-sidebar-nav-icon cil-applications-settings"
                     class="c-sidebar-nav-dropdown-toggle"
-                    :text="__('Access')" />
+                    :text="__('Master')" />
 
                 <ul class="c-sidebar-nav-dropdown-items">
+
+                    @if (
+                        $logged_in_user->hasAllAccess() ||
+                        (
+                            $logged_in_user->can('admin.access.notaris.index') ||
+                            $logged_in_user->can('admin.access.notaris.create') ||
+                            $logged_in_user->can('admin.access.notaris.edit') ||
+                            $logged_in_user->can('admin.access.notaris.destroy')
+                        )
+                    )
+
+                        <li class="c-sidebar-nav-item">
+                            <x-utils.link
+                                :href="route('notaris.index')"
+                                class="c-sidebar-nav-link"
+                                :text="__('Data Notaris ')"
+                                :active="activeClass(Route::is('notaris.*'), 'c-active')" />
+                        </li>
+                    @endif
+
                     @if (
                         $logged_in_user->hasAllAccess() ||
                         (
@@ -69,13 +92,13 @@
                                 :text="__('Role Management')"
                                 :active="activeClass(Route::is('admin.auth.role.*'), 'c-active')" />
                         </li>
-                        <li class="c-sidebar-nav-item">
+                        <!-- <li class="c-sidebar-nav-item">
                             <x-utils.link
                                 :href="route('admin.auth.permission.index')"
                                 class="c-sidebar-nav-link"
                                 :text="__('Permission Management')"
                                 :active="activeClass(Route::is('admin.auth.permission.*'), 'c-active')" />
-                        </li>
+                        </li> -->
                         
                     @endif
 
@@ -108,35 +131,25 @@
             </li>
         @endif
 
-        
-        <li class="c-sidebar-nav-dropdown {{ activeClass(Route::is('notaris.*') || Route::is('akta.notaris.*'), 'c-open c-show') }}">
+        @if (
+            $logged_in_user->hasAllAccess() ||
+            (
+                $logged_in_user->can('admin.access.akta.notaris.index') ||
+                $logged_in_user->can('admin.access.akta.notaris.create') ||
+                $logged_in_user->can('admin.access.akta.notaris.edit') ||
+                $logged_in_user->can('admin.access.akta.notaris.destroy')
+            )
+        )
+
+            <li class="c-sidebar-nav-item">
                 <x-utils.link
-                    href="#"
-                    icon="c-sidebar-nav-icon cil-applications-settings"
-                    class="c-sidebar-nav-dropdown-toggle"
-                    :text="__('Master')" />
-
-                <ul class="c-sidebar-nav-dropdown-items">
-                    @if (
-                        $logged_in_user->hasAllAccess() ||
-                        (
-                            $logged_in_user->can('admin.access.notaris.index') ||
-                            $logged_in_user->can('admin.access.notaris.create') ||
-                            $logged_in_user->can('admin.access.notaris.edit') ||
-                            $logged_in_user->can('admin.access.notaris.destroy')
-                        )
-                    )
-
-                        <li class="c-sidebar-nav-item">
-                            <x-utils.link
-                                :href="route('notaris.index')"
-                                class="c-sidebar-nav-link"
-                                :text="__('Data Notaris ')"
-                                :active="activeClass(Route::is('notaris.*'), 'c-active')" />
-                        </li>
-                    @endif
-            </ul>
-        </li>
+                    :href="route('akta.notaris.index')"
+                    icon="c-sidebar-nav-icon cil-description"
+                    class="c-sidebar-nav-link"
+                    :text="__('Akta Notaris ')"
+                    :active="activeClass(Route::is('akta.notaris.*'), 'c-active')" />
+            </li>
+        @endif
 
     </ul>
 

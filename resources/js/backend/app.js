@@ -8,3 +8,5 @@ require('@coreui/coreui');
 
 // Boilerplate
 require('../plugins');
+
+require('select2');

@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\LocaleController;
-use App\Domains\Notaris\Http\Backend\Controllers\NotarisController;
-use App\Domains\Notaris\Models\Notaris;
 use Tabuna\Breadcrumbs\Trail;
+use App\Domains\Notaris\Http\Backend\Controllers\NotarisController;
+use App\Domains\AktaNotaris\Http\Backend\Controllers\AktaNotarisController;
+use App\Domains\Notaris\Models\Notaris;
+use App\Domains\Notaris\Models\AktaNotaris;
+use App\Http\Livewire\NotarisSelect2;
 /*
  * Global Routes
  *
@@ -29,6 +32,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], f
     includeRouteFiles(__DIR__.'/backend/');
 });
 
+/**
+ * app routes
+ */
+
+Route::get('/notaris/select2', NotarisSelect2::class);
+Route::get('/notaris/autocomplete', [NotarisSelect2::class, 'selectSearch']);
+
 Route::group([
     'prefix' => 'notaris',
     'as' => 'notaris.',
@@ -36,7 +46,7 @@ Route::group([
 ], function () {
     Route::get('/', [NotarisController::class, 'index'])
         ->name('index')
-        ->middleware('permission:admin.access.notaris.list')            
+        ->middleware('permission:admin.access.akta_notaris.list')            
         ->breadcrumbs(function (Trail $trail) {
             $trail->parent('admin.dashboard')
                 ->push(__('Notaris'), route('notaris.index'));
@@ -57,6 +67,40 @@ Route::group([
 
         Route::patch('/', [NotarisController::class, 'update'])->name('update');
         Route::delete('/', [NotarisController::class, 'destroy'])->name('destroy');
+    });
+});
+
+Route::group([
+    'prefix' => 'akta/notaris',
+    'as' => 'akta.notaris.',
+
+], function () {
+    Route::get('/', [AktaNotarisController::class, 'index'])
+        ->name('index')
+        ->middleware('permission:admin.access.akta_notaris.list')            
+        ->breadcrumbs(function (Trail $trail) {
+            $trail->parent('admin.dashboard')
+                ->push(__('Notaris'), route('akta.notaris.index'));
+        });
+    Route::get('create', [AktaNotarisController::class, 'create'])
+        ->name('create')
+        ->middleware('permission:admin.access.akta_notaris.create');
+    Route::get('view', [AktaNotarisController::class, 'view'])
+        ->name('view')
+        ->middleware('permission:admin.access.akta_notaris.index');
+    Route::post('/', [AktaNotarisController::class, 'store'])
+        ->name('store')
+        ->middleware('permission:admin.access.akta_notaris.create');
+    Route::group(['prefix' => '{data}'], function () {
+        Route::get('edit', [AktaNotarisController::class, 'edit'])
+            ->name('edit')
+            ->breadcrumbs(function (Trail $trail, AktaNotaris $data) {
+                $trail->parent('akta.notaris.index') 
+                    ->push(__('Editing :data', ['data' => $data->name]), route('akta.notaris.edit', $data));
+            });
+
+        Route::patch('/', [AktaNotarisController::class, 'update'])->name('update');
+        Route::delete('/', [AktaNotarisController::class, 'destroy'])->name('destroy');
     });
 });
 // Route::get('/notaris/index', [NotarisController::class, 'index'])->name('notaris.index');

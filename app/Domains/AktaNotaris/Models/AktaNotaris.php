@@ -3,6 +3,8 @@
 namespace App\Domains\AktaNotaris\Models;
 
 use App\Models\BaseModel;
+use App\Domains\Notaris\Models\Notaris;
+use App\Domains\AktaNotaris\Models\AktaNotarisNote;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class AktaNotaris extends BaseModel
@@ -12,13 +14,12 @@ class AktaNotaris extends BaseModel
 
     protected $fillable = [
         'id_notaris',
-        'name',
         'no_covernote',
         'tanggal_covernote',
         'durasi',
         'jatuh_tempo',
         'os',
-        'is_perpanjangan',
+        'is_perpanjangan_sertifikat',
         'cluster',
         'nama_debitur',
         'nama_dokumen',
@@ -38,4 +39,18 @@ class AktaNotaris extends BaseModel
     {
         return "akta_hutang";
     }
+
+    /** Relationship */
+    public function notaris() {
+        return $this->hasOne(Notaris::class, 'id', 'id_notaris');
+    }
+    public function notes() {
+        return $this->hasMany(AktaNotarisNote::class, 'id_akta_hutang', 'id');
+    }
+
+    public function getNotarisNameAttribute(): String
+    {
+       return collect($this->notaris()->pluck('name'))->implode('<br/>');
+    }
+
 }
