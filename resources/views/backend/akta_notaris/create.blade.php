@@ -137,6 +137,14 @@
                         </div>
                     </div>
 
+                    <div class="form-group row">
+                        <label for="akta_note" class="col-md-2 col-form-label">Keterangan</label>
+
+                        <div class="col-md-10">
+                            <livewire:akta-note />
+                        </div>
+                    </div>
+
                 </div>
             </x-slot>
 

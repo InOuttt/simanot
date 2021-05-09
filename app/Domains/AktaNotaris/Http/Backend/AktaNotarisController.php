@@ -7,6 +7,9 @@ use App\Http\Controllers\Backend\BaseBackendController;
 use App\Domains\AktaNotaris\Services\AktaNotarisService;
 use App\Domains\AktaNotaris\Http\Requests\AktaNotarisRequest;
 use App\Domains\AktaNotaris\Models\AktaNotaris;
+use App\Domains\AktaNotaris\Models\AktaNotarisNote;
+use App\Domains\AktaNotaris\Services\AktaNotarisNoteService;
+use Illuminate\Support\Facades\Date;
 
 class AktaNotarisController extends BaseBackendController
 {
@@ -26,8 +29,16 @@ class AktaNotarisController extends BaseBackendController
      */
     public function store(AktaNotarisRequest $request)
     {
-        // dd($request->all());
-        $this->service->store($request->validated());
+        dd($request->all());
+        $akta = $this->service->store($request->validated());
+        $dt = new Date();
+        foreach ($request->akta_note as $key => $value) {
+            AktaNotarisNote::create([
+                'note' => $request->akta_note[$key],
+                'id_akta_hutang' => $akta->id,
+                'tanggal_note' => $dt,
+            ]);
+        }
 
         return redirect()->route($this->route_view_index)->withFlashSuccess(__('The Data was successfully created.'));
     }

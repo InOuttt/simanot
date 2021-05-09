@@ -107,7 +107,7 @@
         @endif
 
         @if ($logged_in_user->hasAllAccess())
-            <li class="c-sidebar-nav-dropdown">
+            <!-- <li class="c-sidebar-nav-dropdown">
                 <x-utils.link
                     href="#"
                     icon="c-sidebar-nav-icon cil-list"
@@ -128,7 +128,7 @@
                             :text="__('Logs')" />
                     </li>
                 </ul>
-            </li>
+            </li> -->
         @endif
 
         @if (
