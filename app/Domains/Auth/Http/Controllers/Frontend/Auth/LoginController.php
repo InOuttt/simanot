@@ -44,7 +44,6 @@ class LoginController
      */
     public function showLoginForm()
     {
-        var_dump(auth()->user());
         return view('frontend.auth.login');
     }
 
