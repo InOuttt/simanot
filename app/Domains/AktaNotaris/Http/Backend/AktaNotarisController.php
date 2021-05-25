@@ -9,7 +9,8 @@ use App\Domains\AktaNotaris\Http\Requests\AktaNotarisRequest;
 use App\Domains\AktaNotaris\Models\AktaNotaris;
 use App\Domains\AktaNotaris\Models\AktaNotarisNote;
 use App\Domains\AktaNotaris\Services\AktaNotarisNoteService;
-use Illuminate\Support\Facades\Date;
+use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Http\Request;
 
 class AktaNotarisController extends BaseBackendController
 {
@@ -29,16 +30,15 @@ class AktaNotarisController extends BaseBackendController
      */
     public function store(AktaNotarisRequest $request)
     {
-        dd($request->all());
         $akta = $this->service->store($request->validated());
-        $dt = new Date();
-        foreach ($request->akta_note as $key => $value) {
-            AktaNotarisNote::create([
-                'note' => $request->akta_note[$key],
-                'id_akta_hutang' => $akta->id,
-                'tanggal_note' => $dt,
-            ]);
-        }
+        // $dt = new Date();
+        // foreach ($request->akta_note as $key => $value) {
+        //     AktaNotarisNote::create([
+        //         'note' => $request->akta_note[$key],
+        //         'id_akta_hutang' => $akta->id,
+        //         'tanggal_note' => $dt,
+        //     ]);
+        // }
 
         return redirect()->route($this->route_view_index)->withFlashSuccess(__('The Data was successfully created.'));
     }
@@ -49,21 +49,52 @@ class AktaNotarisController extends BaseBackendController
             ->withData($data);
     }
 
-    public function edit(BaseRequest $request, AktaNotaris $notaris)
+    public function upgradeIndex(HttpRequest $request = null)
     {
-        return view($this->view_edit)->withData($notaris);
+        $aktas = [];
+        if(!empty($request)) {
+            dd($request);
+        }
+        
+        return view('backend.akta_notaris.update')
+            ->withAktas($aktas);
     }
 
-    public function update(AktaNotarisRequest $request, AktaNotaris $notaris)
+    public function find(Request $request)
     {
-        $this->service->update($notaris, $request->validated());
+        $aktas = [];
+        if(!empty($request)) {
+            $aktas = AktaNotaris::where('id_notaris', '=', $request->id_notaris);
+            if(!empty($request->nama_debitur)) {
+                $aktas = $aktas->where('nama_debitur', '=', $request->nama_debitur);
+            }
+
+            $aktas = $aktas->get();
+        }
+        
+        return view('backend.akta_notaris.update')
+            ->withAktas($aktas);
+    }
+
+    public function edit(BaseRequest $request, AktaNotaris $data)
+    {
+        $akta = AktaNotaris::where('id', '=', $data)->get();
+        // dd($data);
+        return view($this->view_edit)
+            ->withData($data)
+            ->withAkta($akta);
+    }
+
+    public function update(AktaNotarisRequest $request, AktaNotaris $data)
+    {
+        $this->service->update($data, $request->validated());
 
         return redirect()->route($this->route_view_index)->withFlashSuccess(__('The Data was successfully updated.'));
     }
 
-    public function destroy(BaseRequest $request,AktaNotaris $notaris)
+    public function destroy(BaseRequest $request,AktaNotaris $data)
     {
-        $this->service->destroy($notaris);
+        $this->service->destroy($data);
 
         return redirect()->route($this->route_view_index)->withFlashSuccess(__('The Data was successfully deleted.'));
     }

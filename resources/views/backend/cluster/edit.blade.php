@@ -1,18 +1,18 @@
-@inject('model', '\App\Domains\Master\Models\Notaris')
+@inject('model', '\App\Domains\Master\Models\Cluster')
 
 @extends('backend.layouts.app')
 
-@section('title', __('Edit Data Notaris'))
+@section('title', __('Edit Data Cluster'))
 
 @section('content')
-    <x-forms.patch :action="route('notaris.update', $data)">
+    <x-forms.patch :action="route('cluster.update', $data)">
         <x-backend.card>
             <x-slot name="header">
-                @lang('Edit Data Notaris '){{$data->nama}}
+                @lang('Edit Data Cluster '){{$data->nama}}
             </x-slot>
 
             <x-slot name="headerActions">
-                <x-utils.link class="card-header-action" :href="route('notaris.index')" :text="__('Batal')" />
+                <x-utils.link class="card-header-action" :href="route('cluster.index')" :text="__('Batal')" />
             </x-slot>
 
             <x-slot name="body">
@@ -21,7 +21,7 @@
                         <label for="nama" class="col-md-2 col-form-label">Nama</label>
 
                         <div class="col-md-10">
-                            <input type="text" name="nama" class="form-control" placeholder="{{ __('contoh: Notaris abcde') }}" value="{{ $data->nama }}" maxlength="100" required />
+                            <input type="text" name="nama" class="form-control" placeholder="{{ __('contoh: Cluster abcde') }}" value="{{ $data->nama }}" maxlength="100" required />
                         </div>
                     </div><!--form-group-->
 
@@ -29,7 +29,7 @@
                         <label for="partner_id" class="col-md-2 col-form-label">Nama Partner</label>
 
                         <div class="col-md-10">
-                            <livewire:partner-select2 :idNotaris="$data->partner_id" />
+                            <livewire:partner-select2 :idCluster="$data->partner_id" />
                         </div>
                     </div><!--form-group-->
 
@@ -53,7 +53,7 @@
             </x-slot>
 
             <x-slot name="footer">
-                <button class="btn btn-sm btn-primary float-right" type="submit">@lang('Edit Data Notaris')</button>
+                <button class="btn btn-sm btn-primary float-right" type="submit">@lang('Edit Data Cluster')</button>
             </x-slot>
         </x-backend.card>
     </x-forms.post>

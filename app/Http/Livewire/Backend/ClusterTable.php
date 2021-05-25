@@ -2,16 +2,16 @@
 
 namespace App\Http\Livewire\Backend;
 
-use App\Domains\Master\Models\Notaris;
+use App\Domains\Master\Models\Cluster;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\TableComponent;
 use Rappasoft\LaravelLivewireTables\Traits\HtmlComponents;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 
 /**
- * Class NotarisTable.
+ * Class ClusterTable.
  */
-class NotarisTable extends TableComponent
+class ClusterTable extends TableComponent
 {
     use HtmlComponents;
 
@@ -34,7 +34,7 @@ class NotarisTable extends TableComponent
      */
     public function query(): Builder
     {
-        return Notaris::query();
+        return Cluster::query();
     }
 
     public function mount()
@@ -52,27 +52,9 @@ class NotarisTable extends TableComponent
             Column::make(__('Nama'), 'nama')
                 ->searchable()
                 ->sortable(),
-            Column::make(__('Nama Pasangan'), 'partner_id')
-                ->sortable(function ($builder, $direction) {
-                    return $builder->orderBy('nama', $direction);
-                })
-                ->searchable(function ($builder, $term) {
-                    return $builder->orWhereHas('partner', function ($query) use ($term) {
-                        return $query->where('nama', 'like', '%'.$term.'%');
-                });
-                })
-                ->format(function (Notaris $model) {
-                  return $this->html($model->partner_name);
-                }),
-            Column::make(__('Alamat'), 'alamat')
-              ->searchable()
-              ->sortable(),
-            Column::make(__('Domisili'), 'domisili')
-              ->searchable()
-              ->sortable(),
             Column::make(__('Actions'))
-                ->format(function (Notaris $model) {
-                    return view('backend.notaris.includes.actions', ['model' => $model]);
+                ->format(function (Cluster $model) {
+                    return view('backend.cluster.includes.actions', ['model' => $model]);
                 }),
         ];
     }

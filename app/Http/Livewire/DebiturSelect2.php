@@ -2,11 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use App\Domains\AktaNotaris\Models\AktaNotaris;
 use Livewire\Component;
 use App\Domains\Master\Models\Notaris;
 use Illuminate\Http\Request;
 
-class NotarisSelect2 extends Component
+class DebiturSelect2 extends Component
 {
 
     public $notaris = [
@@ -29,9 +30,8 @@ class NotarisSelect2 extends Component
 
     public function render()
     {
-        return view('livewire.select2-dropdown')
-            ->withOldData($this->oldData)
-            ->extends('layouts.app');
+        return view('livewire.select2-debitur')
+          ->extends('layouts.app');
     }
 
     public function selectSearch(Request $request)
@@ -40,21 +40,15 @@ class NotarisSelect2 extends Component
 
         if($request->has('q')){
             $search = $request->q;
-            $notaris =Notaris::select("id", "name")
-                    ->withCount(['covernotes' => function($query) {
-                            $query->where('status', 1);
-                        }])
-            		->where('name', 'LIKE', "%$search%")
-            		->having('covernotes_count', '<=', 15)
+            $notaris =AktaNotaris::select("id", "nama_debitur")
+            		->where('nama_debitur', 'LIKE', "%$search%")
+                ->limit(10)
             		->get();
         } else {
-            $notaris = Notaris::select('id', 'name')
-                    ->withCount(['covernotes' => function($query) {
-                            $query->where('status', 1);
-                        }])
-            		->having('covernotes_count', '<=', 15)
-                    ->orderBy('name')
-                    ->get();
+            $notaris = AktaNotaris::select('id', 'nama_debitur')
+                        ->orderBy('nama_debitur')
+                        ->limit(10)
+                        ->get();
         }
         $this->notaris = $notaris;
         return response()->json($notaris);

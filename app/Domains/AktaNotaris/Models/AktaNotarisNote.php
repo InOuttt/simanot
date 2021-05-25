@@ -12,22 +12,21 @@ class AktaNotarisNote extends BaseModel
     use HasFactory;
 
     protected $fillable = [
-        'id_akta_hutang',
-        'tanggal_note',
+        'covernote_document_id',
+        'type',
+        'note_date',
         'note',
         'created_by',
         'updated_by',
-        'created_at',
-        'updated_at',
     ];
     
     public function getTable()
     {
-        return "akta_hutang_note";
+        return "covernote_note";
     }
 
     /** Relationship */
-    public function aktaHutang() {
-        return $this->belongsTo(AktaNotaris::class, 'id', 'id_akta_hutang');
+    public function covernoteDocument() {
+        return $this->belongsTo(AktaNotarisDocument::class, 'id', 'covernote_document_id');
     }
 }

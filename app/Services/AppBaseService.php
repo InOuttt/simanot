@@ -38,7 +38,7 @@ class AppBaseService extends BaseService
         try {
             $model = $this->model::create($data);
         } catch (Exception $e) {
-            var_dump($e->getMessage());exit;
+            dd($e->getMessage());
             DB::rollBack();
 
             throw new GeneralException(__('There was a problem creating the data.'));

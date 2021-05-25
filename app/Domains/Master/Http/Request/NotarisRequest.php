@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Notaris\Http\Requests;
+namespace App\Domains\Master\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -27,10 +27,10 @@ class NotarisRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'max:255'],
-            'couple_name' => ['max:255'],
-            'address' => ['max:1000'],
-            'domicile' => ['max:1000'],
+            'nama' => ['required', 'max:255'],
+            'partner_id' => ['max:255'],
+            'alamat' => ['max:1000'],
+            'domisili' => ['max:1000'],
         ];
     }
 }

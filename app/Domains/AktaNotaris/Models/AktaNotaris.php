@@ -3,7 +3,7 @@
 namespace App\Domains\AktaNotaris\Models;
 
 use App\Models\BaseModel;
-use App\Domains\Notaris\Models\Notaris;
+use App\Domains\Master\Models\Notaris;
 use App\Domains\AktaNotaris\Models\AktaNotarisNote;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -13,39 +13,31 @@ class AktaNotaris extends BaseModel
     use HasFactory;
 
     protected $fillable = [
-        'id_notaris',
+        'notaris_id',
         'no_covernote',
-        'tanggal_covernote',
-        'durasi',
-        'jatuh_tempo',
+        'date_covernote',
+        'duration',
+        'due_date',
         'os',
-        'is_perpanjangan_sertifikat',
+        'is_certificate_renewal',
         'cluster',
-        'nama_debitur',
-        'nama_dokumen',
-        'nomor_tanggal_dokumen',
-        'status_dokumen',
-        'tanggal_terima_dokumen',
-        'jumlah_salinan',
-        'tanggal_selesai',
-        'tanggal_kirim_salinan',
+        'debtor_name',
         'created_by',
         'updated_by',
-        'created_at',
-        'updated_at',
     ];
     
     public function getTable()
     {
-        return "akta_hutang";
+        return "covernote";
     }
 
     /** Relationship */
     public function notaris() {
-        return $this->hasOne(Notaris::class, 'id', 'id_notaris');
+        return $this->hasOne(Notaris::class, 'id', 'notaris_id');
     }
-    public function notes() {
-        return $this->hasMany(AktaNotarisNote::class, 'id_akta_hutang', 'id');
+
+    public function covernoteDocuments() {
+        return $this->hasMany(AktaNotarisDocument::class, 'covernote_id', 'id');
     }
 
     public function getNotarisNameAttribute(): String

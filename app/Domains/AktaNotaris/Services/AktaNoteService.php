@@ -6,9 +6,9 @@ use App\Domains\AktaNotaris\Models\AktaNotarisNote;
 use App\Services\AppBaseService;
 
 /**
- * Class AktaNotarisService.
+ * Class AktaNoteService.
  */
-class AktaNotarisNoteService extends AppBaseService
+class AktaNoteService extends AppBaseService
 {
     
     public function __construct(AktaNotarisNote $constructor)

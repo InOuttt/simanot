@@ -28,21 +28,21 @@ class PermissionRoleSeeder extends Seeder
             'type' => User::TYPE_ADMIN,
             'name' => 'Administrator',
         ]);
-        Role::create([
+        $roleOperator = Role::create([
             'id' => 2,
             'type' => User::TYPE_ADMIN,
             'name' => 'Operator',
         ]);
-        Role::create([
+        $roleInquiry = Role::create([
             'id' => 3,
             'type' => User::TYPE_ADMIN,
             'name' => 'Inquiry',
         ]);
-        Role::create([
-            'id' => 4,
-            'type' => User::TYPE_ADMIN,
-            'name' => 'Supervisor',
-        ]);
+        // Role::create([
+        //     'id' => 4,
+        //     'type' => User::TYPE_ADMIN,
+        //     'name' => 'Supervisor',
+        // ]);
 
         // Non Grouped Permissions
         //
@@ -93,12 +93,12 @@ class PermissionRoleSeeder extends Seeder
             ]),
         ]);
 
-        $notaris = Permission::create([
+        $permissionNotaris = Permission::create([
             'type' => User::TYPE_ADMIN,
             'name' => 'admin.access.notaris',
             'description' => 'All Notaris Permissions',
         ]);
-        $notaris->children()->saveMany([
+        $permissionNotaris->children()->saveMany([
             new Permission([
                 'type' => User::TYPE_ADMIN,
                 'name' => 'admin.access.notaris.list',
@@ -118,6 +118,34 @@ class PermissionRoleSeeder extends Seeder
                 'type' => User::TYPE_ADMIN,
                 'name' => 'admin.access.notaris.delete',
                 'description' => 'Delete Notaris',
+            ]),
+        ]);
+
+        $permissionCluster = Permission::create([
+            'type' => User::TYPE_ADMIN,
+            'name' => 'admin.access.cluster',
+            'description' => 'All Cluster Permissions',
+        ]);
+        $permissionCluster->children()->saveMany([
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.access.cluster.list',
+                'description' => 'View Cluster',
+            ]),
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.access.cluster.create',
+                'description' => 'Create Cluster',
+            ]),
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.access.cluster.update',
+                'description' => 'Update Cluster',
+            ]),
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.access.cluster.delete',
+                'description' => 'Delete Cluster',
             ]),
         ]);
 
@@ -173,6 +201,11 @@ class PermissionRoleSeeder extends Seeder
 
         // Assign Permissions to other Roles
         //
+        $roleOperator->givePermissionTo($akta_notaris);
+        $roleOperator->givePermissionTo($permissionNotaris);
+        $roleOperator->givePermissionTo($permissionCluster);
+        $roleInquiry->givePermissionTo($akta_notaris);
+        // $akta_notaris->syncRoles($roles);
 
         $this->enableForeignKeys();
     }

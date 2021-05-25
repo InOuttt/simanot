@@ -12,7 +12,7 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 /**
  * Class AktaNotarisTable.
  */
-class AktaNotarisTable extends TableComponent
+class CovernoteFollowupTable extends TableComponent
 {
     use HtmlComponents;
 
@@ -65,16 +65,7 @@ class AktaNotarisTable extends TableComponent
             Column::make(__('No.Covernote '), 'no_covernote')
                 ->searchable()
                 ->sortable(),
-            Column::make(__('Tanggal Covernote'), 'tanggal_covernote')
-              ->searchable()
-              ->sortable(),
-            Column::make(__('Durasi'), 'durasi')
-              ->searchable()
-              ->sortable(),
             Column::make(__('Jatuh Tempo'), 'jatuh_tempo')
-              ->searchable()
-              ->sortable(),
-            Column::make(__('OS'), 'os')
               ->searchable()
               ->sortable(),
             Column::make(__('Status Perpanjangan'), 'is_perpanjangan_sertifikat')
@@ -89,27 +80,12 @@ class AktaNotarisTable extends TableComponent
             Column::make(__('Nama Dokumen'), 'nama_dokumen')
               ->searchable()
               ->sortable(),
-            Column::make(__('Nomor Tanggal Dokumen'), 'nomor_tanggal_dokumen')
-              ->searchable()
-              ->sortable(),
             Column::make(__('Status Dokumen'), 'status_dokumen')
-              ->searchable()
-              ->sortable(),
-            Column::make(__('Tanggal Terima Dokumen'), 'tanggal_terima_dokumen')
-              ->searchable()
-              ->sortable(),
-            Column::make(__('Jumlah Salinan'), 'jumlah_salinan')
-              ->searchable()
-              ->sortable(),
-            Column::make(__('Tanggal Selesai'), 'tanggal_selesai')
-              ->searchable()
-              ->sortable(),
-            Column::make(__('Tanggal Kirim Salinan'), 'tanggal_kirim_salinan')
               ->searchable()
               ->sortable(),
             Column::make(__('Keterangan'), 'notes_label')
               ->searchable(function ($builder, $term) {
-                return $builder->orWhereHas('notes', function ($query) use ($term) {
+                return $builder->orWhereHas('akta_notaris_note', function ($query) use ($term) {
                     return $query->where('note', 'like', '%'.$term.'%');
                 });
               })
@@ -118,7 +94,7 @@ class AktaNotarisTable extends TableComponent
               }),
             Column::make(__('Actions'))
                 ->format(function (AktaNotaris $model) {
-                    return view('backend.akta_notaris.includes.actions', ['model' => $model]);
+                    return view('backend.akta_notaris.includes.followup_action', ['model' => $model]);
                 }),
         ];
     }

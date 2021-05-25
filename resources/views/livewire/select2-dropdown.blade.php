@@ -8,7 +8,13 @@
                 <option value="{{$item->id}}">{{$item->name}}</option>
             @endforeach
         </select> -->
+        @if (!empty($oldData))
+            <input type="text" hidden name="hidden-id_notaris" id="hidden-id_notaris" value="{{$oldData->id}}"/>
+        @endif
         <select name="id_notaris" class="form-control select2" id="select2-dropdown">
+            @if (!empty($oldData))
+                <option value="{{$oldData->id}}">{{$oldData->name}}</option>
+            @endif
         </select>
     </div>
 
@@ -18,7 +24,6 @@
 
 <script>
 $(document).ready(function () {
-
         $('.select2').select2({
             placeholder: 'Pilih Notaris',
             minimumInputLength: -1,
@@ -41,10 +46,11 @@ $(document).ready(function () {
                 }
             },
             cache: true
-        });
+        }).val($('#hidden-id_notaris').val()).trigger('change');
         $(document).on('select2:open', () => {
             document.querySelector('.select2-search__field').focus();
         });
+
 
     });
 

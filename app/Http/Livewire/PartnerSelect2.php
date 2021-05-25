@@ -6,11 +6,11 @@ use Livewire\Component;
 use App\Domains\Master\Models\Notaris;
 use Illuminate\Http\Request;
 
-class NotarisSelect2 extends Component
+class PartnerSelect2 extends Component
 {
 
     public $notaris = [
-        "id" => "name"
+        "id" => "nama"
     ];
     public $realData = '';
     public $oldData;
@@ -29,7 +29,7 @@ class NotarisSelect2 extends Component
 
     public function render()
     {
-        return view('livewire.select2-dropdown')
+        return view('livewire.partner-dropdown')
             ->withOldData($this->oldData)
             ->extends('layouts.app');
     }
@@ -40,20 +40,12 @@ class NotarisSelect2 extends Component
 
         if($request->has('q')){
             $search = $request->q;
-            $notaris =Notaris::select("id", "name")
-                    ->withCount(['covernotes' => function($query) {
-                            $query->where('status', 1);
-                        }])
-            		->where('name', 'LIKE', "%$search%")
-            		->having('covernotes_count', '<=', 15)
+            $notaris =Notaris::select("id", "nama")
+            		->where('nama', 'LIKE', "%$search%")
             		->get();
         } else {
-            $notaris = Notaris::select('id', 'name')
-                    ->withCount(['covernotes' => function($query) {
-                            $query->where('status', 1);
-                        }])
-            		->having('covernotes_count', '<=', 15)
-                    ->orderBy('name')
+            $notaris = Notaris::select('id', 'nama')
+                    ->orderBy('nama')
                     ->get();
         }
         $this->notaris = $notaris;

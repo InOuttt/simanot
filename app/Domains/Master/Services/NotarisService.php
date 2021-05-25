@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domains\Notaris\Services;
+namespace App\Domains\Master\Services;
 
-use App\Domains\Notaris\Models\Notaris;
+use App\Domains\Master\Models\Notaris;
 use App\Services\AppBaseService;
 
 /**

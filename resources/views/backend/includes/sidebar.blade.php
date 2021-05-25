@@ -28,13 +28,15 @@
                 $logged_in_user->can('admin.access.user.reactivate') ||
                 $logged_in_user->can('admin.access.user.clear-session') ||
                 $logged_in_user->can('admin.access.user.impersonate') ||
-                $logged_in_user->can('admin.access.user.change-password')
+                $logged_in_user->can('admin.access.user.change-password') ||
+                $logged_in_user->can('admin.access.notaris')
             )
         )
-            <li class="c-sidebar-nav-title">@lang('System')</li>
+            <!-- <li class="c-sidebar-nav-title">@lang('System')</li> -->
 
             <li class="c-sidebar-nav-dropdown {{ 
-                activeClass(Route::is('admin.auth.user.*') || Route::is('admin.auth.role.*') || Route::is('admin.access.notaris*'), 
+                activeClass(Route::is('admin.auth.user.*') || Route::is('admin.auth.role.*') 
+                || Route::is('admin.access.notaris*') || Route::is('admin.access.cluster*'), 
                 'c-open c-show') 
             }}">
                 <x-utils.link
@@ -48,6 +50,7 @@
                     @if (
                         $logged_in_user->hasAllAccess() ||
                         (
+                            $logged_in_user->can('admin.access.notaris') ||
                             $logged_in_user->can('admin.access.notaris.index') ||
                             $logged_in_user->can('admin.access.notaris.create') ||
                             $logged_in_user->can('admin.access.notaris.edit') ||
@@ -60,6 +63,26 @@
                                 :href="route('notaris.index')"
                                 class="c-sidebar-nav-link"
                                 :text="__('Data Notaris ')"
+                                :active="activeClass(Route::is('notaris.*'), 'c-active')" />
+                        </li>
+                    @endif
+
+                    @if (
+                        $logged_in_user->hasAllAccess() ||
+                        (
+                            $logged_in_user->can('admin.access.cluster') ||
+                            $logged_in_user->can('admin.access.cluster.index') ||
+                            $logged_in_user->can('admin.access.cluster.create') ||
+                            $logged_in_user->can('admin.access.cluster.edit') ||
+                            $logged_in_user->can('admin.access.cluster.destroy')
+                        )
+                    )
+
+                        <li class="c-sidebar-nav-item">
+                            <x-utils.link
+                                :href="route('cluster.index')"
+                                class="c-sidebar-nav-link"
+                                :text="__('Data Cluster ')"
                                 :active="activeClass(Route::is('notaris.*'), 'c-active')" />
                         </li>
                     @endif
@@ -134,21 +157,72 @@
         @if (
             $logged_in_user->hasAllAccess() ||
             (
-                $logged_in_user->can('admin.access.akta.notaris.index') ||
-                $logged_in_user->can('admin.access.akta.notaris.create') ||
-                $logged_in_user->can('admin.access.akta.notaris.edit') ||
-                $logged_in_user->can('admin.access.akta.notaris.destroy')
+                $logged_in_user->can('admin.access.akta_notaris') ||
+                $logged_in_user->can('admin.access.akta_notaris.index') ||
+                $logged_in_user->can('admin.access.akta_notaris.create') ||
+                $logged_in_user->can('admin.access.akta_notaris.edit') ||
+                $logged_in_user->can('admin.access.akta_notaris.destroy')
             )
         )
+        <!-- <li class="c-sidebar-nav-title">@lang('Covernote')</li> -->
+
+           <!-- <li class="c-sidebar-nav-item"> -->
+           <li class="c-sidebar-nav-dropdown">
+               <x-utils.link
+                    href="#"
+                    icon="c-sidebar-nav-icon cil-description"
+                    class="c-sidebar-nav-dropdown-toggle"
+                    :text="__('Covernote')" 
+                    :active="activeClass(Route::is('akta.notaris.*'), 'c-open c-show')" />
+
+                <ul class="c-sidebar-nav-dropdown-items">
+                    <li class="c-sidebar-nav-item">
+                        <x-utils.link
+                            :href="route('akta.notaris.index')"
+                            class="c-sidebar-nav-link"
+                            :text="__('Daftar')" 
+                            :active="activeClass(Route::is('akta.notaris.index') || Route::is('akta.notaris.create') || Route::is('akta.notaris.edit'), 'c-active')" />
+                    </li>
+                    <li class="c-sidebar-nav-item">
+                        <x-utils.link
+                            :href="route('akta.notaris.update.index')"
+                            class="c-sidebar-nav-link"
+                            :text="__('Edit')" 
+                            :active="activeClass( Route::is('akta.notaris.update.index'), 'c-active')" />
+                    </li>
+                    <li class="c-sidebar-nav-item">
+                        <x-utils.link
+                            :href="route('akta.note.index')"
+                            class="c-sidebar-nav-link"
+                            :text="__('Follow Up')" />
+                    </li>
+                </ul>
+            </li>
 
             <li class="c-sidebar-nav-item">
+                <x-utils.link
+                    href="#"
+                    icon="c-sidebar-nav-icon cil-envelope-letter"
+                    class="c-sidebar-nav-link"
+                    :text="__('Surat Tagihan Notaris')"
+                    :active="activeClass(Route::is('akta.reporting.message'), 'c-active')" />
+            </li>
+            <li class="c-sidebar-nav-item">
+                <x-utils.link
+                    href="#"
+                    icon="c-sidebar-nav-icon cil-library"
+                    class="c-sidebar-nav-link"
+                    :text="__('Reporting')"
+                    :active="activeClass(Route::is('akta.reporting.reporting'), 'c-active')" />
+            </li>
+            <!-- <li class="c-sidebar-nav-item">
                 <x-utils.link
                     :href="route('akta.notaris.index')"
                     icon="c-sidebar-nav-icon cil-description"
                     class="c-sidebar-nav-link"
-                    :text="__('Akta Notaris ')"
+                    :text="__('Covernote')"
                     :active="activeClass(Route::is('akta.notaris.*'), 'c-active')" />
-            </li>
+            </li> -->
         @endif
 
     </ul>
