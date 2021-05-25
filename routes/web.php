@@ -75,13 +75,9 @@ Route::group([
     });
 });
 
-
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
-    includeRouteFiles(__DIR__.'/backend/');
-});
 Route::group([
-    'prefix' => 'notaris',
-    'as' => 'notaris.',
+    'prefix' => 'cluster',
+    'as' => 'cluster.',
 
 ], function () {
     require __DIR__.'/cluster.php';
