@@ -1,6 +1,6 @@
 <?php
 
-use App\Domains\Master\Http\Backend\Controllers\ClusterController;
+use App\Domains\Master\Http\Controllers\ClusterController;
 use Tabuna\Breadcrumbs\Trail;
 
 Route::get('/', [ClusterController::class, 'index'])

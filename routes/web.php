@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\LocaleController;
 use Tabuna\Breadcrumbs\Trail;
-use App\Domains\Master\Http\Backend\Controllers\NotarisController;
+use App\Domains\Master\Http\Controllers\NotarisController;
 use App\Domains\AktaNotaris\Http\Backend\Controllers\AktaNotarisController;
 use App\Domains\Master\Models\Notaris;
 use App\Domains\AktaNotaris\Models\AktaNotaris;
