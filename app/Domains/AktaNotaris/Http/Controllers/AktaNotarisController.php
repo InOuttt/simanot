@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\AktaNotaris\Http\Backend\Controllers;
+namespace App\Domains\AktaNotaris\Http\Controllers;
 
 use App\Controllers\Requests\BaseRequest;
 use App\Http\Controllers\Backend\BaseBackendController;

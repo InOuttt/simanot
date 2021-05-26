@@ -180,21 +180,14 @@
                         <x-utils.link
                             :href="route('akta.notaris.index')"
                             class="c-sidebar-nav-link"
-                            :text="__('Daftar')" 
+                            :text="__('Input Covernote')" 
                             :active="activeClass(Route::is('akta.notaris.index') || Route::is('akta.notaris.create') || Route::is('akta.notaris.edit'), 'c-active')" />
                     </li>
                     <li class="c-sidebar-nav-item">
                         <x-utils.link
-                            :href="route('akta.notaris.update.index')"
+                            href="#"
                             class="c-sidebar-nav-link"
-                            :text="__('Edit')" 
-                            :active="activeClass( Route::is('akta.notaris.update.index'), 'c-active')" />
-                    </li>
-                    <li class="c-sidebar-nav-item">
-                        <x-utils.link
-                            :href="route('akta.note.index')"
-                            class="c-sidebar-nav-link"
-                            :text="__('Follow Up')" />
+                            :text="__('Update Document')" />
                     </li>
                 </ul>
             </li>
