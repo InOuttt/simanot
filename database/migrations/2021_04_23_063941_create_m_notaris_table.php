@@ -38,7 +38,7 @@ class CreateMNotarisTable extends Migration
         Schema::create('cluster', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('formula');
+            $table->string('formula')->nullable();
 
             $table->timestamps();
         });
