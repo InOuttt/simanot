@@ -84,80 +84,46 @@ Route::group([
 });
 
 Route::group([
-    'prefix' => 'akta/notaris',
-    'as' => 'akta.notaris.',
+    'prefix' => 'covernote',
+    'as' => 'covernote.',
 
 ], function () {
-    Route::get('/', [AktaNotarisController::class, 'index'])
-        ->name('index')
-        ->middleware('permission:admin.access.akta_notaris.list')            
-        ->breadcrumbs(function (Trail $trail) {
-            $trail->parent('admin.dashboard')
-                ->push(__('Covernote'), route('akta.notaris.index'));
-        });
-    Route::get('create', [AktaNotarisController::class, 'create'])
-        ->name('create')
-        ->middleware('permission:admin.access.akta_notaris.create');
-    Route::get('view', [AktaNotarisController::class, 'view'])
-        ->name('view')
-        ->middleware('permission:admin.access.akta_notaris.index');
-    Route::post('/', [AktaNotarisController::class, 'store'])
-        ->name('store')
-        ->middleware('permission:admin.access.akta_notaris.create');
-    Route::group(['prefix' => '{data}'], function () {
-        Route::get('edit', [AktaNotarisController::class, 'edit'])
-            ->name('edit')
-            ->breadcrumbs(function (Trail $trail, AktaNotaris $data) {
-                $trail->parent('akta.notaris.index') 
-                    ->push(__('Editing Covernote :data', ['data' => $data->no_covernote]), route('akta.notaris.edit', $data));
-            });
-
-        Route::patch('/', [AktaNotarisController::class, 'update'])->name('update');
-        Route::delete('/', [AktaNotarisController::class, 'destroy'])->name('destroy');
-    });
-
-    Route::get('update', [AktaNotarisController::class, 'upgradeIndex'])
-        ->name('update.index')
-        ->middleware('permission:admin.access.akta_notaris.note.index');
-    Route::get('find', [AktaNotarisController::class, 'find'])
-        ->name('find')
-        ->middleware('permission:admin.access.akta_notaris.note.index');
-
+    require __DIR__.'/covernote.php';
 });
 
-Route::group([
-    'prefix' => 'akta/follow-up',
-    'as' => 'akta.note.',
+// Route::group([
+//     'prefix' => 'covernote/follow-up',
+//     'as' => 'covernote.',
 
-], function () {
-    Route::get('/', [AktaNotarisController::class, 'index'])
-        ->name('index')
-        ->middleware('permission:admin.access.akta_notaris.note.list')            
-        ->breadcrumbs(function (Trail $trail) {
-            $trail->parent('admin.dashboard')
-                ->push(__('Covernote'), route('akta.note.index'));
-        });
-    Route::post('/', [AktaNotarisController::class, 'store'])
-        ->name('store')
-        ->middleware('permission:admin.access.akta_notaris.note.create');
-    Route::group(['prefix' => '{data}'], function () {
-        Route::get('create', [AktaNotarisController::class, 'create'])
-            ->name('create')
-            ->middleware('permission:admin.access.akta_notaris.note.create');
-        Route::get('view', [AktaNotarisController::class, 'view'])
-            ->name('view')
-            ->middleware('permission:admin.access.akta_notaris.note.index');
-        Route::get('edit', [AktaNotarisController::class, 'edit'])
-            ->name('edit')
-            ->breadcrumbs(function (Trail $trail, AktaNotaris $data) {
-                $trail->parent('akta.note.index') 
-                    ->push(__('Editing follow-up covernote :data', ['data' => $data->no_covernote]), route('akta.note.edit', $data));
-            });
+// ], function () {
+//     Route::get('/', [AktaNotarisController::class, 'index'])
+//         ->name('index')
+//         ->middleware('permission:admin.access.akta_notaris.note.list')            
+//         ->breadcrumbs(function (Trail $trail) {
+//             $trail->parent('admin.dashboard')
+//                 ->push(__('Covernote'), route('akta.note.index'));
+//         });
+//     Route::post('/', [AktaNotarisController::class, 'store'])
+//         ->name('store')
+//         ->middleware('permission:admin.access.akta_notaris.note.create');
+//     Route::group(['prefix' => '{data}'], function () {
+//         Route::get('create', [AktaNotarisController::class, 'create'])
+//             ->name('create')
+//             ->middleware('permission:admin.access.akta_notaris.note.create');
+//         Route::get('view', [AktaNotarisController::class, 'view'])
+//             ->name('view')
+//             ->middleware('permission:admin.access.akta_notaris.note.index');
+//         Route::get('edit', [AktaNotarisController::class, 'edit'])
+//             ->name('edit')
+//             ->breadcrumbs(function (Trail $trail, AktaNotaris $data) {
+//                 $trail->parent('akta.note.index') 
+//                     ->push(__('Editing follow-up covernote :data', ['data' => $data->no_covernote]), route('akta.note.edit', $data));
+//             });
 
-        Route::patch('/', [AktaNotarisController::class, 'update'])->name('update');
-        Route::delete('/', [AktaNotarisController::class, 'destroy'])->name('destroy');
-    });
-});
+//         Route::patch('/', [AktaNotarisController::class, 'update'])->name('update');
+//         Route::delete('/', [AktaNotarisController::class, 'destroy'])->name('destroy');
+//     });
+// });
 // Route::get('/notaris/index', [NotarisController::class, 'index'])->name('notaris.index');
 // Route::get('/akta-notaris/index', [NotarisController::class, 'index'])->name('akta.notaris.index');
 // Route::get('/akta-note/index', [NotarisController::class, 'index'])->name('akta.note.index')    

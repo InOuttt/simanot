@@ -1,23 +1,22 @@
 <?php
 
-namespace App\Domains\AktaNotaris\Http\Controllers;
+namespace App\Domains\Covernote\Http\Controllers;
 
 use App\Controllers\Requests\BaseRequest;
 use App\Http\Controllers\Backend\BaseBackendController;
-use App\Domains\AktaNotaris\Http\Requests\AktaNoteRequest;
-use App\Domains\AktaNotaris\Models\AktaNotaris;
-use App\Domains\AktaNotaris\Models\AktaNotarisNote;
-use App\Domains\AktaNotaris\Services\AktaNoteService;
+use App\Domains\Covernote\Http\Requests\CovernoteFollowupRequest;
+use App\Domains\Covernote\Models\CovernoteFollowup;
+use App\Domains\Covernote\Services\CovernoteFollowupService;
 
-class AktaNoteController extends BaseBackendController
+class CovernoteFollowupController extends BaseBackendController
 {
-    public function __construct(AktaNoteService $service)
+    public function __construct(CovernoteFollowupService $service)
     {
         $this->service = $service;
-        $this->view_index = 'backend.akta_notaris_note.index';
-        $this->route_view_index = 'akta.note.index';
-        $this->view_edit = 'backend.akta_notaris_note.edit';
-        $this->view_create = 'backend.akta_notaris_note.create';
+        $this->view_index = 'backend.covernote_followup.index';
+        $this->route_view_index = 'covernote_document.index';
+        $this->view_edit = 'backend.covernote_followup.edit';
+        $this->view_create = 'backend.covernote_followup.create';
     }
 
     /**
@@ -25,12 +24,12 @@ class AktaNoteController extends BaseBackendController
      * @throws \App\Exceptions\GeneralException
      * @throws \Throwable
      */
-    public function store(AktaNoteRequest $request)
+    public function store(CovernoteFollowupRequest $request)
     {
         $akta = $this->service->store($request->validated());
         // $dt = new Date();
         // foreach ($request->akta_note as $key => $value) {
-        //     AktaNoteNote::create([
+        //     CovernoteFollowupNote::create([
         //         'note' => $request->akta_note[$key],
         //         'id_akta_hutang' => $akta->id,
         //         'tanggal_note' => $dt,
@@ -40,29 +39,29 @@ class AktaNoteController extends BaseBackendController
         return redirect()->route($this->route_view_index)->withFlashSuccess(__('The Data was successfully created.'));
     }
 
-    public function view(AktaNote $data)
+    public function view(CovernoteFollowup $data)
     {
         return view('backend.auth_user.view')
             ->withData($data);
     }
 
-    public function edit(BaseRequest $request, AktaNote $data)
+    public function edit(BaseRequest $request, CovernoteFollowup $data)
     {
-        $akta = AktaNote::where('id', '=', $data)->get();
+        $akta = CovernoteFollowup::where('id', '=', $data)->get();
         // dd($data);
         return view($this->view_edit)
             ->withData($data)
             ->withAkta($akta);
     }
 
-    public function update(AktaNoteRequest $request, AktaNote $data)
+    public function update(CovernoteFollowupRequest $request, CovernoteFollowup $data)
     {
         $this->service->update($data, $request->validated());
 
         return redirect()->route($this->route_view_index)->withFlashSuccess(__('The Data was successfully updated.'));
     }
 
-    public function destroy(BaseRequest $request,AktaNote $data)
+    public function destroy(BaseRequest $request,CovernoteFollowup $data)
     {
         $this->service->destroy($data);
 

@@ -1,27 +1,28 @@
 <?php
 
-namespace App\Domains\AktaNotaris\Models;
+namespace App\Domains\Covernote\Models;
 
 use App\Models\BaseModel;
 use App\Domains\Master\Models\Notaris;
-use App\Domains\AktaNotaris\Models\AktaNotarisNote;
+use App\Domains\Covernote\Models\CovernoteNote;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class AktaNotaris extends BaseModel
+class Covernote extends BaseModel
 {
 
     use HasFactory;
 
     protected $fillable = [
         'notaris_id',
+        'cluster_id',
         'no_covernote',
-        'date_covernote',
-        'duration',
-        'due_date',
+        'tanggal_covernote',
+        'durasi',
+        'jatuh_tempo',
         'os',
-        'is_certificate_renewal',
-        'cluster',
-        'debtor_name',
+        'is_perpanjangan_sertifikat',
+        'nama_debitur',
+        'status',
         'created_by',
         'updated_by',
     ];
@@ -37,12 +38,18 @@ class AktaNotaris extends BaseModel
     }
 
     public function covernoteDocuments() {
-        return $this->hasMany(AktaNotarisDocument::class, 'covernote_id', 'id');
+        return $this->hasMany(CovernoteDocument::class, 'covernote_id', 'id');
     }
 
     public function getNotarisNameAttribute(): String
     {
-       return collect($this->notaris()->pluck('name'))->implode('<br/>');
+       return collect($this->notaris()->pluck('nama'))->implode('<br/>');
+    }
+
+    public function getStatusLabelAttribute(): String
+    {
+       return $this->status == 0 ? 'Belum Selesai' : 'Selesai';
+    //    return $this->notaris_id;
     }
 
 }

@@ -9,7 +9,7 @@
         </x-slot>
 
         <x-slot name="body">
-          <x-forms.get :action="route('akta.notaris.find')">
+          <x-forms.get :action="route('covernote.find')">
             <div class="form-group row">
                 <label for="id_notaris" class="col-md-2 col-form-label">Nama Notaris</label>
                 <div class="col-md-4">
@@ -52,7 +52,7 @@
                   <th>{{$akta->nomor_tanggal_dokumen}}</th>
                   <th>{{$akta->tanggal_terima_dokumen}}</th>
                   <th>
-                    <x-utils.edit-button :href="route('akta.notaris.edit', $akta)" />
+                    <x-utils.edit-button :href="route('covernote.edit', $akta)" />
                   </th>
                 </tr>
               @endforeach

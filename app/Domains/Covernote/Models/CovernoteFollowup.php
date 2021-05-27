@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Domains\AktaNotaris\Models;
+namespace App\Domains\Covernote\Models;
 
 use App\Models\BaseModel;
-use App\Domains\AktaNotaris\Models\AktaNotaris;
+use App\Domains\Covernote\Models\Covernote;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class AktaNotarisNote extends BaseModel
+class CovernoteFollowup extends BaseModel
 {
 
     use HasFactory;
 
     protected $fillable = [
-        'covernote_document_id',
+        'covernote_dokumen_id',
         'type',
         'note_date',
         'note',
@@ -22,11 +22,11 @@ class AktaNotarisNote extends BaseModel
     
     public function getTable()
     {
-        return "covernote_note";
+        return "covernote_followup";
     }
 
     /** Relationship */
     public function covernoteDocument() {
-        return $this->belongsTo(AktaNotarisDocument::class, 'id', 'covernote_document_id');
+        return $this->belongsTo(CovernoteDocument::class, 'id', 'covernote_dokumen_id');
     }
 }

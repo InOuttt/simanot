@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Domains\AktaNotaris\Http\Requests;
+namespace App\Domains\Covernote\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class AktaNotarisRequest.
+ * Class CovernoteRequest.
  */
-class AktaNotarisRequest extends FormRequest
+class CovernoteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,22 +30,15 @@ class AktaNotarisRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_notaris' => ['required', 'max:255'],
+            'notaris_id' => ['required', 'max:255'],
             'no_covernote' => ['required', 'string', 'max:255'],
             'tanggal_covernote' => ['date', 'date_format:Y-m-d'],
             'durasi' => ['numeric'],
             'jatuh_tempo' => ['date', 'date_format:Y-m-d'],
             'os' => ['numeric'],
-            'is_perpanjangan_sertifikat' => ['in:Y,T'],
-            'cluster' => ['string', 'nullable'],
+            'is_perpanjangan_sertifikat' => ['in:0,1'],
+            'cluster_id' => ['string', 'nullable'],
             'nama_debitur' => ['string'],
-            'nama_dokumen' => ['string'],
-            'nomor_tanggal_dokumen' => ['string'],
-            'status_dokumen' => ['in:terima,belum terima'],
-            'tanggal_terima_dokumen' => ['date_format:Y-m-d', 'nullable'],
-            'jumlah_salinan' => ['numeric', 'nullable'],
-            'tanggal_selesai' => ['date_format:Y-m-d', 'nullable'],
-            'tanggal_kirim_salinan' => ['date_format:Y-m-d', 'nullable'],
         ];
     }
 

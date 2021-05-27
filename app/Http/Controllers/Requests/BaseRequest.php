@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Requests;
+namespace App\Http\Controllers\Requests;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;

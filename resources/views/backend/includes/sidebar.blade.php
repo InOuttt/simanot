@@ -83,7 +83,7 @@
                                 :href="route('cluster.index')"
                                 class="c-sidebar-nav-link"
                                 :text="__('Data Cluster ')"
-                                :active="activeClass(Route::is('notaris.*'), 'c-active')" />
+                                :active="activeClass(Route::is('cluster.*'), 'c-active')" />
                         </li>
                     @endif
 
@@ -157,11 +157,11 @@
         @if (
             $logged_in_user->hasAllAccess() ||
             (
-                $logged_in_user->can('admin.access.akta_notaris') ||
-                $logged_in_user->can('admin.access.akta_notaris.index') ||
-                $logged_in_user->can('admin.access.akta_notaris.create') ||
-                $logged_in_user->can('admin.access.akta_notaris.edit') ||
-                $logged_in_user->can('admin.access.akta_notaris.destroy')
+                $logged_in_user->can('admin.access.covernote') ||
+                $logged_in_user->can('admin.access.covernote.index') ||
+                $logged_in_user->can('admin.access.covernote.create') ||
+                $logged_in_user->can('admin.access.covernote.edit') ||
+                $logged_in_user->can('admin.access.covernote.destroy')
             )
         )
         <!-- <li class="c-sidebar-nav-title">@lang('Covernote')</li> -->
@@ -173,21 +173,21 @@
                     icon="c-sidebar-nav-icon cil-description"
                     class="c-sidebar-nav-dropdown-toggle"
                     :text="__('Covernote')" 
-                    :active="activeClass(Route::is('akta.notaris.*'), 'c-open c-show')" />
+                    :active="activeClass(Route::is('covernote.*'), 'c-open c-show')" />
 
                 <ul class="c-sidebar-nav-dropdown-items">
                     <li class="c-sidebar-nav-item">
                         <x-utils.link
-                            :href="route('akta.notaris.index')"
+                            :href="route('covernote.index')"
                             class="c-sidebar-nav-link"
-                            :text="__('Input Covernote')" 
-                            :active="activeClass(Route::is('akta.notaris.index') || Route::is('akta.notaris.create') || Route::is('akta.notaris.edit'), 'c-active')" />
+                            :text="__('Data Covernote')" 
+                            :active="activeClass(Route::is('covernote.index') || Route::is('covernote.create') || Route::is('covernote.edit'), 'c-active')" />
                     </li>
                     <li class="c-sidebar-nav-item">
                         <x-utils.link
                             href="#"
                             class="c-sidebar-nav-link"
-                            :text="__('Update Document')" />
+                            :text="__('Dokumen Covernote')" />
                     </li>
                 </ul>
             </li>
@@ -210,11 +210,11 @@
             </li>
             <!-- <li class="c-sidebar-nav-item">
                 <x-utils.link
-                    :href="route('akta.notaris.index')"
+                    :href="route('covernote.index')"
                     icon="c-sidebar-nav-icon cil-description"
                     class="c-sidebar-nav-link"
                     :text="__('Covernote')"
-                    :active="activeClass(Route::is('akta.notaris.*'), 'c-active')" />
+                    :active="activeClass(Route::is('covernote.*'), 'c-active')" />
             </li> -->
         @endif
 

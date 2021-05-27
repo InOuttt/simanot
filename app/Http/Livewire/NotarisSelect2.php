@@ -40,20 +40,20 @@ class NotarisSelect2 extends Component
 
         if($request->has('q')){
             $search = $request->q;
-            $notaris =Notaris::select("id", "name")
-                    ->withCount(['covernotes' => function($query) {
-                            $query->where('status', 1);
-                        }])
-            		->where('name', 'LIKE', "%$search%")
-            		->having('covernotes_count', '<=', 15)
+            $notaris =Notaris::select("id", "nama")
+                    // ->withCount(['covernotes' => function($query) {
+                    //         $query->where('status', 1);
+                    //     }])
+            		->where('nama', 'LIKE', "%$search%")
+            		// ->having('covernotes_count', '<=', 15)
             		->get();
         } else {
-            $notaris = Notaris::select('id', 'name')
-                    ->withCount(['covernotes' => function($query) {
-                            $query->where('status', 1);
-                        }])
-            		->having('covernotes_count', '<=', 15)
-                    ->orderBy('name')
+            $notaris = Notaris::select('id', 'nama')
+                    // ->withCount(['covernotes' => function($query) {
+                    //         $query->where('status', 1);
+                    //     }])
+            		// ->having('covernotes_count', '<=', 15)
+                    ->orderBy('nama')
                     ->get();
         }
         $this->notaris = $notaris;
