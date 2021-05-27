@@ -149,51 +149,51 @@ class PermissionRoleSeeder extends Seeder
             ]),
         ]);
 
-        $akta_notaris = Permission::create([
+        $covernote = Permission::create([
             'type' => User::TYPE_ADMIN,
-            'name' => 'admin.access.akta_notaris',
-            'description' => 'All Akta Notaris Permissions',
+            'name' => 'admin.access.covernote',
+            'description' => 'All Covernote Permissions',
         ]);
-        $akta_notaris->children()->saveMany([
+        $covernote->children()->saveMany([
             new Permission([
                 'type' => User::TYPE_ADMIN,
-                'name' => 'admin.access.akta_notaris.list',
-                'description' => 'View Akta Notaris',
+                'name' => 'admin.access.covernote.list',
+                'description' => 'View Covernote',
             ]),
             new Permission([
                 'type' => User::TYPE_ADMIN,
-                'name' => 'admin.access.akta_notaris.create',
-                'description' => 'Create Akta Notaris',
+                'name' => 'admin.access.covernote.create',
+                'description' => 'Create Covernote',
             ]),
             new Permission([
                 'type' => User::TYPE_ADMIN,
-                'name' => 'admin.access.akta_notaris.update',
-                'description' => 'Update Akta Notaris',
+                'name' => 'admin.access.covernote.update',
+                'description' => 'Update Covernote',
             ]),
             new Permission([
                 'type' => User::TYPE_ADMIN,
-                'name' => 'admin.access.akta_notaris.delete',
-                'description' => 'Delete Akta Notaris',
+                'name' => 'admin.access.covernote.delete',
+                'description' => 'Delete Covernote',
             ]),
             new Permission([
                 'type' => User::TYPE_ADMIN,
-                'name' => 'admin.access.akta_notaris.note.list',
-                'description' => 'View Akta Notaris',
+                'name' => 'admin.access.covernote_document.list',
+                'description' => 'View Dokumen Covernote',
             ]),
             new Permission([
                 'type' => User::TYPE_ADMIN,
-                'name' => 'admin.access.akta_notaris.note.create',
-                'description' => 'Create Akta Notaris',
+                'name' => 'admin.access.covernote_document.create',
+                'description' => 'Create Dokumen Covernote',
             ]),
             new Permission([
                 'type' => User::TYPE_ADMIN,
-                'name' => 'admin.access.akta_notaris.note.update',
-                'description' => 'Update Akta Notaris',
+                'name' => 'admin.access.covernote_document.update',
+                'description' => 'Update Dokumen Covernote',
             ]),
             new Permission([
                 'type' => User::TYPE_ADMIN,
-                'name' => 'admin.access.akta_notaris.note.delete',
-                'description' => 'Delete Akta Notaris',
+                'name' => 'admin.access.covernote_document.delete',
+                'description' => 'Delete Dokumen Covernote',
             ]),
         ]);
 
@@ -201,10 +201,10 @@ class PermissionRoleSeeder extends Seeder
 
         // Assign Permissions to other Roles
         //
-        $roleOperator->givePermissionTo($akta_notaris);
+        $roleOperator->givePermissionTo($covernote);
         $roleOperator->givePermissionTo($permissionNotaris);
         $roleOperator->givePermissionTo($permissionCluster);
-        $roleInquiry->givePermissionTo($akta_notaris);
+        $roleInquiry->givePermissionTo($covernote);
         // $akta_notaris->syncRoles($roles);
 
         $this->enableForeignKeys();
