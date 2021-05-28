@@ -20,6 +20,10 @@ class CovernoteDocumentTable extends TableComponent
      */
     public $sortField = 'created_at';
     protected $index = 0;
+    public $nama_notaris;
+    public $nama_debitur;
+    public $searchNotaris = true;
+    public $searchDebitur = true;
     
     /**
      * @var array
@@ -34,7 +38,20 @@ class CovernoteDocumentTable extends TableComponent
      */
     public function query(): Builder
     {
-        return CovernoteDocument::query();
+      $query = CovernoteDocument::query();
+      if(!empty($this->nama_debitur)) {
+        $nama = $this->nama_debitur;
+        $query->whereHas('covernote', function($q) use ($nama) {
+          $q->where('nama_debitur', 'LIKE', '%' . $nama . '%');
+        });
+      }
+      if(!empty($this->nama_notaris)) {
+        $nama = $this->nama_notaris;
+        $query->whereHas('covernote.notaris', function($q) use ($nama) {
+          $q->where('nama', 'LIKE', '%' . $nama . '%');
+        });
+      }
+        return $query;
     }
 
     public function mount()
@@ -49,51 +66,30 @@ class CovernoteDocumentTable extends TableComponent
     {
         return [
             Column::make(__('No.'))->format(fn () => ++$this->index),
-            Column::make(__('Notaris'), 'notaris_name')
+            Column::make(__('Notaris'), 'covernote.notaris.nama')
               ->sortable(function ($builder, $direction) {
-                return $builder->orderBy('notaris.name', $direction);
+                return $builder->orderBy('covernote.notaris.nama', $direction);
               })
               ->searchable(function ($builder, $term) {
-                return $builder->orWhereHas('notaris', function ($query) use ($term) {
-                    return $query->where('name', 'like', '%'.$term.'%');
+                return $builder->orWhereHas('covernote.notaris', function ($query) use ($term) {
+                    return $query->where('nama', 'like', '%'.$term.'%');
                 });
-              })
-              ->format(function (CovernoteDocument $model) {
-                  return $this->html($model->notaris_name);
               }),
-            Column::make(__('No.Covernote '), 'no_covernote')
+            Column::make(__('No.Covernote '), 'covernote.no_covernote')
                 ->searchable()
                 ->sortable(),
-            Column::make(__('Jatuh Tempo'), 'jatuh_tempo')
+            Column::make(__('Nama Debitur'), 'covernote.nama_debitur')
               ->searchable()
               ->sortable(),
-            Column::make(__('Status Perpanjangan'), 'is_perpanjangan_sertifikat')
+            Column::make(__('Nama Dokumen'), 'nama')
               ->searchable()
               ->sortable(),
-            Column::make(__('Cluster'), 'cluster')
+            Column::make(__('Status Dokumen'), 'status')
               ->searchable()
               ->sortable(),
-            Column::make(__('Nama Debitur'), 'nama_debitur')
-              ->searchable()
-              ->sortable(),
-            Column::make(__('Nama Dokumen'), 'nama_dokumen')
-              ->searchable()
-              ->sortable(),
-            Column::make(__('Status Dokumen'), 'status_dokumen')
-              ->searchable()
-              ->sortable(),
-            Column::make(__('Keterangan'), 'notes_label')
-              ->searchable(function ($builder, $term) {
-                return $builder->orWhereHas('akta_notaris_note', function ($query) use ($term) {
-                    return $query->where('note', 'like', '%'.$term.'%');
-                });
-              })
-              ->format(function (CovernoteDocument $model) {
-                  return $this->html($model->note_label);
-              }),
             Column::make(__('Actions'))
                 ->format(function (CovernoteDocument $model) {
-                    return view('backend.akta_notaris.includes.followup_action', ['model' => $model]);
+                    return view('backend.covernote_document.includes.actions', ['model' => $model]);
                 }),
         ];
     }

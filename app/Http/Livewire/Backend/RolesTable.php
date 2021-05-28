@@ -20,7 +20,9 @@ class RolesTable extends TableComponent
      * @var string
      */
     public $sortField = 'name';
-
+    public $searchNotaris = false;
+    public $searchDebitur = false;
+    
     /**
      * @var array
      */

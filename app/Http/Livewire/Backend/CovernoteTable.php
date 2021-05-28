@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\TableComponent;
 use Rappasoft\LaravelLivewireTables\Traits\HtmlComponents;
 use Rappasoft\LaravelLivewireTables\Views\Column;
+use Rappasoft\LaravelLivewireTables\Views\Filter;
 
 /**
  * Class CovernoteTable.
@@ -21,6 +22,8 @@ class CovernoteTable extends TableComponent
      */
     public $sortField = 'created_at';
     protected $index = 0;
+    public $searchNotaris = false;
+    public $searchDebitur = false;
     
     /**
      * @var array
@@ -72,7 +75,9 @@ class CovernoteTable extends TableComponent
               ->searchable()
               ->sortable(),
             Column::make(__('Status Covernote'), 'status_label')
-              ->searchable()
+              ->searchable(function ($builder, $term) {
+                        return $builder->where('status', 'like', '%'.$term.'%');
+                })
               ->sortable(),
             // Column::make(__('Keterangan'), 'notes_label')
             //   ->searchable(function ($builder, $term) {

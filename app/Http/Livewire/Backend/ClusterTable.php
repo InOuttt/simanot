@@ -20,7 +20,8 @@ class ClusterTable extends TableComponent
      */
     public $sortField = 'created_at';
     protected $index = 0;
-
+    public $searchNotaris = false;
+    public $searchDebitur = false;
     /**
      * @var array
      */

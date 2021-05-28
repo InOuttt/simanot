@@ -40,4 +40,9 @@ class CovernoteDocument extends BaseModel
     public function followup() {
         return $this->hasMany(CovernoteFollowup::class, 'covernote_dokumen_id', 'id');
     }
+    
+    public function getNotarisNameAttribute(): String
+    {
+       return collect($this->covernote()->pluck('notaris'))->implode('<br/>');
+    }
 }
