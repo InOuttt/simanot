@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.4|^8.0",
         "arcanedev/log-viewer": "8.x",
+        "awssat/tailwindo": "^3.0",
         "darkghosthunter/laraguard": "^3.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",

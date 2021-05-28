@@ -61,14 +61,17 @@
         </div>
       </x-slot>
     </x-backend.card>
-    <livewire:datatable model="App\Domains\Covernote\Models\CovernoteDocument" />
+    <x-backend.card>
+      <x-slot name="body">
+        <livewire:datatable model="App\Domains\Covernote\Models\CovernoteDocument" />
+      </x-slot>
+    </x-backend.card>
 @endsection
 <!-- php artisan vendor:publish --provider="Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider" -->
 
 @push('scripts')
 
 <script>
-$(document).ready(function () {
 
 </script>
 

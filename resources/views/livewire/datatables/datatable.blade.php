@@ -54,32 +54,31 @@
             @endforeach
         </div>
         @endif
-
         <div class="rounded-lg shadow-lg bg-white max-w-screen overflow-x-scroll">
             <div class="rounded-lg @unless($this->hidePagination) rounded-b-none @endif">
-                <div class="table align-middle min-w-full">
+                <table class="table table-striped align-middle min-w-full">
                     @unless($this->hideHeader)
-                    <div class="table-row divide-x divide-gray-200">
+                    <tr class="table-row divide-x divide-gray-200">
                         @foreach($this->columns as $index => $column)
                             @if($hideable === 'inline')
                                 @include('datatables::header-inline-hide', ['column' => $column, 'sort' => $sort])
                             @elseif($column['type'] === 'checkbox')
-                            <div class="relative table-cell h-12 w-48 overflow-hidden align-top px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider flex items-center focus:outline-none">
-                                <div class="px-3 py-1 rounded @if(count($selected)) bg-orange-400 @else bg-gray-200 @endif text-white text-center">
+                            <td class="relative table-cell h-12 w-48 overflow-hidden align-top px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider flex items-center focus:outline-none">
+                                <td class="px-3 py-1 rounded @if(count($selected)) bg-orange-400 @else bg-gray-200 @endif text-white text-center">
                                     {{ count($selected) }}
-                                </div>
-                            </div>
+                                </d>
+                            </td>
                             @else
                                 @include('datatables::header-no-hide', ['column' => $column, 'sort' => $sort])
                             @endif
                         @endforeach
-                    </div>
+                    </tr>
 
-                    <div class="table-row divide-x divide-blue-200 bg-blue-100">
+                    <tr class="table-row divide-x divide-blue-200 bg-blue-100">
                         @foreach($this->columns as $index => $column)
                             @if($column['hidden'])
                                 @if($hideable === 'inline')
-                                    <div class="table-cell w-5 overflow-hidden align-top bg-blue-100"></div>
+                                    <td class="table-cell w-5 overflow-hidden align-top bg-blue-100"></td>
                                 @endif
                             @elseif($column['type'] === 'checkbox')
                                 <div class="w-32 overflow-hidden align-top bg-blue-100 px-6 py-5 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider flex h-full flex-col items-center space-y-2 focus:outline-none">
@@ -89,7 +88,7 @@
                                     </div>
                                 </div>
                             @else
-                                <div class="table-cell overflow-hidden align-top">
+                                <td class="table-cell overflow-hidden align-top">
                                     @isset($column['filterable'])
                                         @if( is_iterable($column['filterable']) )
                                             <div wire:key="{{ $index }}">
@@ -101,33 +100,33 @@
                                             </div>
                                         @endif
                                     @endisset
-                                </div>
+                                </td>
                             @endif
                         @endforeach
-                    </div>
+                    </tr>
                     @endif
                     @forelse($this->results as $result)
-                        <div class="table-row p-1 divide-x divide-gray-100 {{ isset($result->checkbox_attribute) && in_array($result->checkbox_attribute, $selected) ? 'bg-orange-100' : ($loop->even ? 'bg-gray-100' : 'bg-gray-50') }}">
+                        <tr class="table-row p-1 divide-x divide-gray-100 {{ isset($result->checkbox_attribute) && in_array($result->checkbox_attribute, $selected) ? 'bg-orange-100' : ($loop->even ? 'bg-gray-100' : 'bg-gray-50') }}">
                             @foreach($this->columns as $column)
                                 @if($column['hidden'])
                                     @if($hideable === 'inline')
-                                    <div class="table-cell w-5 overflow-hidden align-top"></div>
+                                    <td class="table-cell w-5 overflow-hidden align-top"></td>
                                     @endif
                                 @elseif($column['type'] === 'checkbox')
                                     @include('datatables::checkbox', ['value' => $result->checkbox_attribute])
                                 @else
-                                    <div class="px-6 py-2 whitespace-no-wrap text-sm leading-5 text-gray-900 table-cell @if($column['align'] === 'right') text-right @elseif($column['align'] === 'center') text-center @else text-left @endif">
+                                    <td class="px-6 py-2 whitespace-no-wrap text-sm leading-5 text-gray-900 table-cell @if($column['align'] === 'right') text-right @elseif($column['align'] === 'center') text-center @else text-left @endif">
                                         {!! $result->{$column['name']} !!}
-                                    </div>
+                                    </td>
                                 @endif
                             @endforeach
-                        </div>
+                        </tr>
                     @empty
                         <p class="p-3 text-lg text-teal-600">
                            There's Nothing to show at the moment
                         </p>
                     @endforelse
-                </div>
+                </table>
             </div>
             @unless($this->hidePagination)
             <div class="rounded-lg rounded-t-none max-w-screen rounded-lg border-b border-gray-200 bg-white">
