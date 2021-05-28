@@ -185,7 +185,7 @@
                     </li>
                     <li class="c-sidebar-nav-item">
                         <x-utils.link
-                            href="#"
+                            :href="route('covernote.document.index')"
                             class="c-sidebar-nav-link"
                             :text="__('Dokumen Covernote')" />
                     </li>

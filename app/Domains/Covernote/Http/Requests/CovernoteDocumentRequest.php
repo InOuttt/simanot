@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Domains\AktaNotaris\Http\Requests;
+namespace App\Domains\Covernote\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class AktaNotarisRequest.
+ * Class CovernoteDocumentRequest.
  */
-class AktaNoteRequest extends FormRequest
+class CovernoteDocumentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

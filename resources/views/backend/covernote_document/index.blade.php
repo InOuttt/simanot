@@ -9,16 +9,16 @@
         </x-slot>
 
         <x-slot name="body">
-          <x-forms.get :action="route('akta.note.index')">
+          <x-forms.get :action="route('covernote.document.index')">
             <div class="form-group row">
-                <label for="id_notaris" class="col-md-2 col-form-label">Nama Notaris</label>
+                <label for="nama_notaris" class="col-md-2 col-form-label">Nama Notaris</label>
                 <div class="col-md-4">
-                    <livewire:notaris-select2 />
+                  <input type="text" name="nama_notaris" class="form_control" id="nama_notaris">
                 </div>
-                <label for="id_notaris" class="col-md-2 col-form-label">Nama Debitur</label>
+                <label for="nama_debitur" class="col-md-2 col-form-label">Nama Debitur</label>
 
                 <div class="col-md-4">
-                    <livewire:debitur-select2 />
+                    <input type="text" name="nama_debitur" class="form_control" id="nama_debitur">
                 </div>
             </div><!--form-group-->
 
@@ -39,20 +39,20 @@
                 <th>Status Terima Dokumen</th>
                 <th>Nama Dokumen</th>
                 <th>No. Dokumen</th>
-                <th>Tanggal Terima Dokumen</th>
+                <th>Tanggal Terbit</th>
                 <th>Actions</th>
               </tr>
-              @foreach($aktas as $key => $akta)
+              @foreach($documents as $key => $document)
                 <tr>
                   <th>{{$key+1}}</th>
-                  <th>{{$akta->notaris->name}}</th>
-                  <th>{{$akta->nama_debitur}}</th>
-                  <th>{{$akta->status_dokumen}}</th>
-                  <th>{{$akta->nama_dokumen}}</th>
-                  <th>{{$akta->nomor_tanggal_dokumen}}</th>
-                  <th>{{$akta->tanggal_terima_dokumen}}</th>
+                  <th>{{$document->covernote->notaris->nama}}</th>
+                  <th>{{$document->covernote->nama_debitur}}</th>
+                  <th>{{$document->status}}</th>
+                  <th>{{$document->nama}}</th>
+                  <th>{{$document->nomor}}</th>
+                  <th>{{$document->tanggal_terbit}}</th>
                   <th>
-                    <x-utils.edit-button :href="route('akta.note.add', $akta)" />
+                    <x-utils.edit-button :href="route('covernote.document.edit', $document)" />
                   </th>
                 </tr>
               @endforeach
@@ -61,5 +61,15 @@
         </div>
       </x-slot>
     </x-backend.card>
-
+    <livewire:datatable model="App\Domains\Covernote\Models\CovernoteDocument" />
 @endsection
+<!-- php artisan vendor:publish --provider="Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider" -->
+
+@push('scripts')
+
+<script>
+$(document).ready(function () {
+
+</script>
+
+@endpush

@@ -2,17 +2,16 @@
 
 namespace App\Http\Livewire\Backend;
 
-use App\Domains\AktaNotaris\Models\AktaNotaris;
-use App\Domains\Master\Models\Notaris;
+use App\Domains\Covernote\Models\CovernoteDocument;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\TableComponent;
 use Rappasoft\LaravelLivewireTables\Traits\HtmlComponents;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 
 /**
- * Class AktaNotarisTable.
+ * Class CovernoteDocumentTable.
  */
-class CovernoteFollowupTable extends TableComponent
+class CovernoteDocumentTable extends TableComponent
 {
     use HtmlComponents;
 
@@ -35,7 +34,7 @@ class CovernoteFollowupTable extends TableComponent
      */
     public function query(): Builder
     {
-        return AktaNotaris::query();
+        return CovernoteDocument::query();
     }
 
     public function mount()
@@ -59,7 +58,7 @@ class CovernoteFollowupTable extends TableComponent
                     return $query->where('name', 'like', '%'.$term.'%');
                 });
               })
-              ->format(function (AktaNotaris $model) {
+              ->format(function (CovernoteDocument $model) {
                   return $this->html($model->notaris_name);
               }),
             Column::make(__('No.Covernote '), 'no_covernote')
@@ -89,11 +88,11 @@ class CovernoteFollowupTable extends TableComponent
                     return $query->where('note', 'like', '%'.$term.'%');
                 });
               })
-              ->format(function (AktaNotaris $model) {
+              ->format(function (CovernoteDocument $model) {
                   return $this->html($model->note_label);
               }),
             Column::make(__('Actions'))
-                ->format(function (AktaNotaris $model) {
+                ->format(function (CovernoteDocument $model) {
                     return view('backend.akta_notaris.includes.followup_action', ['model' => $model]);
                 }),
         ];

@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Domains\AktaNotaris\Models\AktaNotaris;
+use App\Domains\Covernote\Models\Covernote;
 use Livewire\Component;
 use App\Domains\Master\Models\Notaris;
 use Illuminate\Http\Request;
@@ -40,12 +40,12 @@ class DebiturSelect2 extends Component
 
         if($request->has('q')){
             $search = $request->q;
-            $notaris =AktaNotaris::select("id", "nama_debitur")
+            $notaris =Covernote::select("id", "nama_debitur")
             		->where('nama_debitur', 'LIKE', "%$search%")
                 ->limit(10)
             		->get();
         } else {
-            $notaris = AktaNotaris::select('id', 'nama_debitur')
+            $notaris = Covernote::select('id', 'nama_debitur')
                         ->orderBy('nama_debitur')
                         ->limit(10)
                         ->get();

@@ -4,6 +4,7 @@ namespace App\Domains\Covernote\Models;
 
 use App\Models\BaseModel;
 use App\Domains\Covernote\Models\Covernote;
+use App\Domains\Covernote\Models\CovernoteFollowup;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CovernoteDocument extends BaseModel
@@ -33,10 +34,10 @@ class CovernoteDocument extends BaseModel
 
     /** Relationship */
     public function covernote() {
-        return $this->belongsTo(Covernote::class, 'id', 'covernote_id');
+        return $this->belongsTo(Covernote::class, 'covernote_id', 'id');
     }
 
-    public function notes() {
-        return $this->hasMany(CovernoteNote::class, 'covernote_dokumen_id', 'id');
+    public function followup() {
+        return $this->hasMany(CovernoteFollowup::class, 'covernote_dokumen_id', 'id');
     }
 }

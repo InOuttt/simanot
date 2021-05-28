@@ -1,8 +1,9 @@
 <?php
 
 use App\Domains\Covernote\Http\Controllers\CovernoteController;
-use App\Domains\Covernote\Http\Controllers\CovernoteFollowupController;
+use App\Domains\Covernote\Http\Controllers\CovernoteDocumentController;
 use App\Domains\Covernote\Models\Covernote;
+use App\Domains\Covernote\Models\CovernoteDocument;
 use Tabuna\Breadcrumbs\Trail;
 
 Route::get('/', [CovernoteController::class, 'index'])
@@ -40,35 +41,35 @@ Route::get('find', [CovernoteController::class, 'find'])
     ->middleware('permission:admin.access.covernote_followup.index');
 
 Route::group([
-  'prefix' => 'follow-up',
-  'as' => 'followup.',
+  'prefix' => 'document',
+  'as' => 'document.',
 
 ], function () {
-  Route::get('/', [CovernoteFollowupController::class, 'index'])
+  Route::get('/', [CovernoteDocumentController::class, 'find'])
       ->name('index')
       ->middleware('permission:admin.access.covernote_followup.list')            
       ->breadcrumbs(function (Trail $trail) {
           $trail->parent('admin.dashboard')
               ->push(__('Covernote'), route('covernote.index'));
       });
-  Route::post('/', [CovernoteFollowupController::class, 'store'])
+  Route::post('/', [CovernoteDocumentController::class, 'store'])
       ->name('store')
       ->middleware('permission:admin.access.covernote_followup.create');
   Route::group(['prefix' => '{data}'], function () {
-      Route::get('create', [CovernoteFollowupController::class, 'create'])
+      Route::get('create', [CovernoteDocumentController::class, 'create'])
           ->name('create')
           ->middleware('permission:admin.access.covernote_followup.create');
-      Route::get('view', [CovernoteFollowupController::class, 'view'])
+      Route::get('view', [CovernoteDocumentController::class, 'view'])
           ->name('view')
           ->middleware('permission:admin.access.covernote_followup.index');
-      Route::get('edit', [CovernoteFollowupController::class, 'edit'])
+      Route::get('edit', [CovernoteDocumentController::class, 'edit'])
           ->name('edit')
-          ->breadcrumbs(function (Trail $trail, AktaNotaris $data) {
+          ->breadcrumbs(function (Trail $trail, CovernoteDocument $data) {
               $trail->parent('covernote.index') 
                   ->push(__('Editing follow-up covernote :data', ['data' => $data->no_covernote]), route('covernote.edit', $data));
           });
 
-      Route::patch('/', [CovernoteFollowupController::class, 'update'])->name('update');
-      Route::delete('/', [CovernoteFollowupController::class, 'destroy'])->name('destroy');
+      Route::patch('/', [CovernoteDocumentController::class, 'update'])->name('update');
+      Route::delete('/', [CovernoteDocumentController::class, 'destroy'])->name('destroy');
   });
 });
