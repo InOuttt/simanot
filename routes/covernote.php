@@ -71,5 +71,14 @@ Route::group([
 
       Route::patch('/', [CovernoteDocumentController::class, 'update'])->name('update');
       Route::delete('/', [CovernoteDocumentController::class, 'destroy'])->name('destroy');
+
+    /** Follow up */
+      Route::group(['prefix' => 'followup', 'as' => 'followup.'], function () {
+          Route::get('/', [CovernoteFollowupController::class, 'edit'])->name('edit');
+          Route::post('/', [CovernoteFollowupController::class, 'store'])
+            ->name('store')
+            ->middleware('permission:admin.access.covernote_followup.create');
+        });
+
   });
 });

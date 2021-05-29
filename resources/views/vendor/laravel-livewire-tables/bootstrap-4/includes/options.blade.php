@@ -25,6 +25,19 @@
             />
         </div>
     </div>
+    <div class="row mb-4">    
+        <label for="nama_notaris" class="col-md-2 col-form-label">Status Dokumen</label>
+        <div class="col-md-4"> 
+            <select
+                @if (is_numeric($searchDebounce) && $searchUpdateMethod === 'debounce') wire:model.debounce.{{ $searchDebounce }}ms="status" @endif
+                class="form-control"
+            >
+                <option value="0">Belum Diterima</option>
+                <option value="1">Diterima</option>
+                <option value="2">Koreksi</option>
+            </select>
+        </div>
+    </div>
     @endif
     <div class="row mb-4">
         @if ($paginationEnabled && count($perPageOptions))

@@ -45,4 +45,13 @@ class CovernoteDocument extends BaseModel
     {
        return collect($this->covernote()->pluck('notaris'))->implode('<br/>');
     }
+
+    public function getStatusLabelAttribute(): String
+    {
+        $label = 'Belum diterima';
+        if($this->status == 1) $label = 'Diterima';
+        if($this->status == 2) $label = 'Revisi';
+       return $label;
+    //    return $this->notaris_id;
+    }
 }

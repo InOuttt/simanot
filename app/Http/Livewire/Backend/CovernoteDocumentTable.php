@@ -22,6 +22,7 @@ class CovernoteDocumentTable extends TableComponent
     protected $index = 0;
     public $nama_notaris;
     public $nama_debitur;
+    public $status;
     public $searchNotaris = true;
     public $searchDebitur = true;
     
@@ -51,6 +52,9 @@ class CovernoteDocumentTable extends TableComponent
           $q->where('nama', 'LIKE', '%' . $nama . '%');
         });
       }
+      if(!empty($this->status)) {
+        $query->where('status', '=', $this->status);
+      }
         return $query;
     }
 
@@ -66,6 +70,9 @@ class CovernoteDocumentTable extends TableComponent
     {
         return [
             Column::make(__('No.'))->format(fn () => ++$this->index),
+            Column::make(__('Nama Dokumen'), 'nama')
+            ->searchable()
+            ->sortable(),
             Column::make(__('Notaris'), 'covernote.notaris.nama')
               ->sortable(function ($builder, $direction) {
                 return $builder->orderBy('covernote.notaris.nama', $direction);
@@ -75,17 +82,19 @@ class CovernoteDocumentTable extends TableComponent
                     return $query->where('nama', 'like', '%'.$term.'%');
                 });
               }),
-            Column::make(__('No.Covernote '), 'covernote.no_covernote')
+            Column::make(__('Nomor Covernote'), 'covernote.no_covernote')
                 ->searchable()
                 ->sortable(),
             Column::make(__('Nama Debitur'), 'covernote.nama_debitur')
               ->searchable()
               ->sortable(),
-            Column::make(__('Nama Dokumen'), 'nama')
+            Column::make(__('Nomor Dokumen'), 'nomor')
               ->searchable()
               ->sortable(),
-            Column::make(__('Status Dokumen'), 'status')
-              ->searchable()
+            Column::make(__('Status Dokumen'), 'status_label')
+              ->searchable(function ($builder, $term) {
+                return $builder->where('status', 'like', '%'.$term.'%');
+              })
               ->sortable(),
             Column::make(__('Actions'))
                 ->format(function (CovernoteDocument $model) {
