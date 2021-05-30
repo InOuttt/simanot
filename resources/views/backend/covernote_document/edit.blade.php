@@ -2,140 +2,125 @@
 
 @extends('backend.layouts.app')
 
-@section('title', __('Edit Covernote'))
+@section('title', __('Edit Data Dokumen Covernote'))
 
 @section('content')
-    <x-forms.patch :action="route('akta.notaris.update', $data)">
-        <x-backend.card>
-            <x-slot name="header">
-                @lang('Edit Covernote')
-            </x-slot>
+    <x-backend.card>
+        <x-slot name="header">
+            @lang('Edit Data Dokumen Covernote')
+        </x-slot>
 
-            <x-slot name="headerActions">
-                <x-utils.link class="card-header-action" :href="route('notaris.index')" :text="__('Cancel')" />
-            </x-slot>
+        <x-slot name="headerActions">
+            <x-utils.link class="card-header-action" :href="route('notaris.index')" :text="__('Cancel')" />
+        </x-slot>
 
-            <x-slot name="body">
-                <div >
-                    <div class="form-group row">
-                        <label for="id_notaris" class="col-md-2 col-form-label">Nama</label>
-
-                        <div class="col-md-10">
-                            <livewire:notaris-select2 :idNotaris="$data->id_notaris" />
-                            <!-- <input type="text" name="name" class="form-control" placeholder="{{ __('Nama') }}" value="{{ old('name') }}" maxlength="100" required /> -->
-                        </div>
-                    </div><!--form-group-->
-
-                    <div class="form-group row">
-                        <label for="no_covernote" class="col-md-2 col-form-label">No. Covernote</label>
-
-                        <div class="col-md-10">
-                            <input type="text" name="no_covernote" class="form-control" placeholder="{{ __('123/abc/Jun/2021') }}" value="{{ $data->no_covernote}}" maxlength="100" />
-                        </div>
-                    </div><!--form-group-->
-
-                    <div class="form-group row">
-                        <label for="jatuh_tempo" class="col-md-2 col-form-label">Jatuh Tempo</label>
-
-                        <div class="col-md-10">
-                            <input type="date" name="jatuh_tempo" class="form-control" placeholder="{{ __('Jatuh Tempo') }}" value="{{ $data->jatuh_tempo }}" />
-                        </div>
+        <x-slot name="body">
+            <div >
+                <div class="form-group row">
+                    <label for="nama_notaris" class="col-md-2 col-form-label">Nama Notaris</label>
+                    <div class="col-md-4">
+                        <input disabled type="text" name="name_notaris" class="form-control" value="{{ $oldData->covernote->notaris->nama }}" maxlength="100" />
                     </div>
 
-                    <div class="form-group row">
-                        <label for="is_perpanjangan_sertifikat" class="col-md-2 col-form-label">Status Perpanjangan</label>
-
-                        <div class="col-md-10">
-                            <input name="is_perpanjangan_sertifikat" id="is_perpanjangan_sertifikat" class="form-check-input" type="checkbox" value="Y" {{ $data->is_perpanjangan_sertifikat == 'Y' ? 'checked' : '' }} />
-                        </div>
+                    <label for="nama_dokumen" class="col-md-2 col-form-label">Nama Dokumen</label>
+                    <div class="col-md-4">
+                        <input disabled type="text" name="name_dokumen" class="form-control" value="{{ $oldData->nama }}" maxlength="100" />
                     </div>
+                </div><!--form-group-->
 
-                    <div class="form-group row">
-                        <label for="cluster" class="col-md-2 col-form-label">Cluster</label>
-
-                        <div class="col-md-10">
-                            <input type="string" name="cluster" class="form-control" placeholder="{{ __('Cluster') }}" value="{{ $data->cluster }}" maxlength="100" />
-                        </div>
+                <div class="form-group row">
+                    <label for="no_covernote" class="col-md-2 col-form-label">Nomor Covernote</label>
+                    <div class="col-md-4">
+                        <input disabled type="text" name="no_covernote" class="form-control" value="{{ $oldData->covernote->no_covernote }}" maxlength="100" />
                     </div>
-
-                    <div class="form-group row">
-                        <label for="nama_debitur" class="col-md-2 col-form-label">Nama Debitur</label>
-
-                        <div class="col-md-10">
-                            <input type="string" name="nama_debitur" class="form-control" placeholder="{{ __('Budi si Debitur') }}" value="{{ $data->nama_debitur }}" maxlength="100" />
-                        </div>
+                    
+                    <label for="nomor_dokumen_non" class="col-md-2 col-form-label">Nomor Dokumen</label>
+                    <div class="col-md-4">
+                        <input disabled type="text" name="nomor_dokumen_non" class="form-control" value="{{ $oldData->nomor }}" maxlength="100" />
                     </div>
+                </div><!--form-group-->
 
-                    <div class="form-group row">
-                        <label for="nama_dokumen" class="col-md-2 col-form-label">Nama Dokumen</label>
+                <!-- <div class="form-group row">
 
-                        <div class="col-md-10">
-                            <input type="string" name="nama_dokumen" class="form-control" placeholder="{{ __('dokumen piutang budi') }}" value="{{ $data->nama_dokumen }}" maxlength="255" />
-                        </div>
+                </div> -->
+                <div class="form-group row">
+                    <label for="nama_debitur" class="col-md-2 col-form-label">Nama Debitur</label>
+                    <div class="col-md-4">
+                        <input disabled type="string" name="nama_debitur" class="form-control" value="{{ $oldData->covernote->nama_debitur }}" maxlength="100" />
                     </div>
-
-                    <div class="form-group row">
-                        <label for="nomor_tanggal_dokumen" class="col-md-2 col-form-label">Nomor Tanggal Dokumen</label>
-
-                        <div class="col-md-10">
-                            <input type="string" name="nomor_tanggal_dokumen" class="form-control" placeholder="{{ __('piutang/budi/xx/xx/xx') }}" value="{{ $data->nomor_tanggal_dokumen }}" maxlength="2255" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="status_dokumen" class="col-md-2 col-form-label">Status Dokumen</label>
-
-                        <div class="col-md-10">
-                            <input name="status_dokumen" id="status_dokumen" class="form-check-input" type="checkbox" value="terima" {{ $data->status_dokumen == 'terima' ? 'checked' : '' }} />
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="tanggal_terima_dokumen" class="col-md-2 col-form-label">Tanggal Terima Dokumen</label>
-
-                        <div class="col-md-10">
-                            <input type="date" name="tanggal_terima_dokumen" class="form-control" placeholder="{{ __('dd/mm/yyyy') }}" value="{{ $data->tanggal_terima_dokumen }}"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="jumlah_salinan" class="col-md-2 col-form-label">Jumlah Salinan</label>
-
-                        <div class="col-md-10">
-                            <input type="number" name="jumlah_salinan" class="form-control" placeholder="{{ __('3') }}" value="{{ $data->jumlah_salinan }}" maxlength="100" />
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="tanggal_selesai" class="col-md-2 col-form-label">Tanggal Selesai</label>
-
-                        <div class="col-md-10">
-                            <input type="date" name="tanggal_selesai" class="form-control" placeholder="{{ __('dd/mm/yyyy') }}" value="{{ $data->tanggal_selesai }}" />
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="tanggal_kirim_salinan" class="col-md-2 col-form-label">Tanggal Kirim salinan</label>
-
-                        <div class="col-md-10">
-                            <input type="date" name="tanggal_kirim_salinan" class="form-control" placeholder="{{ __('dd/mm/yyyy') }}" value="{{ $data->tanggal_kirim_salinan }}" />
-                        </div>
-                    </div>
-<!-- 
-
-                    <div class="form-group row">
-                        <label for="akta_note" class="col-md-2 col-form-label">Keterangan</label>
-
-                        <div class="col-md-10">
-                            <livewire:akta-note />
-                        </div>
-                    </div> -->
-
+                    
                 </div>
+            </div>
+        </x-slot>
+    </x-backend.card>
+    <x-forms.patch :action="route('covernote.document.update', $oldData)">
+        <x-backend.card>
+            <x-slot name="body">
+                <div class="form-group row">
+                    <label for="status_dokumen" class="col-md-2 col-form-label">Status Dokumen</label>
+                    <div class="col-md-4">
+                        <select name="status_dokumen" class="form-control">
+                            <option value="0" {{$oldData->status == 0 ? 'selected' : ''}}>Belum Diterima</option>
+                            <option value="1" {{$oldData->status == 1 ? 'selected' : ''}}>Diterima</option>
+                            <option value="2" {{$oldData->status == 2 ? 'selected' : ''}}>Koreksi</option>
+                        </select>
+                    </div>
+
+                    <label for="jumlah_salinan" class="col-md-2 col-form-label">Jumlah Salinan</label>
+                    <div class="col-md-4">
+                        <input type="number" name="jumlah_salinan" class="form-control" placeholder="contoh: 5" value="{{ $oldData->jumlah_salinan }}" maxlength="100" />
+                    </div>
+                </div><!--form-group-->
+
+                <div class="form-group row">
+                    <label for="nomor_dokumen" class="col-md-2 col-form-label">Nomor Dokumen</label>
+                    <div class="col-md-4">
+                        <input type="text" name="nomor_dokumen" class="form-control" value="{{ $oldData->nomor }}" placeholder="6487/asdoi" maxlength="100" />
+                    </div>
+                    
+                    <label for="tanggal_terbit" class="col-md-2 col-form-label">Tanggal Terbit</label>
+                    <div class="col-md-4">
+                        <input type="date" name="tanggal_terbit" class="form-control" value="{{ $oldData->tanggal_terbit }}" maxlength="100" />
+                    </div>
+                </div><!--form-group-->
+
+                <div class="form-group row">
+                    <label for="tanggal_terima" class="col-md-2 col-form-label">Tanggal Terima</label>
+                    <div class="col-md-4">
+                        <input type="date" name="tanggal_terima" class="form-control" value="{{ $oldData->tanggal_terima }}" placeholder="dd-mm-yyyy" maxlength="100" />
+                    </div>
+                    
+                    <label for="tanggal_selesai" class="col-md-2 col-form-label">Tanggal Selesai Proofread</label>
+                    <div class="col-md-4">
+                        <input type="date" name="tanggal_selesai" class="form-control" value="{{ $oldData->tanggal_selesai }}" placeholder="dd-mm-yyyy" maxlength="100" />
+                    </div>
+                </div><!--form-group-->
+
+                <div class="form-group row">
+                    <label for="tanda_terima_notaris" class="col-md-2 col-form-label">Tanda Terima Notaris</label>
+                    <div class="col-md-4">
+                        <input type="file" name="tanda_terima_notaris" class="form-control" value="{{ $oldData->tanda_terima_notaris }}" maxlength="100" />
+                    </div>
+                    
+                    <label for="tanda_terima_debitur" class="col-md-2 col-form-label">Tanda Terima Debitur</label>
+                    <div class="col-md-4">
+                        <input type="file" name="tanda_terima_debitur" class="form-control" value="{{ $oldData->tanda_terima_debitur }}" maxlength="100" />
+                    </div>
+                </div><!--form-group-->
             </x-slot>
 
             <x-slot name="footer">
-                <button class="btn btn-sm btn-primary float-right" type="submit">@lang('Edit Data')</button>
+                <button class="btn btn-sm btn-primary float-right" type="submit">@lang('Edit Data Dokumen Covernote')</button>
             </x-slot>
         </x-backend.card>
     </x-forms.post>
 @endsection
+
+
+@push('scripts')
+
+<script>
+
+</script>
+
+@endpush

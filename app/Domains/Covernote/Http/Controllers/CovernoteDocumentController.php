@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\BaseBackendController;
 use App\Domains\Covernote\Http\Requests\CovernoteDocumentRequest;
 use App\Domains\Covernote\Models\CovernoteDocument;
 use App\Domains\Covernote\Services\CovernoteDocumentService;
+use App\Models\File;
 
 class CovernoteDocumentController extends BaseBackendController
 {
@@ -72,13 +73,52 @@ class CovernoteDocumentController extends BaseBackendController
         $akta = CovernoteDocument::where('id', '=', $data)->get();
         // dd($data);
         return view($this->view_edit)
-            ->withData($data)
+            ->witholdData($data)
             ->withAkta($akta);
     }
 
     public function update(CovernoteDocumentRequest $request, CovernoteDocument $data)
     {
-        $this->service->update($data, $request->validated());
+        $update = $request->all();
+        if($request->hasFile('tanda_terima_notaris')) {
+            try {
+
+                $file = $request->file('tanda_terima_notaris');
+                $uploaded = File::create([
+                    'path' => File::$filePath['tanda_terima_notaris'] . '/' .$data->id.'-'.$file->getClientOriginalName(),
+                    'type' => $file->getClientOriginalExtension()
+                ]);
+
+                if(!empty($uploaded) && !empty($uploaded->id)) {
+                    $file->move(File::$filePath['tanda_terima_notaris'], $data->id.'-'.$file->getClientOriginalName());
+                    $update['tanda_terima_notaris'] = $uploaded->id;
+                }
+
+            } catch (\Throwable $th) {
+                return back()->withErrors('Gagal upload file Tanda Terima Notaris');
+            }
+        }
+
+        if($request->hasFile('tanda_terima_debitur')) {
+            try {
+
+                $file = $request->file('tanda_terima_debitur');
+                $uploaded = File::create([
+                    'path' => File::$filePath['tanda_terima_debitur'],
+                    'type' => $file->getClientOriginalExtension()
+                ]);
+
+                if(!empty($uploaded) && !empty($uploaded->id)) {
+                    $file->move(File::$filePath['tanda_terima_debitur'], $data->id.'-'.$file->getClientOriginalName());
+                    $update['tanda_terima_debitur'] = $uploaded->id;
+                }
+
+            } catch (\Throwable $th) {
+                return back()->withErrors('Gagal upload file Tanda Terima Debitur');
+            }
+        }
+
+        $this->service->update($data, $update);
 
         return redirect()->route($this->route_view_index)->withFlashSuccess(__('The Data was successfully updated.'));
     }

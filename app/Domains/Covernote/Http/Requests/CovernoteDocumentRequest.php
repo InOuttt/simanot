@@ -30,10 +30,14 @@ class CovernoteDocumentRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_akta_hutang' => ['required', 'max:255'],
-            'type' => ['required', 'in:surat,telp,email'],
-            'tanggal_note' => ['date', 'date_format:Y-m-d'],
-            'note' => ['string']
+            'status_dokumen' => ['in:0,1,2'],
+            'jumlah_salinan' => ['numeric', 'nullable'],
+            'nomor_dokumen' => ['string', 'max:255', 'nullable'],
+            'tanggal_terbit' => ['date', 'date_format:Y-m-d', 'nullable'],
+            'tanggal_terima' => ['date', 'date_format:Y-m-d', 'nullable'],
+            'tanggal_selesai' => ['date', 'date_format:Y-m-d', 'nullable'],
+            'tanda_terima_notaris' => [ 'nullable'],
+            'tanda_terima_debitur' => [ 'nullable'],
         ];
     }
 

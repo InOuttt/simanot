@@ -66,7 +66,7 @@ Route::group([
           ->name('edit')
           ->breadcrumbs(function (Trail $trail, CovernoteDocument $data) {
               $trail->parent('covernote.index') 
-                  ->push(__('Editing follow-up covernote :data', ['data' => $data->no_covernote]), route('covernote.edit', $data));
+                  ->push(__('Editing Dokumen :nama covernote :data', ['nama' => $data->nama, 'data' => $data->covernote->no_covernote]), route('covernote.edit', $data));
           });
 
       Route::patch('/', [CovernoteDocumentController::class, 'update'])->name('update');
