@@ -2,7 +2,7 @@
 
 namespace App\Domains\Master\Http\Controllers;
 
-use App\Controllers\Requests\BaseRequest;
+use App\Http\Controllers\Requests\BaseRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Backend\BaseBackendController;
 use App\Domains\Master\Services\NotarisService;
