@@ -11,7 +11,7 @@
         </x-slot>
 
         <x-slot name="headerActions">
-            <x-utils.link class="card-header-action" :href="route('notaris.index')" :text="__('Cancel')" />
+            <x-utils.link class="card-header-action" :href="route('covernote.document.index')" :text="__('Batal')" />
         </x-slot>
 
         <x-slot name="body">
@@ -99,12 +99,27 @@
                 <div class="form-group row">
                     <label for="tanda_terima_notaris" class="col-md-2 col-form-label">Tanda Terima Notaris</label>
                     <div class="col-md-4">
-                        <input type="file" name="tanda_terima_notaris" class="form-control" value="{{ $oldData->tanda_terima_notaris }}" maxlength="100" />
+                        <button type="button" class="btn btn-success" onClick="document.getElementById('uploadTandaNotaris').click();">Unggah</button> 
+                        <label id="tandaNotarisLabel"></label>
+                        <input type="file" name="tanda_terima_notaris" id="uploadTandaNotaris" style="display:none" class="form-control"  />
+                        <!-- <input type="file" name="tanda_terima_notaris" id="uploadTandaNotaris" class="form-control" value="{{ $oldData->tanda_terima_notaris }}" maxlength="100" /> -->
+                        </br>
+                        @if(!empty($oldData->file_notaris))
+                        <label>File sekarang : <span id="old-tanda-notaris">{{$oldData->file_notaris->nameFile}}</span></label> <a href="{{'/'. $oldData->file_notaris->path}}" class="btn btn-secondary"> Unduh</a> 
+                        @endif
                     </div>
                     
                     <label for="tanda_terima_debitur" class="col-md-2 col-form-label">Tanda Terima Debitur</label>
                     <div class="col-md-4">
-                        <input type="file" name="tanda_terima_debitur" class="form-control" value="{{ $oldData->tanda_terima_debitur }}" maxlength="100" />
+                        <button type="button" class="btn btn-success" onClick="document.getElementById('uploadTandaDebitur').click();">Unggah</button> 
+                        <label id="tandaDebiturLabel"></label>
+                        <input type="file" name="tanda_terima_debitur" id="uploadTandaDebitur" style="display:none" class="form-control" />
+
+                        <!-- <input type="file" name="tanda_terima_debitur" class="form-control" value="{{ $oldData->tanda_terima_debitur }}" maxlength="100" /> -->
+                        </br>
+                        @if(!empty($oldData->file_debitur))
+                        <label>File sekarang : <span id="old-tanda-debitur">{{$oldData->file_debitur->nameFile}}</span></label> <a href="{{'/'. $oldData->file_debitur->path}}" class="btn btn-secondary"> Unduh</a> 
+                        @endif
                     </div>
                 </div><!--form-group-->
             </x-slot>
@@ -120,6 +135,14 @@
 @push('scripts')
 
 <script>
+document.getElementById('uploadTandaNotaris').addEventListener('change', function(){
+    var file = this.files[0];
+    document.getElementById('tandaNotarisLabel').innerHTML = file.name;
+}, false);
+document.getElementById('uploadTandaDebitur').addEventListener('change', function(){
+    var file = this.files[0];
+    document.getElementById('tandaDebiturLabel').innerHTML = file.name;
+}, false);
 
 </script>
 

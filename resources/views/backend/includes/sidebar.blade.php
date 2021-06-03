@@ -198,16 +198,17 @@
                     icon="c-sidebar-nav-icon cil-envelope-letter"
                     class="c-sidebar-nav-link"
                     :text="__('Surat Tagihan Notaris')"
-                    :active="activeClass(Route::is('akta.reporting.message'), 'c-active')" />
+                    :active="activeClass(Route::is('letter.tagihan.*'), 'c-active')" />
             </li>
             <li class="c-sidebar-nav-item">
                 <x-utils.link
                     href="#"
-                    icon="c-sidebar-nav-icon cil-library"
+                    icon="c-sidebar-nav-icon cil-envelope-letter"
                     class="c-sidebar-nav-link"
-                    :text="__('Reporting')"
-                    :active="activeClass(Route::is('akta.reporting.reporting'), 'c-active')" />
+                    :text="__('Laporan Grup Hukum')"
+                    :active="activeClass(Route::is('letter.group_hukum.*'), 'c-active')" />
             </li>
+           
             <!-- <li class="c-sidebar-nav-item">
                 <x-utils.link
                     :href="route('covernote.index')"
@@ -216,6 +217,49 @@
                     :text="__('Covernote')"
                     :active="activeClass(Route::is('covernote.*'), 'c-active')" />
             </li> -->
+        @endif
+        @if (
+            $logged_in_user->hasAllAccess() ||
+            (
+                $logged_in_user->can('admin.access.Inquiry')
+            )
+        )
+        <li class="c-sidebar-nav-dropdown">
+            <x-utils.link
+                href="#"
+                icon="c-sidebar-nav-icon cil-library"
+                class="c-sidebar-nav-dropdown-toggle"
+                :text="__('Inquiry')"
+                :active="activeClass(Route::is('report.*'), 'c-active')" />
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item">
+                    <x-utils.link
+                        href="#"
+                        class="c-sidebar-nav-link"
+                        :text="__('Status Akta')" 
+                        />
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <x-utils.link
+                        href="#"
+                        class="c-sidebar-nav-link"
+                        :text="__('Index Notaris')" />
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <x-utils.link
+                        href="#"
+                        class="c-sidebar-nav-link"
+                        :text="__('Surat Tagihan Notaris')" />
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <x-utils.link
+                        href="#"
+                        class="c-sidebar-nav-link"
+                        :text="__('Laporan Grup Hukum')" />
+                </li>
+            </ul>
+        </li>
+
         @endif
 
     </ul>

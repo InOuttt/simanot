@@ -70,8 +70,8 @@ class CovernoteDocumentController extends BaseBackendController
 
     public function edit(BaseRequest $request, CovernoteDocument $data)
     {
-        $akta = CovernoteDocument::where('id', '=', $data)->get();
-        // dd($data);
+        $akta = CovernoteDocument::with(['file_notaris', 'file_debitur'])->where('id', '=', $data)->get();
+        // dd($data->file_notaris->nameFile);
         return view($this->view_edit)
             ->witholdData($data)
             ->withAkta($akta);
@@ -104,7 +104,7 @@ class CovernoteDocumentController extends BaseBackendController
 
                 $file = $request->file('tanda_terima_debitur');
                 $uploaded = File::create([
-                    'path' => File::$filePath['tanda_terima_debitur'],
+                    'path' => File::$filePath['tanda_terima_debitur'] . '/' .$data->id.'-'.$file->getClientOriginalName(),
                     'type' => $file->getClientOriginalExtension()
                 ]);
 

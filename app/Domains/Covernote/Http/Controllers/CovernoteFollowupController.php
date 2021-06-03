@@ -5,17 +5,19 @@ namespace App\Domains\Covernote\Http\Controllers;
 use App\Http\Controllers\Requests\BaseRequest;
 use App\Http\Controllers\Backend\BaseBackendController;
 use App\Domains\Covernote\Http\Requests\CovernoteDocumentRequest;
+use App\Domains\Covernote\Http\Requests\CovernoteFollowupRequest;
 use App\Domains\Covernote\Models\CovernoteDocument;
-use App\Domains\Covernote\Services\CovernoteDocumentService;
+use App\Domains\Covernote\Models\CovernoteFollowup;
+use App\Domains\Covernote\Services\CovernoteFollowupService;
 
 class CovernoteFollowupController extends BaseBackendController
 {
-    public function __construct(CovernoteDocumentService $service)
+    public function __construct(CovernoteFollowupService $service)
     {
         $this->service = $service;
         $this->view_index = 'backend.covernote_document.index';
         $this->route_view_index = 'covernote.document.index';
-        $this->view_edit = 'backend.covernote_document.edit';
+        $this->view_edit = 'backend.covernote_followup.edit';
         $this->view_create = 'backend.covernote_document.create';
     }
 
@@ -24,56 +26,22 @@ class CovernoteFollowupController extends BaseBackendController
      * @throws \App\Exceptions\GeneralException
      * @throws \Throwable
      */
-    public function store(CovernoteDocumentRequest $request)
+    public function store(CovernoteFollowupRequest $request, CovernoteDocument $data)
     {
-        $akta = $this->service->store($request->validated());
-        // $dt = new Date();
-        // foreach ($request->akta_note as $key => $value) {
-        //     CovernoteDocumentNote::create([
-        //         'note' => $request->akta_note[$key],
-        //         'id_akta_hutang' => $akta->id,
-        //         'tanggal_note' => $dt,
-        //     ]);
-        // }
+        $req = $request->all();
+        $req['created_by'] = auth()->user()->id;
+        // dd($req);
+        $akta = $this->service->store($req);
 
-        return redirect()->route($this->route_view_index)->withFlashSuccess(__('The Data was successfully created.'));
-    }
-
-    public function view(CovernoteDocument $data)
-    {
-        return view('backend.auth_user.view')
-            ->withData($data);
-    }
-
-    public function find(BaseRequest $request)
-    {
-        $aktas = CovernoteDocument::with('covernote');
-        if(!empty($request)) {
-            if(!empty($request->input('nama_notaris'))) {
-                $aktas = $aktas->whereHas('covernote.notaris', function($q) use ($request){
-                    $q->where('nama', '=', $request->input('nama_notaris'));
-                });
-            }
-            if(!empty($request->input('nama_debitur'))) {
-                $aktas = $aktas->whereHas('covernote', function($q) use ($request){
-                    $q->where('nama_debitur', '=', $request->input('nama_debitur'));
-                });
-            }
-
-        }
-        $aktas = $aktas->get();
-        
-        return view($this->view_index)
-            ->withDocuments($aktas);
+        return redirect()->route('covernote.document.followup.edit', $data)->withFlashSuccess(__('The Data was successfully created.'));
     }
 
     public function edit(BaseRequest $request, CovernoteDocument $data)
     {
-        $akta = CovernoteDocument::where('id', '=', $data)->get();
+        $data = CovernoteDocument::with(['followUp'])->where('id', '=', $data->id)->first();
         // dd($data);
         return view($this->view_edit)
-            ->withData($data)
-            ->withAkta($akta);
+            ->withData($data);
     }
 
     public function update(CovernoteDocumentRequest $request, CovernoteDocument $data)

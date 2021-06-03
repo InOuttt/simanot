@@ -2,6 +2,7 @@
 
 use App\Domains\Covernote\Http\Controllers\CovernoteController;
 use App\Domains\Covernote\Http\Controllers\CovernoteDocumentController;
+use App\Domains\Covernote\Http\Controllers\CovernoteFollowupController;
 use App\Domains\Covernote\Models\Covernote;
 use App\Domains\Covernote\Models\CovernoteDocument;
 use Tabuna\Breadcrumbs\Trail;
@@ -75,7 +76,7 @@ Route::group([
     /** Follow up */
       Route::group(['prefix' => 'followup', 'as' => 'followup.'], function () {
           Route::get('/', [CovernoteFollowupController::class, 'edit'])->name('edit');
-          Route::post('/', [CovernoteFollowupController::class, 'store'])
+          Route::patch('/', [CovernoteFollowupController::class, 'store'])
             ->name('store')
             ->middleware('permission:admin.access.covernote_followup.create');
         });

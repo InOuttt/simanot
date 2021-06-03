@@ -5,6 +5,7 @@ namespace App\Domains\Covernote\Models;
 use App\Models\BaseModel;
 use App\Domains\Covernote\Models\Covernote;
 use App\Domains\Covernote\Models\CovernoteFollowup;
+use App\Models\File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CovernoteDocument extends BaseModel
@@ -35,6 +36,14 @@ class CovernoteDocument extends BaseModel
     /** Relationship */
     public function covernote() {
         return $this->belongsTo(Covernote::class, 'covernote_id', 'id');
+    }
+
+    public function file_notaris() {
+        return $this->hasOne(File::class, 'id', 'tanda_terima_notaris');
+    }
+
+    public function file_debitur() {
+        return $this->hasOne(File::class, 'id', 'tanda_terima_debitur');
     }
 
     public function followup() {

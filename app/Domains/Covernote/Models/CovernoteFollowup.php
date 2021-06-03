@@ -11,11 +11,17 @@ class CovernoteFollowup extends BaseModel
 
     use HasFactory;
 
+    public static $TIPE_FOLLOWUP = [
+        'SURAT' => 'surat',
+        'TELP' => 'telp',
+        'EMAIL' => 'email'
+    ];
+
     protected $fillable = [
         'covernote_dokumen_id',
         'type',
-        'note_date',
-        'note',
+        'tanggal_followup',
+        'hasil',
         'created_by',
         'updated_by',
     ];
@@ -28,5 +34,14 @@ class CovernoteFollowup extends BaseModel
     /** Relationship */
     public function covernoteDocument() {
         return $this->belongsTo(CovernoteDocument::class, 'id', 'covernote_dokumen_id');
+    }
+
+    public function getTanggalLabelAttribute(): String
+    {
+        if(!empty($this->tanggal_followup)) {
+            return date('d/m/Y', strtotime($this->tanggal_followup));
+        }
+
+        return '';
     }
 }

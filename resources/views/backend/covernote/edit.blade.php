@@ -81,8 +81,8 @@
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Tidak
                                 </label>
-                                </div>
-                                <div class="form-check">
+                            </div>
+                            <div class="form-check">
                                 <input class="form-check-input" type="radio" name="is_perpanjangan_sertifikat" id="flexRadioDefault2" value="1" {{$oldData->is_perpanjangan_sertifikat == 1  ? 'checked' : ''}}>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     Iya

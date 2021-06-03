@@ -91,6 +91,14 @@ Route::group([
     require __DIR__.'/covernote.php';
 });
 
+Route::group([
+    'prefix' => 'surat',
+    'as' => 'letter.',
+
+], function () {
+    require __DIR__.'/letter.php';
+});
+
 // Route::group([
 //     'prefix' => 'covernote/follow-up',
 //     'as' => 'covernote.',
