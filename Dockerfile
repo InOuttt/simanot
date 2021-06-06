@@ -30,7 +30,19 @@ RUN apk update && apk add --no-cache \
     php7-gd \
     php7-dom \
     php7-session \
-    php7-zlib
+    php7-zlib \
+    zlib1g-dev 
+
+RUN docker-php-ext-install mbstring
+
+RUN apt-get install -y libzip-dev
+RUN docker-php-ext-install zip
+
+RUN docker-php-ext-configure gd --with-gd --with-webp-dir --with-jpeg-dir \
+    --with-png-dir --with-zlib-dir --with-xpm-dir --with-freetype-dir \
+    --enable-gd-native-ttf
+
+RUN docker-php-ext-install gd
 
 # Add and Enable PHP-PDO Extenstions
 RUN docker-php-ext-install pdo pdo_mysql
