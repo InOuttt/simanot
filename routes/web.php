@@ -47,6 +47,7 @@ Route::get('/ajax/akta/debitur', [DebiturSelect2::class, 'selectSearch']);
 Route::group([
     'prefix' => 'notaris',
     'as' => 'notaris.',
+    'middleware' => 'auth'
 
 ], function () {
     Route::get('/', [NotarisController::class, 'index'])
@@ -78,7 +79,7 @@ Route::group([
 Route::group([
     'prefix' => 'cluster',
     'as' => 'cluster.',
-
+    'middleware' => 'auth'
 ], function () {
     require __DIR__.'/cluster.php';
 });
@@ -86,7 +87,7 @@ Route::group([
 Route::group([
     'prefix' => 'covernote',
     'as' => 'covernote.',
-
+    'middleware' => 'auth'
 ], function () {
     require __DIR__.'/covernote.php';
 });
@@ -94,7 +95,7 @@ Route::group([
 Route::group([
     'prefix' => 'surat',
     'as' => 'letter.',
-
+    'middleware' => 'auth'
 ], function () {
     require __DIR__.'/letter.php';
 });

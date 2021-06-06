@@ -50,9 +50,17 @@ class CovernoteDocument extends BaseModel
         return $this->hasMany(CovernoteFollowup::class, 'covernote_dokumen_id', 'id');
     }
     
+    /** label */
     public function getNotarisNameAttribute(): String
     {
        return collect($this->covernote()->pluck('notaris'))->implode('<br/>');
+    }
+
+    public function getFollowupLastHasilAttribute(): String
+    {
+    //    return $this->followup()->orderBy('id', 'DESC')->first()->hasil;
+       $ret = $this->followup->last();
+        return empty($ret) ? '-' : $ret->hasil;
     }
 
     public function getStatusLabelAttribute(): String
@@ -62,5 +70,43 @@ class CovernoteDocument extends BaseModel
         if($this->status == 2) $label = 'Revisi';
        return $label;
     //    return $this->notaris_id;
+    }
+
+    public function getTenggatBulanAttribute(): String
+    {
+        $ret = "-";
+        if(!empty($this->covernote->jatuh_tempo)) {
+            
+            $dateObj   = DateTime::createFromFormat('!m', date('F', strtotime($this->covernote->jatuh_tempo)));
+            $ret = $dateObj->format('F'); // March
+            $ret = date('F', strtotime($this->covernote->jatuh_tempo));
+        }
+        return $ret;
+    }
+    public function getTenggatTahunAttribute(): String
+    {
+        $ret = "-";
+        if(!empty($this->covernote->jatuh_tempo)) {
+            $ret = date('Y', strtotime($this->covernote->jatuh_tempo));
+        }
+        return $ret;
+    }
+
+    /** gathering custom data */
+    public function getDueDocument($status ,$month, $year) {
+        $query = CovernoteDocument::query()->with(['covernote', 'covernote.notaris']);
+
+        $dt = date('Y-m-t', strtotime($year . "-" . $month . "-25"));
+        $query = $query->whereHas('covernote', function($q) use ($dt){
+            $q->where('jatuh_tempo', '<=', $dt);
+        });
+
+        if($status != null) {
+            $query = $query->where('status', '=' ,$status);
+        } else {
+            $query = $query->whereIn('status', ['0', '2']);
+        }
+
+        return $query;
     }
 }

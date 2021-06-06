@@ -194,7 +194,7 @@
 
             <li class="c-sidebar-nav-item">
                 <x-utils.link
-                    href="#"
+                    :href="route('letter.tagihan.index')"
                     icon="c-sidebar-nav-icon cil-envelope-letter"
                     class="c-sidebar-nav-link"
                     :text="__('Surat Tagihan Notaris')"
@@ -202,7 +202,7 @@
             </li>
             <li class="c-sidebar-nav-item">
                 <x-utils.link
-                    href="#"
+                    :href="route('letter.grup_hukum.index')"
                     icon="c-sidebar-nav-icon cil-envelope-letter"
                     class="c-sidebar-nav-link"
                     :text="__('Laporan Grup Hukum')"

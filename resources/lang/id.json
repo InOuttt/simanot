@@ -187,5 +187,17 @@
     "You can not set a password that you have previously used within the last 3 times.": "Anda tidak dapat menetapkan Kata sandi yang sebelumnya Anda gunakan dalam 3 kali terakhir.",
     "These credentials do not match our records.": "Kredensial ini tidak cocok dengan catatan kami.",
     "Editing :role": "Mengedit :role",
-    "Home": "Beranda"
+    "Home": "Beranda",
+    "January": "Januari",
+    "February": "Februari",
+    "March": "Maret",
+    "April": "April",
+    "May": "Mei",
+    "June": "Juni",
+    "July": "Juli",
+    "August": "Agustus",
+    "September": "September",
+    "October": "Oktober",
+    "November": "November",
+    "December": "Desember"
 }

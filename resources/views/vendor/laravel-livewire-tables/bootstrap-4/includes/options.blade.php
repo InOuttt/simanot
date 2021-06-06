@@ -1,6 +1,6 @@
 @if ($paginationEnabled || $searchEnabled)
 
-    @if ($searchNotaris || $searchDebitur)
+    @if ((!empty($searchDebitur) && $searchNotaris) && (!empty($searchDebitur) && $searchDebitur))
     <div class="row mb-4">    
         <label for="nama_notaris" class="col-md-2 col-form-label">Nama Notaris</label>
         <div class="col-md-4"> 
@@ -39,6 +39,64 @@
         </div>
     </div>
     @endif
+
+    @if(!empty($searchTagihan) && $searchTagihan)
+        <div class="row mb-4">    
+            <label for="nama_notaris" class="col-md-2 col-form-label">Bulan</label>
+            <div class="col-md-4"> 
+                <select name="bulan" class="form-control" wire:model.debounce.{{ $searchDebounce }}ms="bulan">
+                    @for($i=1; $i<13; $i++)
+                        <option value="{{$i}}" {{$i == $bulan ? 'selected' : ''}}>{{$listBulan[$i]}}</option>
+                    @endfor
+                </select>
+            </div>
+            <label for="nama_notaris" class="col-md-2 col-form-label">Tahun</label>
+            <div class="col-md-4"> 
+                <select name="tahun" class="form-control" wire:model.debounce.{{ $searchDebounce }}ms="tahun">
+                    @for($i=2010; $i<=date('Y'); $i++)
+                        <option value="{{$i}}" {{$i == $tahun ? 'selected' : ''}}>{{$i}}</option>
+                    @endfor
+                </select>
+            </div>
+        </div>
+        <div class="row mb-4">    
+            <label for="nama_notaris" class="col-md-2 col-form-label">Status Akta</label>
+            <div class="col-md-4"> 
+                <div class="form-check form-check-inline">
+                    <input name="status" class="form-check-input" type="radio" wire:model.debounce.{{ $searchDebounce }}ms="status" id="flexRadioDefault1" 
+                        value="0" {{$status == 0 ? 'checked' : ''}}
+                    />
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Belum Terima
+                    </label>
+                    </div>
+                    <div class="form-check">
+                    <input name="status" class="form-check-input" type="radio" wire:model.debounce.{{ $searchDebounce }}ms="status" 
+                        id="flexRadioDefault2" value="2" {{$status == 2 ? 'checked' : ''}}
+                    />
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Koreksi
+                    </label>
+                </div>
+            </div>
+            @if(!empty($showNotarisSearch) && $showNotarisSearch)
+
+            <label for="nama_notaris" class="col-md-2 col-form-label">Nama Notaris</label>
+            <div class="col-md-4 input-group"> 
+                <input
+                    @if (is_numeric($searchDebounce) && $searchUpdateMethod === 'debounce') wire:model.debounce.{{ $searchDebounce }}ms="nama_notaris" @endif
+                    @if ($searchUpdateMethod === 'lazy') wire:model.lazy="search" @endif
+                    @if ($disableSearchOnLoading) wire:loading.attr="disabled" @endif
+                    class="form-control"
+                    type="text"
+                    placeholder="nama notaris"
+                />
+            </div>
+
+            @endif
+        </div>
+    @endif
+
     <div class="row mb-4">
         @if ($paginationEnabled && count($perPageOptions))
             <div class="col form-inline">

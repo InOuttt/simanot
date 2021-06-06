@@ -13,8 +13,10 @@ class File extends BaseModel
     public $name;
 
     public static $filePath = [
-      'tanda_terima_notaris' => 'uploads/tanda-terima-notaris',
-      'tanda_terima_debitur' => 'uploads/tanda-terima-debitur'
+      'laporan_grup_hukum' => 'storage/laporan-grup-hukum',
+      'surat_tagihan_notaris' => 'storage/surat-tagihan-notaris',
+      'tanda_terima_notaris' => 'storage/tanda-terima-notaris',
+      'tanda_terima_debitur' => 'storage/tanda-terima-debitur'
     ];
 
     protected $fillable = [

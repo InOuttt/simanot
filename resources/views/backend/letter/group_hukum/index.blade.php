@@ -1,20 +1,20 @@
 @extends('backend.layouts.app')
 
-@section('title', __('Surat Tagihan Notaris'))
+@section('title', __('Laporan Grup Hukum'))
 
 @section('content')
     <x-backend.card>
         <x-slot name="header">
-            @lang('Surat Tagihan Notaris')
+            @lang('Laporan Grup Hukum')
         </x-slot>
 
         <x-slot name="body">
-          <livewire:backend.tagihan-notaris-table />
+          <livewire:backend.grup-hukum-table />
 
           
             <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog"  aria-labelledby="uploadModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <x-forms.post :action="route('letter.grup_hukum.store')">
+                <x-forms.post :action="route('letter.tagihan.store')">
                 <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="uploadModalLabel">Unggah file yang sudah ditanda tangani</h5>

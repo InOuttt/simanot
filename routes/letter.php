@@ -1,7 +1,7 @@
 <?php
 
+use App\Domains\Letter\Http\Controllers\GrupHukumController;
 use App\Domains\Letter\Http\Controllers\TagihanNotarisController;
-use App\Domains\Letter\Models\SuratTagihan;
 use Tabuna\Breadcrumbs\Trail;
 
 Route::group([
@@ -9,28 +9,43 @@ Route::group([
   'as' => 'tagihan.',
 
 ], function () {
-  Route::get('/', [TagihanNotarisController::class, 'find'])
+  Route::get('/', [TagihanNotarisController::class, 'index'])
       ->name('index')
       ->breadcrumbs(function (Trail $trail) {
           $trail->parent('admin.dashboard')
-              ->push(__('Surat Tagihan Notaris'), route('letter.tagihan'));
+              ->push(__('Surat Tagihan Notaris'), route('letter.tagihan.index'));
       });
-  Route::get('create', [CovernoteController::class, 'create'])
-    ->name('create');
   Route::post('/', [TagihanNotarisController::class, 'store'])
       ->name('store');
-  Route::group(['prefix' => '{data}'], function () {
-      Route::get('view', [TagihanNotarisController::class, 'view'])
-          ->name('view')
-          ->middleware('permission:admin.access.covernote_followup.index');
-      Route::get('edit', [TagihanNotarisController::class, 'edit'])
-          ->name('edit')
-          ->breadcrumbs(function (Trail $trail, SuratTagihan $data) {
-              $trail->parent('covernote.index') 
-                  ->push(__('Sedang menyunting Surat Tagihan Notaris :nama ', ['nama' => $data->notaris->nama]), route('letter.tagihan.edit', $data));
-          });
+  Route::group(['prefix' => '{notarisId}'], function () {
+    Route::group(['prefix' => '{bulan}'], function () {
+        Route::group(['prefix' => '{tahun}'], function () {
+            Route::get('download', [TagihanNotarisController::class, 'download'])
+            ->name('download');
+        });
+    });
+  });
+});
 
-      Route::patch('/', [TagihanNotarisController::class, 'update'])->name('update');
-      Route::delete('/', [TagihanNotarisController::class, 'destroy'])->name('destroy');
+Route::group([
+  'prefix' => 'grup-hukum',
+  'as' => 'grup_hukum.',
+
+], function () {
+  Route::get('/', [GrupHukumController::class, 'index'])
+      ->name('index')
+      ->breadcrumbs(function (Trail $trail) {
+          $trail->parent('admin.dashboard')
+              ->push(__('Laporan Grup Hukum'), route('letter.grup_hukum.index'));
+      });
+  Route::post('/', [GrupHukumController::class, 'store'])
+      ->name('store');
+  Route::group(['prefix' => '{clusterId}'], function () {
+    Route::group(['prefix' => '{bulan}'], function () {
+        Route::group(['prefix' => '{tahun}'], function () {
+            Route::get('download', [GrupHukumController::class, 'download'])
+            ->name('download');
+        });
+    });
   });
 });

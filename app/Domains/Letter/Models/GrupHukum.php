@@ -2,19 +2,18 @@
 
 namespace App\Domains\Letter\Models;
 
+use App\Domains\Master\Models\Cluster;
 use App\Models\BaseModel;
-use App\Domains\Master\Models\Notaris;
-use App\Domains\Covernote\Models\CovernoteDocument;
 use App\Models\File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class SuratTagihan extends BaseModel
+class GrupHukum extends BaseModel
 {
 
     use HasFactory;
 
     protected $fillable = [
-       'notaris_id',
+       'cluster_id',
        'bulan',
        'tahun',
        'tanggal_email',
@@ -23,12 +22,12 @@ class SuratTagihan extends BaseModel
     
     public function getTable()
     {
-        return "surat_tagihan";
+        return "grup_hukum";
     }
 
     /** Relationship */
-    public function notaris() {
-        return $this->hasOne(Notaris::class, 'id', 'notaris_id');
+    public function cluster() {
+        return $this->hasOne(Cluster::class, 'id', 'cluster_id');
     }
 
     public function file() {
