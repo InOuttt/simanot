@@ -59,7 +59,9 @@
                 </select>
             </div>
         </div>
-        <div class="row mb-4">    
+        <div class="row mb-4">
+            @if(!empty($showStatusAktaSearch) && $showStatusAktaSearch)
+
             <label for="nama_notaris" class="col-md-2 col-form-label">Status Akta</label>
             <div class="col-md-4"> 
                 <div class="form-check form-check-inline">
@@ -79,6 +81,7 @@
                     </label>
                 </div>
             </div>
+            @endif
             @if(!empty($showNotarisSearch) && $showNotarisSearch)
 
             <label for="nama_notaris" class="col-md-2 col-form-label">Nama Notaris</label>

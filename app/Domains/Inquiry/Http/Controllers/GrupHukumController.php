@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Letter\Http\Controllers;
+namespace App\Domains\Inquiry\Http\Controllers;
 
 use App\Domains\Covernote\Models\CovernoteDocument;
 use App\Http\Controllers\Backend\BaseBackendController;
@@ -16,48 +16,13 @@ class GrupHukumController extends BaseBackendController
     public function __construct(GrupHukumService $service)
     {
         $this->service = $service;
-        $this->view_index = 'backend.letter.group_hukum.index';
-        $this->route_view_index = 'letter.grup_hukum.index';
-        $this->view_edit = 'backend.letter.group_hukum.edit';
-        $this->view_create = 'backend.letter.group_hukum.create';
+        $this->view_index = 'backend.inquiry.grup_hukum';
+        $this->route_view_index = 'inquiry.grup_hukum.index';
     }
 
     public function index()
     {
         return view($this->view_index);
-    }
-
-    /**
-     * @return mixed
-     * @throws \App\Exceptions\GeneralException
-     * @throws \Throwable
-     */
-    public function store(GrupHukumRequest $request)
-    {
-        $update = $request->all();
-        if($request->hasFile('file')) {
-            try {
-
-                $file = $request->file('file');
-                $fileName = $update['cluster_id']. '-' . $file->getClientOriginalName();
-                $uploaded = File::create([
-                    'path' => File::$filePath['laporan_grup_hukum'] . '/' . $fileName,
-                    'type' => $file->getClientOriginalExtension()
-                ]);
-
-                if(!empty($uploaded) && !empty($uploaded->id)) {
-                    $file->move(File::$filePath['laporan_grup_hukum'], $fileName);
-                    $update['file_id'] = $uploaded->id;
-                }
-
-            } catch (\Throwable $th) {
-                dd($th);
-                return back()->withErrors('Gagal upload file Laporan Grup Hukum');
-            }
-        }
-        $suratTagihan= $this->service->store($update);
-
-        return redirect()->route($this->route_view_index)->withFlashSuccess(__('The Data was successfully created.'));
     }
 
     public function download($clusterId, $bulan, $tahun) {

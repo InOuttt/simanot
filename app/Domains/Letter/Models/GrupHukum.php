@@ -34,6 +34,15 @@ class GrupHukum extends BaseModel
         return $this->hasOne(File::class, 'id', 'file_id');
     }
 
+    /** attributes */
+    public function getfileDownloadPathButtonAttribute() : String
+    {
+        $ret = "-";
+        if(!empty($this->file->path)) {
+            $ret = "<a href='/".$this->file->path."' class='btn btn-success' target='__blank()'> Unduh </a>";
+        }
+        return $ret;
+    }
 
     /** Gathering Data */
 

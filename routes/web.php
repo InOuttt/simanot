@@ -100,6 +100,14 @@ Route::group([
     require __DIR__.'/letter.php';
 });
 
+Route::group([
+    'prefix' => 'inquiry',
+    'as' => 'inquiry.',
+    'middleware' => 'auth'
+], function () {
+    require __DIR__.'/inquiry.php';
+});
+
 // Route::group([
 //     'prefix' => 'covernote/follow-up',
 //     'as' => 'covernote.',

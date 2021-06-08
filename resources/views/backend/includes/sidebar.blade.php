@@ -230,32 +230,35 @@
                 icon="c-sidebar-nav-icon cil-library"
                 class="c-sidebar-nav-dropdown-toggle"
                 :text="__('Inquiry')"
-                :active="activeClass(Route::is('report.*'), 'c-active')" />
+                :active="activeClass(Route::is('inquiry.*'), 'c-active')" />
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item">
                     <x-utils.link
-                        href="#"
+                        :href="route('inquiry.status_akta.index')"
                         class="c-sidebar-nav-link"
                         :text="__('Status Akta')" 
-                        />
+                        :active="activeClass(Route::is('inquiry.status_akta.*'), 'c-active')" />
                 </li>
                 <li class="c-sidebar-nav-item">
                     <x-utils.link
-                        href="#"
+                        :href="route('inquiry.index_notaris.index')"
                         class="c-sidebar-nav-link"
-                        :text="__('Index Notaris')" />
+                        :text="__('Index Notaris')" 
+                        :active="activeClass(Route::is('inquiry.index_notaris.*'), 'c-active')" />
                 </li>
                 <li class="c-sidebar-nav-item">
                     <x-utils.link
-                        href="#"
+                        :href="route('inquiry.tagihan_notaris.index')"
                         class="c-sidebar-nav-link"
-                        :text="__('Surat Tagihan Notaris')" />
+                        :text="__('Surat Tagihan Notaris')"
+                        :active="activeClass(Route::is('inquiry.tagihan_notaris.*'), 'c-active')" />
                 </li>
                 <li class="c-sidebar-nav-item">
                     <x-utils.link
-                        href="#"
+                        :href="route('inquiry.grup_hukum.index')"
                         class="c-sidebar-nav-link"
-                        :text="__('Laporan Grup Hukum')" />
+                        :text="__('Laporan Grup Hukum')" 
+                        :active="activeClass(Route::is('inquiry.grup_hukum.*'), 'c-active')" />
                 </li>
             </ul>
         </li>

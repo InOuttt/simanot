@@ -7,11 +7,14 @@ use App\Domains\Covernote\Models\Covernote;
 use App\Domains\Covernote\Models\CovernoteFollowup;
 use App\Models\File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Rappasoft\LaravelLivewireTables\Traits\HtmlComponents;
+use PhpParser\Node\Expr\Cast\String_;
 
 class CovernoteDocument extends BaseModel
 {
 
     use HasFactory;
+    use HtmlComponents;
 
     protected $fillable = [
         'covernote_id',
@@ -90,6 +93,24 @@ class CovernoteDocument extends BaseModel
             $ret = date('Y', strtotime($this->covernote->jatuh_tempo));
         }
         return $ret;
+    }
+
+    public function getFileNotarisDownloadAttribute() : String
+    {
+        $ret = "-";
+        if(!empty($this->file_notaris->path)) {
+            $ret = "<a href='/".$this->file_notaris->path."' class='btn btn-success' target='__blank()'> Unduh </a>";
+        }
+        return $this->html($ret);
+    }
+
+    public function getFileDebiturDownloadAttribute() : String
+    {
+        $ret = "-";
+        if(!empty($this->file_debitur->path)) {
+            $ret = "<a href='/".$this->file_debitur->path."' class='btn btn-success' target='__blank()'> Unduh </a>";
+        }
+        return $this->html($ret);
     }
 
     /** gathering custom data */

@@ -14,7 +14,7 @@
           
             <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog"  aria-labelledby="uploadModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <x-forms.post :action="route('letter.tagihan.store')">
+                <x-forms.post :action="route('letter.grup_hukum.store')">
                 <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="uploadModalLabel">Unggah file yang sudah ditanda tangani</h5>
@@ -23,7 +23,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                        <input type="text" name="notaris_id" class="form-control" id="id_notaris" value="" hidden>
+                        <input type="text" name="cluster_id" class="form-control" id="cluster_id" value="" hidden>
                         <input type="text" name="bulan" class="form-control" id="bulan" value="" hidden>
                         <input type="text" name="tahun" class="form-control" id="tahun" value="" hidden>
                     <div class="mb-3">
@@ -67,7 +67,7 @@ uploadModal.addEventListener('show.coreui.modal', function (event) {
   var tahun = button.getAttribute('data-modal-tahun');
   var bulan = button.getAttribute('data-modal-bulan');
 
-  document.getElementById('id_notaris').value = id;
+  document.getElementById('cluster_id').value = id;
   document.getElementById('tahun').value = tahun;
   document.getElementById('bulan').value = bulan;
 })
