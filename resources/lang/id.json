@@ -179,7 +179,7 @@
     "System": "Sistem",
     "Access": "Akses",
     "Welcome :Name": "Selamat datang :Name",
-    "Welcome to the Dashboard": "Selamat datang di Dasbor",
+    "Welcome to the Dashboard": "Selamat datang di Beranda",
     "Delete": "Hapus",
     "Close": "Tutup",
     "Edit": "Edit",
@@ -211,5 +211,6 @@
     "bulan-9": "September",
     "bulan-10": "Oktober",
     "bulan-11": "November",
-    "bulan-12": "Desember"
+    "bulan-12": "Desember",
+    "Save": "Simpan",
 }
