@@ -221,7 +221,7 @@
         @if (
             $logged_in_user->hasAllAccess() ||
             (
-                $logged_in_user->can('admin.access.Inquiry')
+                $logged_in_user->can('admin.access.inquiry')
             )
         )
         <li class="c-sidebar-nav-dropdown">

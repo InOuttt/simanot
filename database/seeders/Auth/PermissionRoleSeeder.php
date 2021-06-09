@@ -197,6 +197,34 @@ class PermissionRoleSeeder extends Seeder
             ]),
         ]);
 
+        $inquiry = Permission::create([
+            'type' => User::TYPE_ADMIN,
+            'name' => 'admin.access.inquiry',
+            'description' => 'All Covernote Permissions',
+        ]);
+        $inquiry->children()->saveMany([
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.access.inquiry.status_akta',
+                'description' => 'View Inquiry statusk akta',
+            ]),
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.access.inquiry.index_notaris',
+                'description' => 'View Inquiry index notaris',
+            ]),
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.access.inquiry.surat_tagihan',
+                'description' => 'View Inquiry surat tagiham',
+            ]),
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.access.inquiry.grup_hukum',
+                'description' => 'View Inquiry grup hukum',
+            ]),
+        ]);
+
         
 
         // Assign Permissions to other Roles
@@ -204,7 +232,8 @@ class PermissionRoleSeeder extends Seeder
         $roleOperator->givePermissionTo($covernote);
         $roleOperator->givePermissionTo($permissionNotaris);
         $roleOperator->givePermissionTo($permissionCluster);
-        $roleInquiry->givePermissionTo($covernote);
+        $roleOperator->givePermissionTo($inquiry);
+        $roleInquiry->givePermissionTo($inquiry);
         // $akta_notaris->syncRoles($roles);
 
         $this->enableForeignKeys();
