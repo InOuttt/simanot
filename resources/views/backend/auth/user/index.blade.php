@@ -2,9 +2,9 @@
 
 @section('title', __('User Management'))
 
-@section('breadcrumb-links')
+<!-- @section('breadcrumb-links')
     @include('backend.auth.user.includes.breadcrumb-links')
-@endsection
+@endsection -->
 
 @section('content')
     <x-backend.card>

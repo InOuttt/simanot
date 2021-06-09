@@ -68,11 +68,11 @@ class UsersTable extends TableComponent
     public function columns(): array
     {
         return [
-            Column::make(__('Type'), 'type')
-                ->sortable()
-                ->format(function (User $model) {
-                    return view('backend.auth.user.includes.type', ['user' => $model]);
-                }),
+            // Column::make(__('Type'), 'type')
+            //     ->sortable()
+            //     ->format(function (User $model) {
+            //         return view('backend.auth.user.includes.type', ['user' => $model]);
+            //     }),
             Column::make(__('Name'), 'name')
                 ->searchable()
                 ->sortable(),
@@ -87,13 +87,13 @@ class UsersTable extends TableComponent
                 ->format(function (User $model) {
                     return view('backend.auth.user.includes.verified', ['user' => $model]);
                 }),
-            Column::make(__('2FA'))
-                ->sortable(function ($builder, $direction) {
-                    return $builder->orderBy('two_factor_auth_count', $direction);
-                })
-                ->format(function (User $model) {
-                    return view('backend.auth.user.includes.2fa', ['user' => $model]);
-                }),
+            // Column::make(__('2FA'))
+            //     ->sortable(function ($builder, $direction) {
+            //         return $builder->orderBy('two_factor_auth_count', $direction);
+            //     })
+            //     ->format(function (User $model) {
+            //         return view('backend.auth.user.includes.2fa', ['user' => $model]);
+            //     }),
             Column::make(__('Roles'), 'roles_label')
                 ->searchable(function ($builder, $term) {
                     return $builder->orWhereHas('roles', function ($query) use ($term) {

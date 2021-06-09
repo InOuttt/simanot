@@ -1,6 +1,20 @@
+
 @extends('frontend.layouts.app')
 
 @section('title', __('Login'))
+
+@push('after-styles')
+
+<style>
+    .field-icon {
+        float: right;
+        margin-left: -25px;
+        margin-top: -25px;
+        position: relative;
+        z-index: 2;
+    }
+</style>
+@endpush
 
 @section('content')
     <div class="container py-4">
@@ -26,6 +40,7 @@
 
                                 <div class="col-md-6">
                                     <input type="password" name="password" id="password" class="form-control" placeholder="{{ __('Password') }}" maxlength="100" required autocomplete="current-password" />
+                                    <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                 </div>
                             </div><!--form-group-->
 
@@ -54,7 +69,7 @@
                                 <div class="col-md-8 offset-md-4">
                                     <button class="btn btn-primary" type="submit">@lang('Login')</button>
 
-                                    <x-utils.link :href="route('frontend.auth.password.request')" class="btn btn-link" :text="__('Forgot Your Password?')" />
+                                    <!-- <x-utils.link :href="route('frontend.auth.password.request')" class="btn btn-link" :text="__('Forgot Your Password?')" /> -->
                                 </div>
                             </div><!--form-group-->
 
@@ -68,3 +83,18 @@
         </div><!--row-->
     </div><!--container-->
 @endsection
+
+
+@push('after-scripts')
+<script>
+    $(".toggle-password").click(function() {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
+</script>
+@endpush
