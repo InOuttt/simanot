@@ -32,14 +32,14 @@ class ClusterController extends BaseBackendController
         return redirect()->route($this->route_view_index)->withFlashSuccess(__('Data berhasil dibuat.'));
     }
 
-    public function edit(BaseRequest $request, Cluster $notaris)
+    public function edit(BaseRequest $request, Cluster $cluster)
     {
-        return view($this->view_edit)->withData($notaris);
+        return view($this->view_edit)->withData($cluster);
     }
 
-    public function update(ClusterRequest $request, Cluster $notaris)
+    public function update(ClusterRequest $request, Cluster $cluster)
     {
-        $this->service->update($notaris, $request->validated());
+        $this->service->update($cluster, $request->validated());
 
         return redirect()->route($this->route_view_index)->withFlashSuccess(__('Data berhasil diedit.'));
     }

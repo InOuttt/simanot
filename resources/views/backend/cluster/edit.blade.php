@@ -24,31 +24,6 @@
                             <input type="text" name="nama" class="form-control" placeholder="{{ __('contoh: Cluster abcde') }}" value="{{ $data->nama }}" maxlength="100" required />
                         </div>
                     </div><!--form-group-->
-
-                    <div class="form-group row">
-                        <label for="partner_id" class="col-md-2 col-form-label">Nama Partner</label>
-
-                        <div class="col-md-10">
-                            <livewire:partner-select2 :idCluster="$data->partner_id" />
-                        </div>
-                    </div><!--form-group-->
-
-                    <div class="form-group row">
-                        <label for="alamat" class="col-md-2 col-form-label">Alamat</label>
-
-                        <div class="col-md-10">
-                            <textarea name="alamat" class="form-control" placeholder="contoh: Jl.jalan street" value="" rows='3' />{{ $data->alamat }}</textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="domisili" class="col-md-2 col-form-label">Domisili</label>
-
-                        <div class="col-md-10">
-                            <textarea name="domisili" class="form-control" placeholder="contoh: DKI Jakarta" rows="3" />{{ $data->domisili }}</textarea>
-                        </div>
-                    </div>
-
                 </div>
             </x-slot>
 

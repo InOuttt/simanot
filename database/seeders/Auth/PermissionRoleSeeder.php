@@ -206,7 +206,7 @@ class PermissionRoleSeeder extends Seeder
             new Permission([
                 'type' => User::TYPE_ADMIN,
                 'name' => 'admin.access.inquiry.status_akta',
-                'description' => 'View Inquiry statusk akta',
+                'description' => 'View Inquiry status dokumen',
             ]),
             new Permission([
                 'type' => User::TYPE_ADMIN,
@@ -216,7 +216,7 @@ class PermissionRoleSeeder extends Seeder
             new Permission([
                 'type' => User::TYPE_ADMIN,
                 'name' => 'admin.access.inquiry.surat_tagihan',
-                'description' => 'View Inquiry surat tagiham',
+                'description' => 'View Inquiry surat tagihan',
             ]),
             new Permission([
                 'type' => User::TYPE_ADMIN,

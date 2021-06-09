@@ -18,11 +18,11 @@ Route::post('/', [ClusterController::class, 'store'])
     ->middleware('permission:admin.access.cluster.create');
 Route::group(['prefix' => '{cluster}'], function () {
     Route::get('edit', [ClusterController::class, 'edit'])
-        ->name('edit')
-        ->breadcrumbs(function (Trail $trail, Cluster $data) {
-            $trail->parent('cluster.index') 
-                ->push(__('Editing :cluster', ['cluster' => $data->name]), route('cluster.edit', $data));
-        });
+        ->name('edit');
+        // ->breadcrumbs(function (Trail $trail, Cluster $data) {
+        //     $trail->parent('cluster.index') 
+        //         ->push(__('Editing :cluster', ['cluster' => $data->nama]), route('cluster.edit', $data));
+        // });
 
     Route::patch('/', [ClusterController::class, 'update'])->name('update');
     Route::delete('/', [ClusterController::class, 'destroy'])->name('destroy');

@@ -236,7 +236,7 @@
                     <x-utils.link
                         :href="route('inquiry.status_akta.index')"
                         class="c-sidebar-nav-link"
-                        :text="__('Status Akta')" 
+                        :text="__('Status Dokumen')" 
                         :active="activeClass(Route::is('inquiry.status_akta.*'), 'c-active')" />
                 </li>
                 <li class="c-sidebar-nav-item">
