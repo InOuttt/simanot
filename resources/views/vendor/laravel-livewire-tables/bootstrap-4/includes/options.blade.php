@@ -44,17 +44,19 @@
         <div class="row mb-4">    
             <label for="nama_notaris" class="col-md-2 col-form-label">Bulan</label>
             <div class="col-md-4"> 
-                <select name="bulan" class="form-control" wire:model.debounce.{{ $searchDebounce }}ms="bulan">
-                    @for($i=1; $i<13; $i++)
-                        <option value="{{$i}}" {{$i == $bulan ? 'selected' : ''}}>{{$listBulan[$i]}}</option>
+                <input name="tmp_bulan" id="tmp_bulan" value="{{$bulan}}" hidden>
+                <select name="bulan" class="form-control" wire:model.debounce.{{ $searchDebounce }}ms="bulan" id="select-bulan">
+                    @for($i=1; $i < 13; $i++)
+                        <option id="opt-bulan-{{$i}}" value="{{$i}}" >{{$listBulan[$i]}}</option>
                     @endfor
                 </select>
             </div>
             <label for="nama_notaris" class="col-md-2 col-form-label">Tahun</label>
             <div class="col-md-4"> 
-                <select name="tahun" class="form-control" wire:model.debounce.{{ $searchDebounce }}ms="tahun">
+                <input name="tmp_tahun" id="tmp_tahun" value="{{$tahun}}" hidden>
+                <select name="tahun" class="form-control" wire:model.debounce.{{ $searchDebounce }}ms="tahun" id="select-tahun">
                     @for($i=2010; $i<=date('Y'); $i++)
-                        <option value="{{$i}}" {{$i == $tahun ? 'selected' : ''}}>{{$i}}</option>
+                        <option id="opt-tahun-{{$i}}" value="{{$i}}" >{{$i}}</option>
                     @endfor
                 </select>
             </div>
@@ -93,6 +95,21 @@
                     class="form-control"
                     type="text"
                     placeholder="nama notaris"
+                />
+            </div>
+
+            @endif
+            @if(!empty($showClusterSearch) && $showClusterSearch)
+
+            <label for="nama_notaris" class="col-md-2 col-form-label">Nama Cluster</label>
+            <div class="col-md-4 input-group"> 
+                <input
+                    @if (is_numeric($searchDebounce) && $searchUpdateMethod === 'debounce') wire:model.debounce.{{ $searchDebounce }}ms="nama_cluster" @endif
+                    @if ($searchUpdateMethod === 'lazy') wire:model.lazy="search" @endif
+                    @if ($disableSearchOnLoading) wire:loading.attr="disabled" @endif
+                    class="form-control"
+                    type="text"
+                    placeholder="nama cluster"
                 />
             </div>
 
@@ -138,3 +155,18 @@
         @include('laravel-livewire-tables::'.config('laravel-livewire-tables.theme').'.includes.export')
     </div><!--row-->
 @endif
+
+@push('scripts')
+
+<script>
+    $('#select-bulan').on('change', function() {
+        var bulan = $('#tmp_bulan').val();
+        $('#opt-bulan-'+bulan).prop('selected', false);
+    })
+    $('#select-tahun').on('change', function() {
+        var tahun = $('#tmp_tahun').val();
+        $('#opt-tahun-'+tahun).prop('selected', false);
+    })
+</script>
+
+@endpush

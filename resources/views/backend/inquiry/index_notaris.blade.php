@@ -31,7 +31,7 @@
                 <div class="col-md-4">
                   <select name="bulan" class="form-control">
                     @foreach(listMonth() as $key => $val) 
-                      <option value="{{$key}}" {{$key == date('m') ? 'selected' : ''}}>{{__($val)}}</option>
+                      <option value="{{$key}}" {{$key == $dateData['bulan'] ? 'selected' : ''}}>{{__($val)}}</option>
                     @endforeach
                   </select>
                 </div>
@@ -40,7 +40,7 @@
                 <div class="col-md-4">
                   <select name="tahun" class="form-control" >
                     @for($i=2010; $i<=date('Y'); $i++)
-                        <option value="{{$i}}" {{$i == date('Y') ? 'selected' : ''}}>{{$i}}</option>
+                        <option value="{{$i}}" {{$i == $dateData['tahun'] ? 'selected' : ''}}>{{$i}}</option>
                     @endfor
                   </select>
                 </div>

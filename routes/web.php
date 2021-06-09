@@ -52,7 +52,7 @@ Route::group([
 ], function () {
     Route::get('/', [NotarisController::class, 'index'])
         ->name('index')
-        ->middleware('permission:admin.access.akta_notaris.list')            
+        ->middleware('permission:admin.access.notaris.list')            
         ->breadcrumbs(function (Trail $trail) {
             $trail->parent('admin.dashboard')
                 ->push(__('Notaris'), route('notaris.index'));

@@ -69,7 +69,7 @@ class GrupHukumTable extends TableComponent
     public function mount()
     {
         $this->index = $this->page > 1 ? ($this->page - 1) * $this->perPage : 0;
-        $this->bulan = date('m');
+        $this->bulan = date('n');
     }
 
     /**

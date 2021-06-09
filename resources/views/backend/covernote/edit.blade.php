@@ -12,7 +12,7 @@
             </x-slot>
 
             <x-slot name="headerActions">
-                <x-utils.link class="card-header-action" :href="route('notaris.index')" :text="__('Cancel')" />
+                <x-utils.link class="card-header-action" :href="route('covernote.index')" :text="__('Cancel')" />
             </x-slot>
 
             <x-slot name="body">

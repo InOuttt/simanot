@@ -47,6 +47,11 @@
                 </div>
 
                 <x-utils.link
+                    :href="route('admin.auth.user.change-password', auth()->user()->id)"
+                    class="dropdown-item"
+                    :text="__('Change Password')"/>
+
+                <x-utils.link
                     class="dropdown-item"
                     icon="c-icon mr-2 cil-account-logout"
                     onclick="event.preventDefault();document.getElementById('logout-form').submit();">

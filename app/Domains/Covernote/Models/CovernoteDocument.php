@@ -63,7 +63,7 @@ class CovernoteDocument extends BaseModel
     {
     //    return $this->followup()->orderBy('id', 'DESC')->first()->hasil;
        $ret = $this->followup->last();
-        return empty($ret) ? '-' : $ret->hasil;
+        return empty($ret) ? '-' : $ret->type . '-' . carbon($ret->tanggal_followup)->format('d-m-Y') . '-' . $ret->hasil;
     }
 
     public function getStatusLabelAttribute(): String

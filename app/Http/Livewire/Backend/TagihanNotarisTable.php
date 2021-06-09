@@ -24,7 +24,7 @@ class TagihanNotarisTable extends TableComponent
     public $nama_notaris;
     public $status = 0;
     public $tahun;
-    public $bulan = 6;
+    public $bulan;
     public $searchNotaris = true;
     public $searchTagihan = true;
     public $searchEnabled = false;
@@ -58,7 +58,7 @@ class TagihanNotarisTable extends TableComponent
     public function query(): Builder
     {
       $query = new Covernote();
-      $this->bulan = empty($this->bulan)? date('m') : $this->bulan;
+      $this->bulan = empty($this->bulan)? date('n') : $this->bulan;
       $this->tahun = empty($this->tahun)? date('Y') : $this->tahun;
       $query = $query->getDueDocument($this->status, $this->bulan, $this->tahun)
         ->groupBy(['notaris_id']);
@@ -69,7 +69,9 @@ class TagihanNotarisTable extends TableComponent
     public function mount()
     {
         $this->index = $this->page > 1 ? ($this->page - 1) * $this->perPage : 0;
-        $this->bulan = date('m');
+        if(!empty($this->bulan)) {
+          $this->bulan = date('n');
+        }
     }
 
     /**
@@ -81,7 +83,9 @@ class TagihanNotarisTable extends TableComponent
             Column::make(__('No.'))->format(fn () => ++$this->index),
             Column::make(__('Notaris'), 'notaris.nama')
               ->sortable(function ($builder, $direction) {
-                return $builder->orderBy('notaris.nama', $direction);
+                return $builder->orWhereHas('notaris', function ($query) use ($direction) {
+                  return $query->orderBy('nama', $direction);
+                });
               })
               ->searchable(function ($builder, $term) {
                 return $builder->orWhereHas('notaris', function ($query) use ($term) {

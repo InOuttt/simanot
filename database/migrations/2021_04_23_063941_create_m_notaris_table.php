@@ -52,7 +52,7 @@ class CreateMNotarisTable extends Migration
             $table->integer('durasi')->nullable();
             $table->date('jatuh_tempo')->nullable();
             $table->integer('os')->nullable();
-            $table->enum('is_perpanjangan_sertifikat', ['Y', 'N'])->default('N');
+            $table->enum('is_perpanjangan_sertifikat', [0, 1])->default(0);
             $table->string('nama_debitur')->nullable();
             $table->enum('status', [0, 1, 2])->default(0);
             $table->unsignedBigInteger('created_by');

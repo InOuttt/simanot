@@ -25,11 +25,13 @@ class GrupHukumTable extends TableComponent
     public $status = 0;
     public $tahun;
     public $bulan = 6;
+    public $nama_cluster;
     public $searchNotaris = true;
     public $searchTagihan = true;
     public $searchEnabled = false;
-    public $showNotarisSearch = true;
+    public $showNotarisSearch = false;
     public $showStatusAktaSearch = false;
+    public $showClusterSearch = true;
     public $listBulan = [
       1 => 'Januari',
       2 => 'Februari',
@@ -59,7 +61,7 @@ class GrupHukumTable extends TableComponent
     public function query(): Builder
     {
       $query = GrupHukum::query()->with('cluster');
-      $this->bulan = empty($this->bulan)? date('m') : $this->bulan;
+      $this->bulan = empty($this->bulan)? date('n') : $this->bulan;
       $this->tahun = empty($this->tahun)? date('Y') : $this->tahun;
 
       $query = $query->where('bulan', '=', $this->bulan);
