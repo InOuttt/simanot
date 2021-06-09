@@ -46,19 +46,19 @@ class RolesTable extends TableComponent
     public function columns(): array
     {
         return [
-            Column::make(__('Type'), 'type')
-                ->sortable()
-                ->format(function (Role $model) {
-                    if ($model->type === User::TYPE_ADMIN) {
-                        return __('Administrator');
-                    }
+            // Column::make(__('Type'), 'type')
+            //     ->sortable()
+            //     ->format(function (Role $model) {
+            //         if ($model->type === User::TYPE_ADMIN) {
+            //             return __('Administrator');
+            //         }
 
-                    if ($model->type === User::TYPE_USER) {
-                        return __('User');
-                    }
+            //         if ($model->type === User::TYPE_USER) {
+            //             return __('User');
+            //         }
 
-                    return 'N/A';
-                }),
+            //         return 'N/A';
+            //     }),
             Column::make(__('Name'), 'name')
                 ->searchable()
                 ->sortable(),

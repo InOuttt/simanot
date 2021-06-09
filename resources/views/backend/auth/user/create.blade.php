@@ -61,7 +61,7 @@
                     </div><!--form-group-->
 
                     <div class="form-group row">
-                        <label for="active" class="col-md-2 col-form-label">@lang('Active')</label>
+                        <label for="active" class="col-md-2 col-form-label">@lang('Status')</label>
 
                         <div class="col-md-10">
                             <div class="form-check">
