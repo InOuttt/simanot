@@ -17,7 +17,7 @@
                 :href="route('admin.dashboard')"
                 :active="activeClass(Route::is('admin.dashboard'), 'c-active')"
                 icon="c-sidebar-nav-icon cil-speedometer"
-                :text="__('Dashboard')" />
+                :text="__('Home')" />
         </li>
 
         @if (

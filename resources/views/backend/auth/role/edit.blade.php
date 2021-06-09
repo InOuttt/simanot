@@ -41,7 +41,7 @@
             </x-slot>
 
             <x-slot name="footer">
-                <button class="btn btn-sm btn-primary float-right" type="submit">@lang('Update Role')</button>
+                <button class="btn btn-sm btn-primary float-right" type="submit">@lang('Save')</button>
             </x-slot>
         </x-backend.card>
     </x-forms.patch>
