@@ -80,6 +80,9 @@ class CovernoteDocumentController extends BaseBackendController
     public function update(CovernoteDocumentRequest $request, CovernoteDocument $data)
     {
         $update = $request->all();
+        if(!empty($update['status_dokumen'])) {
+            $update['status'] =  $update['status_dokumen'];
+        }
         if($request->hasFile('tanda_terima_notaris')) {
             try {
 

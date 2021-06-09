@@ -15,7 +15,7 @@ Route::group([
       ->name('index')
       ->breadcrumbs(function (Trail $trail) {
           $trail->parent('admin.dashboard')
-              ->push(__('Surat Tagihan Notaris'), route('letter.tagihan.index'));
+              ->push(__('Status Dokumen Notaris'), route('inquiry.status_akta.index'));
       });
   Route::group(['prefix' => '{id}'], function () {
     Route::get('followup', [StatusAktaController::class, 'followup'])
@@ -28,7 +28,11 @@ Route::group([
   'as' => 'index_notaris.'
 ], function () {
   Route::get('/', [IndexNotarisController::class, 'index'])
-    ->name('index');
+    ->name('index')
+    ->breadcrumbs(function (Trail $trail) {
+      $trail->parent('admin.dashboard')
+          ->push(__('Index Notaris'), route('inquiry.index_notaris.index'));
+  });
 });
 
 Route::group([
@@ -36,7 +40,11 @@ Route::group([
   'as' => 'tagihan_notaris.'
 ], function () {
   Route::get('/', [TagihanNotarisController::class, 'index'])
-    ->name('index');
+    ->name('index')
+    ->breadcrumbs(function (Trail $trail) {
+      $trail->parent('admin.dashboard')
+          ->push(__('Tagihan Notaris'), route('inquiry.tagihan_notaris.index'));
+      });
 });
 
 Route::group([
@@ -44,5 +52,9 @@ Route::group([
   'as' => 'grup_hukum.'
 ], function () {
   Route::get('/', [GrupHukumController::class, 'index'])
-    ->name('index');
+    ->name('index')
+    ->breadcrumbs(function (Trail $trail) {
+      $trail->parent('admin.dashboard')
+          ->push(__('Grup Hukum'), route('inquiry.grup_hukum.index'));
+    });
 });

@@ -48,21 +48,17 @@ Route::group([
 ], function () {
   Route::get('/', [CovernoteDocumentController::class, 'find'])
       ->name('index')
-      ->middleware('permission:admin.access.covernote_followup.list')            
       ->breadcrumbs(function (Trail $trail) {
           $trail->parent('admin.dashboard')
               ->push(__('Covernote'), route('covernote.index'));
       });
   Route::post('/', [CovernoteDocumentController::class, 'store'])
-      ->name('store')
-      ->middleware('permission:admin.access.covernote_followup.create');
+      ->name('store');
   Route::group(['prefix' => '{data}'], function () {
       Route::get('create', [CovernoteDocumentController::class, 'create'])
-          ->name('create')
-          ->middleware('permission:admin.access.covernote_followup.create');
+          ->name('create');
       Route::get('view', [CovernoteDocumentController::class, 'view'])
-          ->name('view')
-          ->middleware('permission:admin.access.covernote_followup.index');
+          ->name('view');
       Route::get('edit', [CovernoteDocumentController::class, 'edit'])
           ->name('edit')
           ->breadcrumbs(function (Trail $trail, CovernoteDocument $data) {
@@ -77,8 +73,7 @@ Route::group([
       Route::group(['prefix' => 'followup', 'as' => 'followup.'], function () {
           Route::get('/', [CovernoteFollowupController::class, 'edit'])->name('edit');
           Route::patch('/', [CovernoteFollowupController::class, 'store'])
-            ->name('store')
-            ->middleware('permission:admin.access.covernote_followup.create');
+            ->name('store');
         });
 
   });
