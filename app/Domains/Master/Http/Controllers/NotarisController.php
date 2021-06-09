@@ -49,7 +49,7 @@ class NotarisController extends BaseBackendController
 
     public function destroy(BaseRequest $request,Notaris $notaris)
     {
-        $partnerId = Notaris::where('partner_id', '=', $notaris->id)->get();
+        $partnerId = Notaris::where('partner_id', '=', $notaris->id)->first();
         if(!empty($partnerId)) {
             return back()->withErrors('Notaris digunakan sebagai partner');
         }
