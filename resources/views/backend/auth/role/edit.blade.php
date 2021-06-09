@@ -17,7 +17,7 @@
 
             <x-slot name="body">
                 <div x-data="{userType : '{{ $role->type }}'}">
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <label for="name" class="col-md-2 col-form-label">@lang('Type')</label>
 
                         <div class="col-md-10">
