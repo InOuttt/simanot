@@ -18,13 +18,14 @@ class IndexNotarisController
       $oldData = [];
       $bulan = date('n');
       $tahun = date('Y');
+
       if(!empty($request->all())) {
         $dt = date('Y-m-t', strtotime($request->tahun . '-' . $request->bulan . '-25' ));
         $data = Covernote::with('notaris')
           ->where('notaris_id', '=', $request->notaris_id)
           ->where('status', '=', $request->status)
           ->where('jatuh_tempo', '<=', $dt)
-          ->where('is_perpanjangan_sertifikat', '=', 0)
+          ->where('is_perpanjangan_sertifikat', '=', '0')
           ->distinct('nama_debitur')
           ->get();
 
