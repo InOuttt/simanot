@@ -14,10 +14,10 @@
 
         <x-slot name="body">
             <table class="table table-hover">
-                <tr>
+                <!-- <tr>
                     <th>@lang('Type')</th>
                     <td>@include('backend.auth.user.includes.type')</td>
-                </tr>
+                </tr> -->
 
                 <tr>
                     <th>@lang('Avatar')</th>

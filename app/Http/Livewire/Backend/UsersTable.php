@@ -82,11 +82,11 @@ class UsersTable extends TableComponent
                 ->format(function (User $model) {
                     return $this->mailto($model->email);
                 }),
-            Column::make(__('Verified'), 'email_verified_at')
-                ->sortable()
-                ->format(function (User $model) {
-                    return view('backend.auth.user.includes.verified', ['user' => $model]);
-                }),
+            // Column::make(__('Verified'), 'email_verified_at')
+            //     ->sortable()
+            //     ->format(function (User $model) {
+            //         return view('backend.auth.user.includes.verified', ['user' => $model]);
+            //     }),
             // Column::make(__('2FA'))
             //     ->sortable(function ($builder, $direction) {
             //         return $builder->orderBy('two_factor_auth_count', $direction);
