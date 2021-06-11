@@ -36,7 +36,7 @@
                         <label for="no_covernote" class="col-md-2 col-form-label">Nomor Covernote</label>
 
                         <div class="col-md-4">
-                            <input type="text" name="no_covernote" class="form-control" placeholder="{{ __('ex : 123/abc/Jun/2021') }}" value="{{ old('no_covernote') }}" maxlength="100" />
+                            <input type="text" name="no_covernote" class="form-control" placeholder="{{ __('ex : www/aaa/sss/ddd') }}" value="{{ old('no_covernote') }}" maxlength="100" />
                         </div>
                         <label for="jatuh_tempo" class="col-md-2 col-form-label">Jatuh Tempo</label>
 

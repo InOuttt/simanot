@@ -6,7 +6,6 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 use App\Domains\Covernote\Models\Covernote;
-use App\Observers\AktaNotarisObserver;
 use App\Observers\CovernoteObserver;
 
 /**

@@ -50,6 +50,14 @@ class Covernote extends BaseModel
         return $this->hasMany(CovernoteDocument::class, 'covernote_id', 'id');
     }
 
+    public function documentsFinish() {
+        return $this->covernoteDocuments()->where('status', '=', '1');
+    }
+
+    public function documentsUnfinish() {
+        return $this->covernoteDocuments()->where('status', '!=', '1');
+    }
+
     public function getNotarisNameAttribute(): String
     {
        return collect($this->notaris()->pluck('nama'))->implode('<br/>');

@@ -3,9 +3,7 @@
 use App\Http\Controllers\LocaleController;
 use Tabuna\Breadcrumbs\Trail;
 use App\Domains\Master\Http\Controllers\NotarisController;
-use App\Domains\AktaNotaris\Http\Controllers\AktaNotarisController;
 use App\Domains\Master\Models\Notaris;
-use App\Domains\AktaNotaris\Models\AktaNotaris;
 use App\Http\Livewire\DebiturSelect2;
 use App\Http\Livewire\NotarisSelect2;
 use App\Http\Livewire\PartnerSelect2;
@@ -98,6 +96,14 @@ Route::group([
     'middleware' => 'auth'
 ], function () {
     require __DIR__.'/letter.php';
+});
+
+Route::group([
+    'prefix' => 'report',
+    'as' => 'report.',
+    'middleware' => 'auth'
+], function () {
+    require __DIR__.'/report.php';
 });
 
 Route::group([

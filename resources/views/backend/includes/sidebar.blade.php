@@ -200,13 +200,30 @@
                     :text="__('Surat Tagihan Notaris')"
                     :active="activeClass(Route::is('letter.tagihan.*'), 'c-active')" />
             </li>
-            <li class="c-sidebar-nav-item">
+            <li class="c-sidebar-nav-dropdown">
                 <x-utils.link
-                    :href="route('letter.grup_hukum.index')"
-                    icon="c-sidebar-nav-icon cil-envelope-letter"
-                    class="c-sidebar-nav-link"
-                    :text="__('Laporan Grup Hukum')"
-                    :active="activeClass(Route::is('letter.group_hukum.*'), 'c-active')" />
+                    href="#"
+                    icon="c-sidebar-nav-icon cil-spreadsheet"
+                    class="c-sidebar-nav-dropdown-toggle"
+                    :text="__('Report')"
+                    :active="activeClass(Route::is('letter.group_hukum.*') || Route::is('report.*'), 'c-active')" />
+                <ul class="c-sidebar-nav-dropdown-items">
+                    <li class="c-sidebar-nav-item">
+                        <x-utils.link
+                            :href="route('letter.grup_hukum.index')"
+                            class="c-sidebar-nav-link"
+                            :text="__('Laporan Grup Hukum')"
+                            :active="activeClass(Route::is('letter.group_hukum.*'), 'c-active')" />
+                    </li>
+                    <li class="c-sidebar-nav-item">
+                        <x-utils.link
+                            :href="route('report.notaris.index')"
+                            class="c-sidebar-nav-link"
+                            :text="__('Laporan notaris')"
+                            :active="activeClass(Route::is('report.notaris.*'), 'c-active')" />
+                    </li>
+                </ul>
+
             </li>
            
             <!-- <li class="c-sidebar-nav-item">

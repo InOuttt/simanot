@@ -46,8 +46,11 @@
             <div class="col-md-4"> 
                 <input name="tmp_bulan" id="tmp_bulan" value="{{$bulan}}" hidden>
                 <select name="bulan" class="form-control" wire:model.debounce.{{ $searchDebounce }}ms="bulan" id="select-bulan">
+                    @if(!empty($allMonth) || $allMonth)
+                        <option id="opt-bulan-0" value="null" >{{__('All')}}</option>
+                    @endif
                     @for($i=1; $i < 13; $i++)
-                        <option id="opt-bulan-{{$i}}" value="{{$i}}" >{{$listBulan[$i]}}</option>
+                        <option id="opt-bulan-{{$i}}" value="{{$i}}" >{{listMonth()[$i]}}</option>
                     @endfor
                 </select>
             </div>
