@@ -1,7 +1,6 @@
 <?php
 namespace App\Domains\Letter\Http\Controllers;
 
-use App\Domains\Covernote\Models\Covernote;
 use App\Domains\Master\Models\Notaris;
 use App\Http\Controllers\Requests\BaseRequest;
 use PDF;
@@ -13,11 +12,6 @@ class ReportNotarisController {
 
 
   public function index(BaseRequest $request) {
-    // $data = Covernote::countNotarisCovernote()->toSql();
-    // $data = Covernote::countNotarisCovernote()->get();
-    // $data = Notaris::countNotarisCovernote()->get();
-    // dd($data);
-
     return view($this->viewIndex);
   }
 

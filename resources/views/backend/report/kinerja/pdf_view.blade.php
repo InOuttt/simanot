@@ -34,7 +34,7 @@
 
     <div class="row ">
       <div class="col-md-12 ">
-        <h2 class="text-center" style="padding-left: 25%;">Laporan Notaris Bulan: {{__($bulan)}} Tahun: {{$tahun}}</h2>
+        <h2 class="text-center" style="padding-left: 25%;">Jumlah Covernote Jatuh Tempo Terhitung Dari Tanggal : {{$tanggal}} {{__('bulan-'.$bulan)}} {{$tahun}}</h2>
       </div>
     </div>
     <div class="row entered">&nbsp;</div>
@@ -48,22 +48,18 @@
       <thead>
         <tr>
           <th style="width: 70px">Nama Notaris</th>
-          <th style="width: 100px">Total Covernote</th>
-          <th style="width: 100px">Total Dokumen</th>
-          <th style="width: 100px">Dokumen Belum selesai</th>
-          <th style="width: 100px">Dokumen Selesai</th>
-          <th style="width: 100px">Dokumen Koreksi</th>
+          <th style="width: 100px">0 - 3 bulan</th>
+          <th style="width: 100px">3 - 6 bulan</th>
+          <th style="width: 100px"> > 6 bulan</th>
         </tr >
       </thead>
       <tbody>
         @foreach($datas as $data => $val)
         <tr>
           <td>{{$val->nama}}</td>
-          <td>{{$val->covernotes_count}}</td>
-          <td>{{$val->covernotes_documents_count}}</td>
-          <td>{{$val->documents_unfinish_count}}</td>
-          <td>{{$val->documents_finish_count}}</td>
-          <td>{{$val->documents_correction_count}}</td>
+          <td>{{$val->covernote_under90}}</td>
+          <td>{{$val->covernote_between180}}</td>
+          <td>{{$val->covernote_more180}}</td>
         </tr>
         @endforeach
       </tbody>

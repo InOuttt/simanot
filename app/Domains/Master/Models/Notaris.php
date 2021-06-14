@@ -18,7 +18,7 @@ class Notaris extends BaseModel
         'alamat',
         'domisili'
     ];
-    
+
     public function getTable()
     {
         return "notaris";
@@ -50,7 +50,11 @@ class Notaris extends BaseModel
     }
 
     public function documentsUnfinish() {
-        return $this->covernotesDocuments()->where('covernote_dokumen.status', '!=', '1');
+        return $this->covernotesDocuments()->where('covernote_dokumen.status', '=', '0');
+    }
+
+    public function documentsCorrection() {
+        return $this->covernotesDocuments()->where('covernote_dokumen.status', '=', '2');
     }
 
     public function getPartnerNameAttribute(): String
@@ -77,6 +81,7 @@ class Notaris extends BaseModel
             // ->sum('covernote_documents_count')
             ->withCount('documentsFinish')
             ->withCount('documentsUnfinish')
+            ->withCount('documentsCorrection')
             ->withCount('covernotesDocuments')
             ->withCount('covernotes')
             // ->sum('documents_finish_count')
@@ -84,6 +89,34 @@ class Notaris extends BaseModel
                 $q->whereBetween('jatuh_tempo', [$dtStart, $dtEnd]);
             })
             // ->distinct('notaris_id')
+            ;
+
+        return $qry;
+
+    }
+
+    public function countUnfinishCovernote($date) {
+        $date = empty($date) ? date('Y-m-d') : $date;
+        $date90 = carbon($date)->addDays(-90)->format('Y-m-d');
+        $date180 = carbon($date)->addDays(-180)->format('Y-m-d');
+
+        $qry = $this->query()->with('covernotes');
+        $qry = $qry
+            ->withCount([
+            'covernotes', 
+            'covernotes as covernote_under90' => function ($query) use ($date, $date90) {
+                $query->where('status', '=', '0');
+                $query->whereBetween('jatuh_tempo', [$date90, $date]);
+            },
+            'covernotes as covernote_between180' => function ($query) use ($date90, $date180) {
+                $query->where('status', '=', '0');
+                $query->whereBetween('jatuh_tempo', [$date180, $date90]);
+            },
+            'covernotes as covernote_more180' => function ($query) use ($date180) {
+                $query->where('status', '=', '0');
+                $query->where('jatuh_tempo', '<' , $date180);
+            },
+            ])
             ;
 
         return $qry;

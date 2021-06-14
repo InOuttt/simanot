@@ -120,6 +120,16 @@
         </div>
     @endif
 
+    @if(!empty($showDateSearch) && $showDateSearch)
+    <div class="row mb-4">    
+        <label for="nama_notaris" class="col-md-2 col-form-label">Tanggal</label>
+        <div class="col-md-4"> 
+            <input type='date' name="tanggal" wire:model.debounce.{{ $searchDebounce }}ms="tanggal" id="tanggal" value="{{$tanggal}}" class="form-control">
+        </div>
+    </div>
+    @endif
+
+
     <div class="row mb-4">
         @if ($paginationEnabled && count($perPageOptions))
             <div class="col form-inline">

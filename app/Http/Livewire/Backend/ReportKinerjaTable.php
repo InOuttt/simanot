@@ -2,8 +2,7 @@
 
 namespace App\Http\Livewire\Backend;
 
-use App\Domains\Covernote\Models\Covernote;
-use App\Domains\Letter\Http\Controllers\ReportNotarisController;
+use App\Domains\Letter\Http\Controllers\ReportKinerjaController;
 use App\Domains\Master\Models\Notaris;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\TableComponent;
@@ -11,9 +10,9 @@ use Rappasoft\LaravelLivewireTables\Traits\HtmlComponents;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 
 /**
- * Class ReportNotarisTable.
+ * Class ReportKinerjaTable.
  */
-class ReportNotarisTable extends TableComponent
+class ReportKinerjaTable extends TableComponent
 {
     use HtmlComponents;
 
@@ -23,13 +22,8 @@ class ReportNotarisTable extends TableComponent
     public $sortField = 'created_at';
     protected $index = 0;
     public $status = 0;
-    public $tahun;
-    public $bulan;
-    public $searchNotaris = false;
-    public $searchTagihan = true; //show bulan & tahun
-    public $searchEnabled = false;
-    public $showNotarisSearch = false;
-    public $allMonth = true;
+    public $tanggal;
+    public $showDateSearch = true;
     public $exports = [
       'pdf'
     ];
@@ -46,9 +40,9 @@ class ReportNotarisTable extends TableComponent
      */
     public function query(): Builder
     {
-      $this->bulan = empty($this->bulan)? 0 : $this->bulan;
-      $this->tahun = empty($this->tahun)? date('Y') : $this->tahun;
-      $query = Notaris::countNotarisCovernote($this->bulan, $this->tahun);
+      $this->tanggal = empty($this->tanggal)? date('Y-m-d') : $this->tanggal;
+      $notaris = new Notaris();
+      $query = $notaris->countUnfinishCovernote($this->tanggal);
 
       return $query;
     }
@@ -67,18 +61,16 @@ class ReportNotarisTable extends TableComponent
         return [
             Column::make(__('No.'))->format(fn () => ++$this->index),
             Column::make(__('Nama Notaris'), 'nama'),
-            Column::make(__('Total Covernote'), 'covernotes_count'),
-            Column::make(__('Total Dokumen'), 'covernotes_documents_count'),
-            Column::make(__('Dokumen Belum Selesai'), 'documents_unfinish_count'),
-            Column::make(__('Dokumen Selesai'), 'documents_finish_count'),
-            Column::make(__('Dokumen Koreksi'), 'documents_correction_count'),
+            Column::make(__('0 - 3 Bulan'), 'covernote_under90'),
+            Column::make(__('3 - 6 Bulan'), 'covernote_between180'),
+            Column::make(__('  > 6 Bulan'), 'covernote_more180'),
 
         ];
     }
 
     public function export($type)
     {
-      $reportController = new ReportNotarisController();
-      return $reportController->download($this->bulan, $this->tahun);
+      $reportController = new ReportKinerjaController();
+      return $reportController->download($this->tanggal);
     }
 }

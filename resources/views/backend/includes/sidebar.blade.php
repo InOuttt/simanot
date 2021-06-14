@@ -192,14 +192,7 @@
                 </ul>
             </li>
 
-            <li class="c-sidebar-nav-item">
-                <x-utils.link
-                    :href="route('letter.tagihan.index')"
-                    icon="c-sidebar-nav-icon cil-envelope-letter"
-                    class="c-sidebar-nav-link"
-                    :text="__('Surat Tagihan Notaris')"
-                    :active="activeClass(Route::is('letter.tagihan.*'), 'c-active')" />
-            </li>
+           
             <li class="c-sidebar-nav-dropdown">
                 <x-utils.link
                     href="#"
@@ -214,6 +207,21 @@
                             class="c-sidebar-nav-link"
                             :text="__('Laporan Grup Hukum')"
                             :active="activeClass(Route::is('letter.group_hukum.*'), 'c-active')" />
+                    </li>
+                    <li class="c-sidebar-nav-item">
+                    <!-- icon="c-sidebar-nav-icon cil-envelope-letter" -->
+                        <x-utils.link
+                            :href="route('letter.tagihan.index')"
+                            class="c-sidebar-nav-link"
+                            :text="__('Laporan Outstanding Notaris')"
+                            :active="activeClass(Route::is('letter.tagihan.*'), 'c-active')" />
+                    </li>
+                    <li class="c-sidebar-nav-item">
+                        <x-utils.link
+                            :href="route('report.kinerja.index')"
+                            class="c-sidebar-nav-link"
+                            :text="__('Laporan Kinerja Notaris')"
+                            :active="activeClass(Route::is('report.kinerja.*'), 'c-active')" />
                     </li>
                     <li class="c-sidebar-nav-item">
                         <x-utils.link
