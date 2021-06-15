@@ -32,7 +32,7 @@ Route::group([
       ->name('index')
       ->breadcrumbs(function (Trail $trail) {
           $trail->parent('admin.dashboard')
-              ->push(__('Laporan Notaris'), route('report.kinerja.index'));
+              ->push(__('Laporan Kinerja Notaris'), route('report.kinerja.index'));
       });
     Route::group(['prefix' => '{tanggal}'], function () {
         Route::get('download', [ReportKinerjaController::class, 'download'])
