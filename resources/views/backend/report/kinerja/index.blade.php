@@ -5,7 +5,7 @@
 @section('content')
     <x-backend.card>
         <x-slot name="header">
-            @lang('Laporan Notaris')
+            @lang('Laporan Kinerja Notaris')
         </x-slot>
 
         <x-slot name="body">
