@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', __('Surat Tagihan Notaris'))
+@section('title', __('Laporan Outstanding Notaris'))
 
 @section('content')
     <x-backend.card>
