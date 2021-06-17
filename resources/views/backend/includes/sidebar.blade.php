@@ -186,7 +186,7 @@
                             $logged_in_user->can('admin.access.covernote.index') ||
                             $logged_in_user->can('admin.access.covernote.create') ||
                             $logged_in_user->can('admin.access.covernote.edit') ||
-                            $logged_in_user->can('admin.access.covernote.destroy') ||
+                            $logged_in_user->can('admin.access.covernote.destroy')
                         )
                     )
 
