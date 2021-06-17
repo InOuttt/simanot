@@ -192,8 +192,8 @@ class PermissionRoleSeeder extends Seeder
             ]),
             new Permission([
                 'type' => User::TYPE_ADMIN,
-                'name' => 'admin.access.covernote_document.delete',
-                'description' => 'Delete Dokumen Covernote',
+                'name' => 'admin.access.covernote_document.followup',
+                'description' => 'Followup Dokumen Covernote',
             ]),
         ]);
 
