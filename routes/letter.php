@@ -13,7 +13,7 @@ Route::group([
       ->name('index')
       ->breadcrumbs(function (Trail $trail) {
           $trail->parent('admin.dashboard')
-              ->push(__('Surat Tagihan Notaris'), route('letter.tagihan.index'));
+              ->push(__('Laporan Outstanding Notaris'), route('letter.tagihan.index'));
       });
   Route::post('/', [TagihanNotarisController::class, 'store'])
       ->name('store');
