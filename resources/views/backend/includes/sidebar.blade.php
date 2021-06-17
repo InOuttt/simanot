@@ -161,7 +161,10 @@
                 $logged_in_user->can('admin.access.covernote.index') ||
                 $logged_in_user->can('admin.access.covernote.create') ||
                 $logged_in_user->can('admin.access.covernote.edit') ||
-                $logged_in_user->can('admin.access.covernote.destroy')
+                $logged_in_user->can('admin.access.covernote.destroy') ||
+                $logged_in_user->can('admin.access.covernote_document.list') ||
+                $logged_in_user->can('admin.access.covernote_document.update') ||
+                $logged_in_user->can('admin.access.covernote_document.followup') 
             )
         )
         <!-- <li class="c-sidebar-nav-title">@lang('Covernote')</li> -->
@@ -176,6 +179,17 @@
                     :active="activeClass(Route::is('covernote.*'), 'c-open c-show')" />
 
                 <ul class="c-sidebar-nav-dropdown-items">
+                    @if (
+                        $logged_in_user->hasAllAccess() ||
+                        (
+                            $logged_in_user->can('admin.access.covernote') ||
+                            $logged_in_user->can('admin.access.covernote.index') ||
+                            $logged_in_user->can('admin.access.covernote.create') ||
+                            $logged_in_user->can('admin.access.covernote.edit') ||
+                            $logged_in_user->can('admin.access.covernote.destroy') ||
+                        )
+                    )
+
                     <li class="c-sidebar-nav-item">
                         <x-utils.link
                             :href="route('covernote.index')"
@@ -183,16 +197,37 @@
                             :text="__('Data Covernote')" 
                             :active="activeClass(Route::is('covernote.index') || Route::is('covernote.create') || Route::is('covernote.edit'), 'c-active')" />
                     </li>
+
+                    @endif
+                    @if (
+                        $logged_in_user->hasAllAccess() ||
+                        (
+                            $logged_in_user->can('admin.access.covernote_document.list') ||
+                            $logged_in_user->can('admin.access.covernote_document.update') ||
+                            $logged_in_user->can('admin.access.covernote_document.followup') 
+                        )
+                    )
+
                     <li class="c-sidebar-nav-item">
                         <x-utils.link
                             :href="route('covernote.document.index')"
                             class="c-sidebar-nav-link"
                             :text="__('Dokumen Covernote')" />
                     </li>
+                    @endif
                 </ul>
             </li>
 
-           
+            @if (
+            $logged_in_user->hasAllAccess() ||
+            (
+                $logged_in_user->can('admin.access.report') ||
+                $logged_in_user->can('admin.access.report.grup_hukum') ||
+                $logged_in_user->can('admin.access.report.outstanding_notaris') ||
+                $logged_in_user->can('admin.access.report.kinerja_notaris') ||
+                $logged_in_user->can('admin.access.report.notaris')
+            )
+            )
             <li class="c-sidebar-nav-dropdown">
                 <x-utils.link
                     href="#"
@@ -201,6 +236,7 @@
                     :text="__('Report')"
                     :active="activeClass(Route::is('letter.group_hukum.*') || Route::is('report.*'), 'c-active')" />
                 <ul class="c-sidebar-nav-dropdown-items">
+                    @if($logged_in_user->hasAllAccess() || ($logged_in_user->can('admin.access.report') || $logged_in_user->can('admin.access.report.grup_hukum')) )
                     <li class="c-sidebar-nav-item">
                         <x-utils.link
                             :href="route('letter.grup_hukum.index')"
@@ -208,6 +244,9 @@
                             :text="__('Laporan Grup Hukum')"
                             :active="activeClass(Route::is('letter.group_hukum.*'), 'c-active')" />
                     </li>
+                    @endif
+                    @if($logged_in_user->hasAllAccess() || ($logged_in_user->can('admin.access.report') || $logged_in_user->can('admin.access.report.outstanding_notaris')) )
+
                     <li class="c-sidebar-nav-item">
                     <!-- icon="c-sidebar-nav-icon cil-envelope-letter" -->
                         <x-utils.link
@@ -216,6 +255,8 @@
                             :text="__('Laporan Outstanding Notaris')"
                             :active="activeClass(Route::is('letter.tagihan.*'), 'c-active')" />
                     </li>
+                    @endif
+                    @if($logged_in_user->hasAllAccess() || ($logged_in_user->can('admin.access.report') || $logged_in_user->can('admin.access.report.kinerja_notaris')) )
                     <li class="c-sidebar-nav-item">
                         <x-utils.link
                             :href="route('report.kinerja.index')"
@@ -223,6 +264,8 @@
                             :text="__('Laporan Kinerja Notaris')"
                             :active="activeClass(Route::is('report.kinerja.*'), 'c-active')" />
                     </li>
+                    @endif
+                    @if($logged_in_user->hasAllAccess() || ($logged_in_user->can('admin.access.report') || $logged_in_user->can('admin.access.report.notaris')) )
                     <li class="c-sidebar-nav-item">
                         <x-utils.link
                             :href="route('report.notaris.index')"
@@ -230,9 +273,13 @@
                             :text="__('Laporan notaris')"
                             :active="activeClass(Route::is('report.notaris.*'), 'c-active')" />
                     </li>
+                    @endif
+
                 </ul>
 
             </li>
+
+            @endif
            
             <!-- <li class="c-sidebar-nav-item">
                 <x-utils.link
@@ -246,7 +293,11 @@
         @if (
             $logged_in_user->hasAllAccess() ||
             (
-                $logged_in_user->can('admin.access.inquiry')
+                $logged_in_user->can('admin.access.inquiry') ||
+                $logged_in_user->can('admin.access.inquiry.status_akta') ||
+                $logged_in_user->can('admin.access.inquiry.index_notaris') ||
+                $logged_in_user->can('admin.access.inquiry.surat_tagihan') ||
+                $logged_in_user->can('admin.access.inquiry.grup_hukum')
             )
         )
         <li class="c-sidebar-nav-dropdown">
@@ -257,6 +308,7 @@
                 :text="__('Inquiry')"
                 :active="activeClass(Route::is('inquiry.*'), 'c-active')" />
             <ul class="c-sidebar-nav-dropdown-items">
+                @if($logged_in_user->hasAllAccess() || ($logged_in_user->can('admin.access.inquiry') || $logged_in_user->can('admin.access.inquiry.status_akta')) )
                 <li class="c-sidebar-nav-item">
                     <x-utils.link
                         :href="route('inquiry.status_akta.index')"
@@ -264,6 +316,8 @@
                         :text="__('Status Dokumen')" 
                         :active="activeClass(Route::is('inquiry.status_akta.*'), 'c-active')" />
                 </li>
+                @endif
+                @if($logged_in_user->hasAllAccess() || ($logged_in_user->can('admin.access.inquiry') || $logged_in_user->can('admin.access.inquiry.index_notaris')) )
                 <li class="c-sidebar-nav-item">
                     <x-utils.link
                         :href="route('inquiry.index_notaris.index')"
@@ -271,6 +325,8 @@
                         :text="__('Index Notaris')" 
                         :active="activeClass(Route::is('inquiry.index_notaris.*'), 'c-active')" />
                 </li>
+                @endif
+                @if($logged_in_user->hasAllAccess() || ($logged_in_user->can('admin.access.inquiry') || $logged_in_user->can('admin.access.inquiry.surat_tagihan')) )
                 <li class="c-sidebar-nav-item">
                     <x-utils.link
                         :href="route('inquiry.tagihan_notaris.index')"
@@ -278,6 +334,8 @@
                         :text="__('Surat Tagihan Notaris')"
                         :active="activeClass(Route::is('inquiry.tagihan_notaris.*'), 'c-active')" />
                 </li>
+                @endif
+                @if($logged_in_user->hasAllAccess() || ($logged_in_user->can('admin.access.inquiry') || $logged_in_user->can('admin.access.inquiry.grup_hukum')) )
                 <li class="c-sidebar-nav-item">
                     <x-utils.link
                         :href="route('inquiry.grup_hukum.index')"
@@ -285,6 +343,7 @@
                         :text="__('Laporan Grup Hukum')" 
                         :active="activeClass(Route::is('inquiry.grup_hukum.*'), 'c-active')" />
                 </li>
+                @endif
             </ul>
         </li>
 

@@ -225,6 +225,34 @@ class PermissionRoleSeeder extends Seeder
             ]),
         ]);
 
+        $report = Permission::create([
+            'type' => User::TYPE_ADMIN,
+            'name' => 'admin.access.report',
+            'description' => 'All Report Permissions',
+        ]);
+        $report->children()->saveMany([
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.access.report.grup_hukum',
+                'description' => 'View Laporan Grup Hukum',
+            ]),
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.access.report.outstanding_notaris',
+                'description' => 'View Laporan Outstanding Notaris',
+            ]),
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.access.report.kinerja_notaris',
+                'description' => 'View Laporan Kinerja Notaris',
+            ]),
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.access.report.notaris',
+                'description' => 'View Laporan Notaris',
+            ]),
+        ]);
+
         
 
         // Assign Permissions to other Roles
@@ -233,6 +261,7 @@ class PermissionRoleSeeder extends Seeder
         $roleOperator->givePermissionTo($permissionNotaris);
         $roleOperator->givePermissionTo($permissionCluster);
         $roleOperator->givePermissionTo($inquiry);
+        $roleOperator->givePermissionTo($report);
         $roleInquiry->givePermissionTo($inquiry);
         // $akta_notaris->syncRoles($roles);
 
