@@ -14,3 +14,4 @@ If you discover a security vulnerability within this boilerplate, please send an
     \URL::forceRootUrl('https://domain.com');
     \URL::forceScheme('https');
   ```
+  
