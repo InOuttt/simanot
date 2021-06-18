@@ -10,5 +10,7 @@ If you discover a security vulnerability within this boilerplate, please send an
 ## Known bugs
 ### installing on nginx with proxypass
   add this line inside boot() on AppServiceProvide to force the routing
+  ```
     \URL::forceRootUrl('https://domain.com');
     \URL::forceScheme('https');
+  ```
