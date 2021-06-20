@@ -167,7 +167,7 @@ class CreateMNotarisTable extends Migration
 
             $table->foreign('cluster_id')
                 ->references('id')
-                ->on('notaris')
+                ->on('cluster')
                 ->onDelete('cascade');
             $table->foreign('file_id')
                 ->references('id')

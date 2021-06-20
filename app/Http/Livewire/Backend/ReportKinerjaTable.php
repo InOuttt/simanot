@@ -60,7 +60,9 @@ class ReportKinerjaTable extends TableComponent
     {
         return [
             Column::make(__('No.'))->format(fn () => ++$this->index),
-            Column::make(__('Nama Notaris'), 'nama'),
+            Column::make(__('Nama Notaris'), 'nama')
+            ->searchable()
+            ->sortable(),
             Column::make(__('0 - 3 Bulan'), 'covernote_under90'),
             Column::make(__('3 - 6 Bulan'), 'covernote_between180'),
             Column::make(__('  > 6 Bulan'), 'covernote_more180'),

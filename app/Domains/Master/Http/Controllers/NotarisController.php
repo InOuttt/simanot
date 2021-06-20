@@ -29,7 +29,7 @@ class NotarisController extends BaseBackendController
     {
         $this->service->store($request->validated());
 
-        return redirect()->route($this->route_view_index)->withFlashSuccess(__('The Data was successfully created.'));
+        return redirect()->route($this->route_view_index)->withFlashSuccess(__('Data berhasil ditambahkan.'));
     }
 
     public function edit(BaseRequest $request, Notaris $notaris)
@@ -44,7 +44,7 @@ class NotarisController extends BaseBackendController
         }
         $this->service->update($notaris, $request->validated());
 
-        return redirect()->route($this->route_view_index)->withFlashSuccess(__('The Data was successfully updated.'));
+        return redirect()->route($this->route_view_index)->withFlashSuccess(__('Data berhasil diedit.'));
     }
 
     public function destroy(BaseRequest $request,Notaris $notaris)
@@ -55,7 +55,7 @@ class NotarisController extends BaseBackendController
         }
         $this->service->destroy($notaris);
 
-        return redirect()->route($this->route_view_index)->withFlashSuccess(__('The Data was successfully deleted.'));
+        return redirect()->route($this->route_view_index)->withFlashSuccess(__('Data berhasil dihapus.'));
     }
 
 

@@ -5,6 +5,7 @@ namespace App\Domains\Covernote\Http\Controllers;
 use App\Http\Controllers\Requests\BaseRequest;
 use App\Http\Controllers\Backend\BaseBackendController;
 use App\Domains\Covernote\Http\Requests\CovernoteDocumentRequest;
+use App\Domains\Covernote\Models\Covernote;
 use App\Domains\Covernote\Models\CovernoteDocument;
 use App\Domains\Covernote\Services\CovernoteDocumentService;
 use App\Models\File;
@@ -122,6 +123,15 @@ class CovernoteDocumentController extends BaseBackendController
         }
 
         $this->service->update($data, $update);
+
+        $isFinish = CovernoteDocument::where('covernote_id', '=', $data->covernote_id)
+                    ->where('status', '!=', '1')
+                    ->first();
+        if(empty($isFinish)) {
+            Covernote::where('id', '=', $data->covernote_id)->update(['status' => '1']);
+        } else {
+            Covernote::where('id', '=', $data->covernote_id)->update(['status' => '0']);
+        }
 
         return redirect()->route($this->route_view_index)->withFlashSuccess(__('The Data was successfully updated.'));
     }

@@ -2,6 +2,7 @@
 
 namespace App\Domains\Master\Http\Controllers;
 
+use App\Domains\Covernote\Models\Covernote;
 use App\Http\Controllers\Requests\BaseRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Backend\BaseBackendController;
@@ -44,9 +45,14 @@ class ClusterController extends BaseBackendController
         return redirect()->route($this->route_view_index)->withFlashSuccess(__('Data berhasil diedit.'));
     }
 
-    public function destroy(BaseRequest $request,Cluster $notaris)
+    public function destroy(BaseRequest $request,Cluster $cluster)
     {
-        $this->service->destroy($notaris);
+        $covernote = Covernote::where('cluster_id', '=', $cluster->id)->first();
+        if(!empty($covernote)) {
+            return back()->withErrors('Cluster digunakan di salah satu covernote');
+        }
+        
+        $this->service->destroy($cluster);
 
         return redirect()->route($this->route_view_index)->withFlashSuccess(__('Data berhasil dihapus.'));
     }

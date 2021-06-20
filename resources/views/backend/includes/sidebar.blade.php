@@ -331,7 +331,7 @@
                     <x-utils.link
                         :href="route('inquiry.tagihan_notaris.index')"
                         class="c-sidebar-nav-link"
-                        :text="__('Surat Tagihan Notaris')"
+                        :text="__('Laporan Outstanding Notaris')"
                         :active="activeClass(Route::is('inquiry.tagihan_notaris.*'), 'c-active')" />
                 </li>
                 @endif

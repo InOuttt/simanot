@@ -105,11 +105,12 @@ class Covernote extends BaseModel
         $query = Covernote::query()->with(['notaris']);
 
         $dt = date('Y-m-t', strtotime($year . "-" . $month . "-25"));
-        // $dtFrom = date('Y-m-t', strtotime($year . "-" . $month - 1 . "-25"));
+        $dtFrom = date('Y-m-d', strtotime($year . "-" . $month . "-1"));
 
         $query = $query->where('status', '=' , (string)$status)
-                    // ->where('jatuh_tempo', '>', $dtFrom)
+                    ->where('jatuh_tempo', '>=', $dtFrom)
                     ->where('jatuh_tempo', '<=', $dt);
+
 
         return $query;
     }

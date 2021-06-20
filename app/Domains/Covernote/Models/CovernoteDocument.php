@@ -118,8 +118,11 @@ class CovernoteDocument extends BaseModel
         $query = CovernoteDocument::query()->with(['covernote', 'covernote.notaris']);
 
         $dt = date('Y-m-t', strtotime($year . "-" . $month . "-25"));
-        $query = $query->whereHas('covernote', function($q) use ($dt){
-            $q->where('jatuh_tempo', '<=', $dt);
+        $dtFrom = date('Y-m-d', strtotime($year . "-" . $month . "-1"));
+
+        $query = $query->whereHas('covernote', function($q) use ($dt, $dtFrom){
+            $q->where('jatuh_tempo', '>=', $dtFrom)
+                ->where('jatuh_tempo', '<=', $dt);
         });
 
         if($status != null) {

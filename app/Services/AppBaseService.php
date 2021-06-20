@@ -66,7 +66,6 @@ class AppBaseService extends BaseService
         try {
             $model->update($data);
         } catch (Exception $e) {
-            dd($e->getMessage());
             DB::rollBack();
 
             throw new GeneralException(__('There was a problem updating the data.'));

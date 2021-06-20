@@ -68,7 +68,7 @@ class Notaris extends BaseModel
         $dtStart = date('Y-1-1', strtotime($year . "-1-1"));
         $dtEnd = date('Y-12-t', strtotime($year . "-12-25"));
 
-        if($month != null ) {
+        if($month != null && $month != 0) {
             $dtStart = date('Y-m-d', strtotime($year . "-" . $month . "-1"));
             $dtEnd = date('Y-m-t', strtotime($year . "-" . $month . "-25"));
         }
