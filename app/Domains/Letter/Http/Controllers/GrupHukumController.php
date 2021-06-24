@@ -76,12 +76,13 @@ class GrupHukumController extends BaseBackendController
 
     public function generateTagihan($clusterId, $bulan, $tahun) {
         $covernoteDocument = new CovernoteDocument();
-        $data = $covernoteDocument->getDueDocument('0', $bulan, $tahun)
+        $data = $covernoteDocument->getDueDocument(null, $bulan, $tahun)
             ->with(['covernote.cluster', 'followup'])
             ->whereHas('covernote', function($q) use ($clusterId) {
                 $q->where('cluster_id', '=', $clusterId);
             })
             ->get();
+
         $namaCluster = $data->first()->covernote->cluster->nama;
         $bulanLabel = __(date('F', strtotime($tahun.'-'.$bulan.'-'.'1')));
 
