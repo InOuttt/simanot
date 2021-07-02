@@ -17,13 +17,13 @@
 
             <x-slot name="body">
                 <div x-data="{userType : '{{ $model::TYPE_USER }}'}">
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <label for="name" class="col-md-2 col-form-label">@lang('Type')</label>
 
                         <div class="col-md-10">
                             <select name="type" class="form-control" required x-on:change="userType = $event.target.value">
                                 <option value="{{ $model::TYPE_USER }}">@lang('User')</option>
-                                <option value="{{ $model::TYPE_ADMIN }}">@lang('Administrator')</option>
+                                <option value="{{ $model::TYPE_ADMIN }}" selected>@lang('Administrator')</option>
                             </select>
                         </div>
                     </div><!--form-group-->
@@ -61,7 +61,7 @@
                     </div><!--form-group-->
 
                     <div class="form-group row">
-                        <label for="active" class="col-md-2 col-form-label">@lang('Active')</label>
+                        <label for="active" class="col-md-2 col-form-label">@lang('Status')</label>
 
                         <div class="col-md-10">
                             <div class="form-check">
@@ -116,7 +116,7 @@
             </x-slot>
 
             <x-slot name="footer">
-                <button class="btn btn-sm btn-primary float-right" type="submit">@lang('Create User')</button>
+                <button class="btn btn-sm btn-primary float-right" type="submit">@lang('Save')</button>
             </x-slot>
         </x-backend.card>
     </x-forms.post>

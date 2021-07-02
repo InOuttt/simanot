@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.4|^8.0",
         "arcanedev/log-viewer": "8.x",
+        "barryvdh/laravel-dompdf": "^0.8.7",
         "darkghosthunter/laraguard": "^3.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
@@ -22,7 +23,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.0",
         "livewire/livewire": "^2.0",
-        "rappasoft/laravel-livewire-tables": "^0.3",
+        "mediconesystems/livewire-datatables": "^0.4.3",
+        "rappasoft/laravel-livewire-tables": "0.4",
         "rappasoft/lockout": "^3.0",
         "spatie/laravel-activitylog": "^3.14",
         "spatie/laravel-permission": "^3.11",

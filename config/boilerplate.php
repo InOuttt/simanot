@@ -94,6 +94,8 @@ return [
              * It is not recommended to change
              */
             'admin' => 'Administrator',
+            'operator' => 'Operator',
+            'inquiry' => 'Inquiry',
         ],
     ],
 

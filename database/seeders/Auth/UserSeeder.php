@@ -30,6 +30,24 @@ class UserSeeder extends Seeder
             'active' => true,
         ]);
 
+        User::create([
+            'type' => User::TYPE_ADMIN,
+            'name' => 'Operator',
+            'email' => 'operator@admin.com',
+            'password' => 'secret',
+            'email_verified_at' => now(),
+            'active' => true,
+        ]);
+
+        User::create([
+            'type' => User::TYPE_ADMIN,
+            'name' => 'Inquiry',
+            'email' => 'inquiry@admin.com',
+            'password' => 'secret',
+            'email_verified_at' => now(),
+            'active' => true,
+        ]);
+
         if (app()->environment(['local', 'testing'])) {
             User::create([
                 'type' => User::TYPE_USER,

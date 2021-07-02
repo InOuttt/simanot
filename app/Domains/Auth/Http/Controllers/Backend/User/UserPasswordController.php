@@ -50,6 +50,7 @@ class UserPasswordController
     {
         $this->userService->updatePassword($user, $request->validated());
 
-        return redirect()->route('admin.auth.user.index')->withFlashSuccess(__('The user\'s password was successfully updated.'));
+        return redirect()->route('admin.dashboard')->withFlashSuccess(__('The user\'s password was successfully updated.'));
+        // return redirect()->route('admin.auth.user.index')->withFlashSuccess(__('The user\'s password was successfully updated.'));
     }
 }

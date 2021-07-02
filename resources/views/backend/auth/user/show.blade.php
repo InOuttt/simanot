@@ -14,10 +14,10 @@
 
         <x-slot name="body">
             <table class="table table-hover">
-                <tr>
+                <!-- <tr>
                     <th>@lang('Type')</th>
                     <td>@include('backend.auth.user.includes.type')</td>
-                </tr>
+                </tr> -->
 
                 <tr>
                     <th>@lang('Avatar')</th>
@@ -39,7 +39,7 @@
                     <td>@include('backend.auth.user.includes.status', ['user' => $user])</td>
                 </tr>
 
-                <tr>
+                <!-- <tr>
                     <th>@lang('Verified')</th>
                     <td>@include('backend.auth.user.includes.verified', ['user' => $user])</td>
                 </tr>
@@ -52,7 +52,7 @@
                 <tr>
                     <th>@lang('Timezone')</th>
                     <td>{{ $user->timezone ?? __('N/A') }}</td>
-                </tr>
+                </tr> -->
 
                 <tr>
                     <th>@lang('Last Login At')</th>
@@ -65,10 +65,10 @@
                     </td>
                 </tr>
 
-                <tr>
+                <!-- <tr>
                     <th>@lang('Last Known IP Address')</th>
                     <td>{{ $user->last_login_ip ?? __('N/A') }}</td>
-                </tr>
+                </tr> -->
 
                 @if ($user->isSocial())
                     <tr>

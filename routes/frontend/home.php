@@ -15,8 +15,9 @@ use App\Domains\Auth\Http\Controllers\Frontend\Auth\LoginController;
 //     ->breadcrumbs(function (Trail $trail) {
 //         $trail->push(__('Home'), route('frontend.index'));
 //     });
-Route::get('/', [LoginController::class, 'showLoginForm'])->name('index');
-
+Route::get('/', [LoginController::class, 'showLoginForm'])
+    ->middleware('guest')
+    ->name('index');
 
 Route::get('terms', [TermsController::class, 'index'])
     ->name('pages.terms')

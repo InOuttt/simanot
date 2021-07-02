@@ -30,8 +30,9 @@ class AnnouncementSeeder extends Seeder
             Announcement::create([
                 'area' => null,
                 'type' => 'info',
-                'message' => 'This is a <strong>Global</strong> announcement that will show on both the frontend and backend. <em>See <strong>AnnouncementSeeder</strong> for more usage examples.</em>',
-                'enabled' => true,
+                // 'message' => 'This is a <strong>Global</strong> announcement that will show on both the frontend and backend. <em>See <strong>AnnouncementSeeder</strong> for more usage examples.</em>',
+                'message' => 'Contoh pengumuman',
+                'enabled' => false,
             ]);
 
 //            Announcement::create([

@@ -58,6 +58,19 @@ Route::group([
             });
         });
 
+        Route::group(['prefix' => '{user}'], function () {
+            Route::get('password/change', [UserPasswordController::class, 'edit'])
+                ->name('change-password')
+                // ->middleware('permission:admin.access.user.change-password')
+                ->breadcrumbs(function (Trail $trail, User $user) {
+                    $trail->parent('admin.auth.user.show', $user)
+                        ->push(__('Change Password'), route('admin.auth.user.change-password', $user));
+            });
+            Route::patch('password/change', [UserPasswordController::class, 'update'])
+            ->name('change-password.update');
+            // ->middleware('permission:admin.access.user.change-password');
+        });
+
         Route::group([
             'middleware' => 'permission:admin.access.user.list|admin.access.user.deactivate|admin.access.user.reactivate|admin.access.user.clear-session|admin.access.user.impersonate|admin.access.user.change-password',
         ], function () {
@@ -95,17 +108,11 @@ Route::group([
                     ->name('clear-session')
                     ->middleware('permission:admin.access.user.clear-session');
 
-                Route::get('password/change', [UserPasswordController::class, 'edit'])
-                    ->name('change-password')
-                    ->middleware('permission:admin.access.user.change-password')
-                    ->breadcrumbs(function (Trail $trail, User $user) {
-                        $trail->parent('admin.auth.user.show', $user)
-                            ->push(__('Change Password'), route('admin.auth.user.change-password', $user));
-                    });
+               
 
-                Route::patch('password/change', [UserPasswordController::class, 'update'])
-                    ->name('change-password.update')
-                    ->middleware('permission:admin.access.user.change-password');
+                // Route::patch('password/change', [UserPasswordController::class, 'update'])
+                //     ->name('change-password.update')
+                //     ->middleware('permission:admin.access.user.change-password');
             });
         });
     });

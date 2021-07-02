@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Backend;
 
-use App\Domains\Notaris\Models\Notaris;
+use App\Domains\Master\Models\Notaris;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\TableComponent;
 use Rappasoft\LaravelLivewireTables\Traits\HtmlComponents;
@@ -18,8 +18,11 @@ class NotarisTable extends TableComponent
     /**
      * @var string
      */
-    public $sortField = 'name';
-
+    public $sortField = 'created_at';
+    protected $index = 0;
+    public $searchNotaris = false;
+    public $searchDebitur = false;
+    
     /**
      * @var array
      */
@@ -48,16 +51,25 @@ class NotarisTable extends TableComponent
     {
         return [
             Column::make(__('No.'))->format(fn () => ++$this->index),
-            Column::make(__('Nama'), 'name')
+            Column::make(__('Nama'), 'nama')
                 ->searchable()
                 ->sortable(),
-            Column::make(__('Nama Pasangan'), 'couple_name')
-                ->searchable()
-                ->sortable(),
-            Column::make(__('Alamat'), 'domicile')
+            Column::make(__('Nama Pasangan'), 'partner_id')
+                ->sortable(function ($builder, $direction) {
+                    return $builder->orderBy('nama', $direction);
+                })
+                ->searchable(function ($builder, $term) {
+                    return $builder->orWhereHas('partner', function ($query) use ($term) {
+                        return $query->where('nama', 'like', '%'.$term.'%');
+                });
+                })
+                ->format(function (Notaris $model) {
+                  return $this->html($model->partner_name);
+                }),
+            Column::make(__('Alamat'), 'alamat')
               ->searchable()
               ->sortable(),
-            Column::make(__('Domisili'), 'domicile')
+            Column::make(__('Domisili'), 'domisili')
               ->searchable()
               ->sortable(),
             Column::make(__('Actions'))

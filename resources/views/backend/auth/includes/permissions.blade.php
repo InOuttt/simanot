@@ -4,12 +4,13 @@
     <div class="col-md-10">
         @include('backend.auth.role.includes.no-permissions-message')
 
-        <div x-show="userType === '{{ $model::TYPE_ADMIN }}'">
+        <!-- <div x-show="userType === '{{ $model::TYPE_ADMIN }}'"> -->
+        <div>
             @include('backend.auth.includes.partials.permission-type', ['type' => $model::TYPE_ADMIN])
         </div>
 
-        <div x-show="userType === '{{ $model::TYPE_USER}}'">
+        <!-- <div x-show="userType === '{{ $model::TYPE_USER}}'">
             @include('backend.auth.includes.partials.permission-type', ['type' => $model::TYPE_USER])
-        </div>
+        </div> -->
     </div>
 </div><!--form-group-->

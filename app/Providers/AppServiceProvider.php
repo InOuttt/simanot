@@ -5,8 +5,9 @@ namespace App\Providers;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
-use App\Domains\AktaNotaris\Models\AktaNotaris;
-use App\Observers\AktaNotarisObserver;
+use App\Domains\Covernote\Models\Covernote;
+use App\Observers\CovernoteObserver;
+
 /**
  * Class AppServiceProvider.
  */
@@ -30,6 +31,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
-        AktaNotaris::observe(AktaNotarisObserver::class);
+        Covernote::observe(CovernoteObserver::class);
     }
 }

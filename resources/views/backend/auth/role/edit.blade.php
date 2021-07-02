@@ -17,7 +17,7 @@
 
             <x-slot name="body">
                 <div x-data="{userType : '{{ $role->type }}'}">
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <label for="name" class="col-md-2 col-form-label">@lang('Type')</label>
 
                         <div class="col-md-10">
@@ -41,7 +41,7 @@
             </x-slot>
 
             <x-slot name="footer">
-                <button class="btn btn-sm btn-primary float-right" type="submit">@lang('Update Role')</button>
+                <button class="btn btn-sm btn-primary float-right" type="submit">@lang('Save')</button>
             </x-slot>
         </x-backend.card>
     </x-forms.patch>

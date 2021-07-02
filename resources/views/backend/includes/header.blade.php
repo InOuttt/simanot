@@ -4,9 +4,9 @@
     </button>
 
     <a class="c-header-brand d-lg-none" href="#">
-        <svg width="118" height="46" alt="CoreUI Logo">
+        <!-- <svg width="118" height="46" alt="CoreUI Logo">
             <use xlink:href="{{ asset('img/brand/coreui.svg#full') }}"></use>
-        </svg>
+        </svg> -->
     </a>
 
     <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
@@ -45,6 +45,11 @@
                 <div class="dropdown-header bg-light py-2">
                     <strong>@lang('Account')</strong>
                 </div>
+
+                <x-utils.link
+                    :href="route('admin.auth.user.change-password', auth()->user()->id)"
+                    class="dropdown-item"
+                    :text="__('Change Password')"/>
 
                 <x-utils.link
                     class="dropdown-item"

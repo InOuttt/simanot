@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Controllers\Requests\BaseRequest;
+use App\Http\Controllers\Requests\BaseRequest;
 use App\Http\Controllers\Controller;
 use App\Services\AppBaseService;
 use Illuminate\Database\Eloquent\Model;

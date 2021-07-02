@@ -1,4 +1,4 @@
-@inject('model', '\App\Domains\Notaris\Models\Notaris')
+@inject('model', '\App\Domains\Master\Models\Notaris')
 
 @extends('backend.layouts.app')
 
@@ -18,34 +18,34 @@
             <x-slot name="body">
                 <div >
                     <div class="form-group row">
-                        <label for="name" class="col-md-2 col-form-label">Nama</label>
+                        <label for="nama" class="col-md-2 col-form-label">Nama</label>
 
                         <div class="col-md-10">
-                            <input type="text" name="name" class="form-control" placeholder="{{ __('Nama') }}" value="{{ old('name') }}" maxlength="100" required />
+                            <input type="text" name="nama" class="form-control" placeholder="{{ __('contoh: Notaris abcde') }}" value="{{ old('nama') }}" maxlength="100" required />
                         </div>
                     </div><!--form-group-->
 
                     <div class="form-group row">
-                        <label for="couple_name" class="col-md-2 col-form-label">Nama Pasangan</label>
+                        <label for="partner_id" class="col-md-2 col-form-label">Nama Partner</label>
 
                         <div class="col-md-10">
-                            <input type="text" name="couple_name" class="form-control" placeholder="{{ __('Nama Pasangan') }}" value="{{ old('couple_name') }}" maxlength="100" />
+                            <livewire:partner-select2 />
                         </div>
                     </div><!--form-group-->
 
                     <div class="form-group row">
-                        <label for="address" class="col-md-2 col-form-label">Alamat</label>
+                        <label for="alamat" class="col-md-2 col-form-label">Alamat</label>
 
                         <div class="col-md-10">
-                            <textarea name="address" class="form-control" placeholder="Alamat" value="" rows='3' />{{ old('address') }}</textarea>
+                            <textarea name="alamat" class="form-control" placeholder="contoh: Jl.jalan street" value="" rows='3' />{{ old('alamat') }}</textarea>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="domicile" class="col-md-2 col-form-label">Domisili</label>
+                        <label for="domisili" class="col-md-2 col-form-label">Domisili</label>
 
                         <div class="col-md-10">
-                            <textarea name="domicile" class="form-control" placeholder="Domisili" rows="3" />{{ old('domicile') }}</textarea>
+                            <textarea name="domisili" class="form-control" placeholder="contoh: DKI Jakarta" rows="3" />{{ old('domisili') }}</textarea>
                         </div>
                     </div>
 
@@ -53,7 +53,7 @@
             </x-slot>
 
             <x-slot name="footer">
-                <button class="btn btn-sm btn-primary float-right" type="submit">@lang('Buat Data Notaris')</button>
+                <button class="btn btn-sm btn-primary float-right" type="submit">@lang('Save')</button>
             </x-slot>
         </x-backend.card>
     </x-forms.post>
