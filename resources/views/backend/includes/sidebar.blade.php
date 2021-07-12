@@ -198,16 +198,7 @@
                             :active="activeClass(Route::is('covernote.index') || Route::is('covernote.create') || Route::is('covernote.edit'), 'c-active')" />
                     </li>
 
-                    @endif
-                    @if (
-                        $logged_in_user->hasAllAccess() ||
-                        (
-                            $logged_in_user->can('admin.access.covernote_document.list') ||
-                            $logged_in_user->can('admin.access.covernote_document.update') ||
-                            $logged_in_user->can('admin.access.covernote_document.followup') 
-                        )
-                    )
-
+                   
                     <li class="c-sidebar-nav-item">
                         <x-utils.link
                             :href="route('covernote.document.index')"
