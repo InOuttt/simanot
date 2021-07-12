@@ -70,8 +70,8 @@ class ReportNotarisTable extends TableComponent
             Column::make(__('Total Covernote'), 'covernotes_count'),
             Column::make(__('Total Dokumen'), 'covernotes_documents_count'),
             Column::make(__('Dokumen Belum Selesai'), 'documents_unfinish_count'),
-            Column::make(__('Dokumen Selesai'), 'documents_finish_count'),
             Column::make(__('Dokumen Koreksi'), 'documents_correction_count'),
+            Column::make(__('Dokumen Selesai'), 'documents_finish_count'),
 
         ];
     }
