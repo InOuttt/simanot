@@ -105,9 +105,7 @@
                                 :text="__('User Management')"
                                 :active="activeClass(Route::is('admin.auth.user.*'), 'c-active')" />
                         </li>
-                    @endif
-
-                    @if ($logged_in_user->hasAllAccess())
+                    
                         <li class="c-sidebar-nav-item">
                             <x-utils.link
                                 :href="route('admin.auth.role.index')"
