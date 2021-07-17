@@ -24,6 +24,7 @@ class ReportKinerjaTable extends TableComponent
     public $status = 0;
     public $tanggal;
     public $showDateSearch = true;
+    public $customHeaderKinerja = true;
     public $exports = [
       'pdf'
     ];

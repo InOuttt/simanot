@@ -1,11 +1,11 @@
 @extends('backend.layouts.app')
 
-@section('title', __('Laporan Notaris'))
+@section('title', __('Laporan Covernote'))
 
 @section('content')
     <x-backend.card>
         <x-slot name="header">
-            @lang('Laporan Kinerja Notaris')
+            @lang('Laporan Covernote')
         </x-slot>
 
         <x-slot name="body">

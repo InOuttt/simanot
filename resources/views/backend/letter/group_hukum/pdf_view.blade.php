@@ -31,6 +31,12 @@
     .text-center {
       padding-left: 25%;
     }
+
+    .ttd {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
   </style>
 </head>
 <body>
@@ -73,6 +79,10 @@
       </tbody>
     </table>
     </div>
+    <div class="ttd">
+      <?= carbon(date('Y-m-d H:i:s'))->isoFormat('D MMMM Y')?>
+    </div>
+
   </div>
 </body>
 </html>

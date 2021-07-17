@@ -13,7 +13,7 @@ Route::group([
       ->name('index')
       ->breadcrumbs(function (Trail $trail) {
           $trail->parent('admin.dashboard')
-              ->push(__('Laporan Notaris'), route('report.notaris.index'));
+              ->push(__('Laporan Covernote'), route('report.notaris.index'));
       });
     Route::group(['prefix' => '{bulan}'], function () {
         Route::group(['prefix' => '{tahun}'], function () {
@@ -32,7 +32,7 @@ Route::group([
       ->name('index')
       ->breadcrumbs(function (Trail $trail) {
           $trail->parent('admin.dashboard')
-              ->push(__('Laporan Kinerja Notaris'), route('report.kinerja.index'));
+              ->push(__('Laporan Dokumen Covernote'), route('report.kinerja.index'));
       });
     Route::group(['prefix' => '{tanggal}'], function () {
         Route::get('download', [ReportKinerjaController::class, 'download'])

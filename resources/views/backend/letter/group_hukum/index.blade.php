@@ -1,11 +1,11 @@
 @extends('backend.layouts.app')
 
-@section('title', __('Laporan Grup Hukum'))
+@section('title', __('Surat Outstanding Cluster'))
 
 @section('content')
     <x-backend.card>
         <x-slot name="header">
-            @lang('Laporan Grup Hukum')
+            @lang('Surat Outstanding Cluster')
         </x-slot>
 
         <x-slot name="body">
@@ -27,7 +27,7 @@
                         <input type="text" name="bulan" class="form-control" id="bulan" value="" hidden>
                         <input type="text" name="tahun" class="form-control" id="tahun" value="" hidden>
                     <div class="mb-3">
-                        <label for="tanggal_email" class="col-form-label">Tanggal Email ke Grup Hukum</label>
+                        <label for="tanggal_email" class="col-form-label">Tanggal Email ke Cluster</label>
                         <input type="date" name="tanggal_email" class="form-control" id="tanggal_email">
                     </div>
                     <div class="mb-3">

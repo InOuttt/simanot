@@ -27,6 +27,12 @@
     /* tr:nth-child(even) {
       background-color: #dddddd;
     } */
+
+    .ttd {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
   </style>
 </head>
 <body>
@@ -78,6 +84,9 @@
         @endforeach
       </tbody>
     </table>
+    </div>
+    <div class="ttd">
+      <?= carbon(date('Y-m-d H:i:s'))->isoFormat('D MMMM Y')?>
     </div>
   </div>
 </body>

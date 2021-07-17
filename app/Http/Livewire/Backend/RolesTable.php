@@ -37,7 +37,8 @@ class RolesTable extends TableComponent
     public function query(): Builder
     {
         return Role::with('permissions:id,name,description')
-            ->withCount('users');
+            ->withCount('users')
+            ->where('id', '!=', '1');
     }
 
     /**

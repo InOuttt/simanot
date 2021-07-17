@@ -230,7 +230,7 @@
                         <x-utils.link
                             :href="route('letter.grup_hukum.index')"
                             class="c-sidebar-nav-link"
-                            :text="__('Laporan Grup Hukum')"
+                            :text="__('Surat Outstanding Cluster')"
                             :active="activeClass(Route::is('letter.group_hukum.*'), 'c-active')" />
                     </li>
                     @endif
@@ -241,7 +241,7 @@
                         <x-utils.link
                             :href="route('letter.tagihan.index')"
                             class="c-sidebar-nav-link"
-                            :text="__('Laporan Outstanding Notaris')"
+                            :text="__('Surat Outstanding Notaris')"
                             :active="activeClass(Route::is('letter.tagihan.*'), 'c-active')" />
                     </li>
                     @endif
@@ -250,7 +250,7 @@
                         <x-utils.link
                             :href="route('report.kinerja.index')"
                             class="c-sidebar-nav-link"
-                            :text="__('Laporan Kinerja Notaris')"
+                            :text="__('Laporan Covernote')"
                             :active="activeClass(Route::is('report.kinerja.*'), 'c-active')" />
                     </li>
                     @endif
@@ -259,7 +259,7 @@
                         <x-utils.link
                             :href="route('report.notaris.index')"
                             class="c-sidebar-nav-link"
-                            :text="__('Laporan notaris')"
+                            :text="__('Laporan Dokumen Covernote')"
                             :active="activeClass(Route::is('report.notaris.*'), 'c-active')" />
                     </li>
                     @endif
@@ -320,7 +320,7 @@
                     <x-utils.link
                         :href="route('inquiry.tagihan_notaris.index')"
                         class="c-sidebar-nav-link"
-                        :text="__('Laporan Outstanding Notaris')"
+                        :text="__('Surat Outstanding Notaris')"
                         :active="activeClass(Route::is('inquiry.tagihan_notaris.*'), 'c-active')" />
                 </li>
                 @endif
@@ -329,7 +329,7 @@
                     <x-utils.link
                         :href="route('inquiry.grup_hukum.index')"
                         class="c-sidebar-nav-link"
-                        :text="__('Laporan Grup Hukum')" 
+                        :text="__('Surat Outstanding Cluster')" 
                         :active="activeClass(Route::is('inquiry.grup_hukum.*'), 'c-active')" />
                 </li>
                 @endif

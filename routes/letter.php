@@ -13,7 +13,7 @@ Route::group([
       ->name('index')
       ->breadcrumbs(function (Trail $trail) {
           $trail->parent('admin.dashboard')
-              ->push(__('Laporan Outstanding Notaris'), route('letter.tagihan.index'));
+              ->push(__('Surat Outstanding Notaris'), route('letter.tagihan.index'));
       });
   Route::post('/', [TagihanNotarisController::class, 'store'])
       ->name('store');
@@ -36,7 +36,7 @@ Route::group([
       ->name('index')
       ->breadcrumbs(function (Trail $trail) {
           $trail->parent('admin.dashboard')
-              ->push(__('Laporan Grup Hukum'), route('letter.grup_hukum.index'));
+              ->push(__('Surat Outstadning Cluster'), route('letter.grup_hukum.index'));
       });
   Route::post('/', [GrupHukumController::class, 'store'])
       ->name('store');

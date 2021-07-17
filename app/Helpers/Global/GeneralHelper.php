@@ -25,6 +25,7 @@ if (! function_exists('carbon')) {
      */
     function carbon($time)
     {
+        carbon::setLocale('id');
         return new Carbon($time);
     }
 }
