@@ -5,7 +5,10 @@ namespace App\Domains\Covernote\Models;
 use App\Models\BaseModel;
 use App\Domains\Master\Models\Notaris;
 use App\Domains\Covernote\Models\CovernoteNote;
+use App\Domains\Letter\Models\GrupHukum;
+use App\Domains\Letter\Models\SuratTagihan;
 use App\Domains\Master\Models\Cluster;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Covernote extends BaseModel
@@ -58,16 +61,40 @@ class Covernote extends BaseModel
         return $this->covernoteDocuments()->where('status', '!=', '1');
     }
 
+    public function tagihanNotaris() {
+        $bulan = Carbon::parse($this->jatuh_tempo)->format('m');
+        $tahun = Carbon::parse($this->jatuh_tempo)->format('Y');
+        return $this->hasOne(SuratTagihan::class, 'notaris_id', 'notaris_id')->where('bulan', '=', $bulan)->where('tahun', '=', $tahun);
+    }
+
+    public function grupHukum() {
+        $bulan = Carbon::parse($this->jatuh_tempo)->format('m');
+        $tahun = Carbon::parse($this->jatuh_tempo)->format('Y');
+        return $this->hasOne(GrupHukum::class, 'cluster_id', 'cluster_id')->where('bulan', '=', $bulan)->where('tahun', '=', $tahun);
+    }
+
     public function getNotarisNameAttribute(): String
     {
        return collect($this->notaris()->pluck('nama'))->implode('<br/>');
     }
+
 
     public function getStatusLabelAttribute(): String
     {
        return $this->status == 0 ? 'Belum Selesai' : 'Selesai';
     //    return $this->notaris_id;
     }
+
+    public function getStatusGrupHukumLabelAttribute(): String
+    {
+       return empty($this->grupHukum) ? 'Belum Selesai' : 'Selesai';
+    }
+
+    public function getStatusTagihanNotarisLabelAttribute(): String
+    {
+       return empty($this->tagihanNotaris) ? 'Belum Selesai' : 'Selesai';
+    }
+
 
     public function getTenggatBulanAttribute(): String
     {

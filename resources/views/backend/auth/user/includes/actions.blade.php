@@ -15,10 +15,8 @@
             :text="__('Permanently Delete')" />
     @endif
 @else
-    @if ($logged_in_user->hasAllAccess())
         <x-utils.view-button :href="route('admin.auth.user.show', $user)" />
         <x-utils.edit-button :href="route('admin.auth.user.edit', $user)" />
-    @endif
 
     @if (! $user->isActive())
         <x-utils.form-button
@@ -65,9 +63,9 @@
         )
     )
         <div class="dropdown d-inline-block">
-            <!-- <a class="btn btn-sm btn-secondary dropdown-toggle" id="moreMenuLink" href="#" role="button" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
+            <a class="btn btn-sm btn-secondary dropdown-toggle" id="moreMenuLink" href="#" role="button" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
                 @lang('More')
-            </a> -->
+            </a>
 
             <div class="dropdown-menu" aria-labelledby="moreMenuLink">
                 <x-utils.link
@@ -76,7 +74,6 @@
                     :text="__('Change Password')"
                     permission="admin.access.user.change-password" />
 
-                @if ($user->id !== $logged_in_user->id && !$user->isMasterAdmin())
                     <x-utils.form-button
                         :action="route('admin.auth.user.clear-session', $user)"
                         name="confirm-item"
@@ -85,6 +82,7 @@
                     >
                         @lang('Clear Session')
                     </x-utils.form-button>
+                @if ($user->id !== $logged_in_user->id && !$user->isMasterAdmin() && $logged_in_user->hasAllAccess())
 
                     @canBeImpersonated($user)
                         <x-utils.link

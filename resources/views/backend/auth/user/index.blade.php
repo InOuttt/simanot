@@ -12,7 +12,6 @@
             @lang('User Management')
         </x-slot>
 
-        @if ($logged_in_user->hasAllAccess())
             <x-slot name="headerActions">
                 <x-utils.link
                     icon="c-icon cil-plus"
@@ -21,7 +20,6 @@
                     :text="__('Create User')"
                 />
             </x-slot>
-        @endif
 
         <x-slot name="body">
             <livewire:backend.users-table />

@@ -26,6 +26,18 @@ class RoleService extends BaseService
         $this->model = $role;
     }
 
+    public function get()
+    {
+        $this->newQuery()->eagerLoad()->setClauses()->setScopes();
+
+        $models = $this->query;
+        $models = $models->where('id', '!=', 1)->orderByDesc('id')->get(); // AdminData
+
+        $this->unsetClauses();
+
+        return $models;
+    }
+
     /**
      * @param  array  $data
      *

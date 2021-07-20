@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Backend;
 
 use App\Domains\Auth\Models\User;
+use Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\TableComponent;
 use Rappasoft\LaravelLivewireTables\Traits\HtmlComponents;
@@ -50,6 +51,9 @@ class UsersTable extends TableComponent
     {
         $query = User::with('roles', 'twoFactorAuth')
             ->withCount('twoFactorAuth');
+        if(Auth::id() != 1) {
+            $query = $query->where('id', '!=', 1);
+        }
 
         if ($this->status === 'deleted') {
             return $query->onlyTrashed();

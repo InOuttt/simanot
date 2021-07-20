@@ -94,11 +94,11 @@ class TagihanNotarisTable extends TableComponent
               }),
             Column::make(__('Bulan'), 'tenggat_bulan'),
             Column::make(__('Tahun'), 'tenggat_tahun'),
-            Column::make(__('Status Dokumen'), 'status_label')
-              ->searchable(function ($builder, $term) {
-                return $builder->where('status', 'like', '%'.$term.'%');
-              })
-              ->sortable(),
+            Column::make(__('Status Dokumen'), 'status_tagihan_notaris_label'),
+              // ->searchable(function ($builder, $term) {
+              //   return $builder->where('status', 'like', '%'.$term.'%');
+              // })
+              // ->sortable(),
             Column::make(__('Actions'))
                 ->format(function (Covernote $model) {
                     return view('backend.letter.tagihan.actions', ['model' => $model]);
