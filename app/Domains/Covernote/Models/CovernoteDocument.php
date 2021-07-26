@@ -70,7 +70,7 @@ class CovernoteDocument extends BaseModel
     {
         $label = 'Belum diterima';
         if($this->status == 1) $label = 'Diterima';
-        if($this->status == 2) $label = 'Revisi';
+        if($this->status == 2) $label = 'Koreksi';
        return $label;
     //    return $this->notaris_id;
     }
