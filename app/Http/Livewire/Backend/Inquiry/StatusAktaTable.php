@@ -54,7 +54,7 @@ class StatusAktaTable extends TableComponent
           $q->where('nama', 'LIKE', '%' . $nama . '%');
         });
       }
-      if(!empty($this->status)) {
+      if(!empty($this->status) || $this->status == '0') {
         $query->where('status', '=', $this->status);
       }
         return $query;

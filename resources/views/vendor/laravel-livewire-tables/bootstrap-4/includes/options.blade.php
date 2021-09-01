@@ -32,6 +32,7 @@
                 @if (is_numeric($searchDebounce) && $searchUpdateMethod === 'debounce') wire:model.debounce.{{ $searchDebounce }}ms="status" @endif
                 class="form-control"
             >
+                <option value="">Semua Status</option>
                 <option value="0">Belum Diterima</option>
                 <option value="1">Diterima</option>
                 <option value="2">Koreksi</option>

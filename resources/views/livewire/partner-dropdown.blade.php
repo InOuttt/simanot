@@ -26,6 +26,7 @@
 $(document).ready(function () {
     $('.select2').select2({
         placeholder: 'Pilih Nama Partner',
+        allowClear: true ,
         minimumInputLength: -1,
         ajax: {
             url: '/autocomplete/notaris/partner',
