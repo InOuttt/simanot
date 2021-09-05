@@ -83,6 +83,7 @@
                         @lang('Clear Session')
                     </x-utils.form-button>
                 @if ($user->id !== $logged_in_user->id && !$user->isMasterAdmin() && $logged_in_user->hasAllAccess())
+                @endif
 
                     @canBeImpersonated($user)
                         <x-utils.link
@@ -99,9 +100,8 @@
                         button-class="dropdown-item"
                         permission="admin.access.user.deactivate"
                     >
-                        @lang('Deactivate')
+                        @lang('Hapus')
                     </x-utils.form-button>
-                @endif
             </div>
         </div>
     @endif
