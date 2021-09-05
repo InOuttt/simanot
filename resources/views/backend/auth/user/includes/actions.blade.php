@@ -83,8 +83,6 @@
                         @lang('Clear Session')
                     </x-utils.form-button>
                 @if ($user->id !== $logged_in_user->id && !$user->isMasterAdmin() && $logged_in_user->hasAllAccess())
-                @endif
-
                     @canBeImpersonated($user)
                         <x-utils.link
                             :href="route('impersonate', $user->id)"
@@ -92,6 +90,8 @@
                             :text="__('Login As ' . $user->name)"
                             permission="admin.access.user.impersonate" />
                     @endCanBeImpersonated
+                @endif
+
 
                     <x-utils.form-button
                         :action="route('admin.auth.user.mark', [$user, 0])"
