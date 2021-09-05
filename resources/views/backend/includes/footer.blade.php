@@ -3,7 +3,7 @@
     <!-- <div> -->
         <strong>
             @lang('Copyright') &copy; 2021 
-            Team 7 SIBOL 21
+            SIMANOT
         </strong>
     </div>
 

@@ -1,6 +1,6 @@
 <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
     <div class="c-sidebar-brand d-lg-down-none">
-        TEAM 7 SIBOL
+        SIMANOT
         <!-- <img src="{{ asset('img/logo/binus-SIS.svg')}}" width="100" height="46"\> -->
         <!-- <svg class="c-sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
             <use xlink:href="{{ asset('img/brand/coreui.svg#full') }}"></use>
