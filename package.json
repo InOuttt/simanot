@@ -33,6 +33,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "chart.js": "^2.9.4",
         "select2": "^4.1.0-rc.0",
         "tailwindcss": "^2.1.2"
     }

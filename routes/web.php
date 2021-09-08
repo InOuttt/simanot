@@ -4,6 +4,7 @@ use App\Http\Controllers\LocaleController;
 use Tabuna\Breadcrumbs\Trail;
 use App\Domains\Master\Http\Controllers\NotarisController;
 use App\Domains\Master\Models\Notaris;
+use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Livewire\DebiturSelect2;
 use App\Http\Livewire\NotarisSelect2;
 use App\Http\Livewire\PartnerSelect2;
@@ -41,6 +42,9 @@ Route::get('/notaris/select2', NotarisSelect2::class);
 Route::get('/notaris/autocomplete', [NotarisSelect2::class, 'selectSearch']);
 Route::get('/autocomplete/notaris/partner', [PartnerSelect2::class, 'selectSearch']);
 Route::get('/ajax/akta/debitur', [DebiturSelect2::class, 'selectSearch']);
+Route::get('/ajax/dashboard/chart/outstanding', [DashboardController::class, 'getOutstandingCovernote']);
+Route::get('/ajax/dashboard/chart/penerimaan', [DashboardController::class, 'getPenerimaanCovernote']);
+Route::get('/ajax/dashboard/chart/status', [DashboardController::class, 'getStatusDokumenCovernote']);
 
 Route::group([
     'prefix' => 'notaris',

@@ -10,3 +10,5 @@ require('@coreui/coreui');
 require('../plugins');
 
 require('select2');
+
+require('./dashboard-chart');

@@ -33,7 +33,10 @@ class CovernoteFollowup extends BaseModel
 
     /** Relationship */
     public function covernoteDocument() {
-        return $this->belongsTo(CovernoteDocument::class, 'id', 'covernote_dokumen_id');
+        return $this->belongsTo(CovernoteDocument::class, 'covernote_dokumen_id', 'id');
+    }
+    public function covernote() {
+        return $this->hasOneThrough(Covernote::class, CovernoteDocument::class, 'id', 'id', 'covernote_dokumen_id', 'covernote_id');
     }
 
     public function getTanggalLabelAttribute(): String
@@ -44,4 +47,5 @@ class CovernoteFollowup extends BaseModel
 
         return '';
     }
+
 }
