@@ -27,8 +27,14 @@ class ClusterRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama' => ['required', 'max:255'],
+            'nama' => ['required', 'max:255', 'regex:/^[\pL\s\-]+$/u'],
             'formula' => ['max:255'],
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'nama.regex' => __('Cannot use special char on name!'),
         ];
     }
 }
