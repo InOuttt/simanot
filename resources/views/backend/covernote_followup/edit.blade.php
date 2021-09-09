@@ -73,8 +73,8 @@
                     <div class="form-group row">
                       <label for="tanggal_followup" class="col-md-3 col-form-label">Tanggal Followup</label>
                       <div class="col-md-8">
-                        <!-- <input type="date" name="tanggal_followup" class="form-control" placeholder="dd-mm-yyyy" maxlength="100" min='{{date('Y-m-d')}}'/> -->
-                        <input type="date" name="tanggal_followup" class="form-control" placeholder="dd-mm-yyyy" maxlength="100"/>
+                        <input type="date" name="tanggal_followup" class="form-control" placeholder="dd-mm-yyyy" maxlength="100" min='{{date('Y-m-d')}}'/>
+                        <!-- <input type="date" name="tanggal_followup" class="form-control" placeholder="dd-mm-yyyy" maxlength="100"/> -->
                       </div>
                     </div>
 
