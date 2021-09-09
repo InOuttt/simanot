@@ -30,8 +30,8 @@ class StoreRoleRequest extends FormRequest
     {
         return [
             'type' => ['required', Rule::in([User::TYPE_ADMIN, User::TYPE_USER])],
-            'name' => ['required', 'max:100', Rule::unique('roles')],
-            'permissions' => ['sometimes', 'array'],
+            'name' => ['required', 'max:100', Rule::unique('roles'), 'regex:/^[\pL\s\-]+$/u'],
+            'permissions' => ['required', 'array'],
             'permissions.*' => [Rule::exists('permissions', 'id')->where('type', $this->type)],
         ];
     }
@@ -42,6 +42,8 @@ class StoreRoleRequest extends FormRequest
     public function messages()
     {
         return [
+            'name.regex' => __('Cannot use special char on name!'),
+            'permissions.required' => __('Izin wajib diisi!'),
             'permissions.*.exists' => __('One or more permissions were not found or are not allowed to be associated with this role type.'),
         ];
     }

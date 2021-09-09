@@ -213,5 +213,6 @@
     "bulan-11": "November",
     "bulan-12": "Desember",
     "Save": "Simpan",
-    "All": "Semua"
+    "All": "Semua",
+    "Cannot use special char on name!": "Nama tidak boleh mengandung karakter spesial (!@#$%^&*)"
 }
