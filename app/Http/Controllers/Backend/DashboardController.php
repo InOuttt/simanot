@@ -133,6 +133,11 @@ class DashboardController
      */
     public function getStatusDokumenCovernote(){
         $data = ['data'=> [], 'label' => [], 'color' => []];
+        $pallete = [
+            '200,39,66',
+            '85,186,113',
+            '227,214,52',
+        ];
 
         $covernoteDocument = CovernoteDocument::selectRaw("count(*) as total, status")
                                 ->groupBy('status')
@@ -141,9 +146,9 @@ class DashboardController
         foreach($covernoteDocument as $key => $val) {
             $tempTotal += $val['total'];
             array_push($data['data'], $val['total']);
-            array_push($data['color'], "rgb(".implode(',', $this->getColor($key)).')');
         }
         foreach($covernoteDocument as $key => $val) {
+            array_push($data['color'], "rgb(". $pallete[(Int)$val->status] .')');
             array_push($data['label'], $val->statusLabel . ' ' . number_format((float)($val['total']* 100 / $tempTotal), 2, ',', '') .'%' );
         }
         $data['total'] = $tempTotal;
