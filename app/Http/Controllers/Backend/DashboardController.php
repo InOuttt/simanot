@@ -144,7 +144,7 @@ class DashboardController
             array_push($data['color'], "rgb(".implode(',', $this->getColor($key)).')');
         }
         foreach($covernoteDocument as $key => $val) {
-            array_push($data['label'], $val->statusLabel . ' ' . ($val['total']* 100 / $tempTotal) .'%' );
+            array_push($data['label'], $val->statusLabel . ' ' . number_format((float)($val['total']* 100 / $tempTotal), 2, ',', '') .'%' );
         }
         $data['total'] = $tempTotal;
         return response()->json($data);

@@ -84,6 +84,10 @@ class CovernoteDocumentController extends BaseBackendController
         if(!empty($update['status_dokumen'])) {
             $update['status'] =  $update['status_dokumen'];
         }
+        if(!empty($update['tanggal_terima']) && !$request->hasFile('tanda_terima_notaris')) {
+            return back()->withErrors('Tanggal Terima terisi tapi file tanda terima notaris belum terupload');
+        }
+
         if($request->hasFile('tanda_terima_notaris')) {
             try {
 
