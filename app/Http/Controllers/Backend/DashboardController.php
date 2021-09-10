@@ -71,7 +71,7 @@ class DashboardController
                 if(!empty($val['cluster']['nama'])) {
                     array_push($temp['data'], $val['total']);
                     array_push($temp['label'], $val['cluster']['nama']);
-                    array_push($temp['color'], "rgb(".implode(',', $this->getColor($key)).')');
+                    array_push($temp['color'], "rgb(".implode(',', $this->getColor($key. '4')).')');
                 }
             }
             $covernote['cluster'] = $temp;
@@ -100,7 +100,7 @@ class DashboardController
                 if(!empty($val['notaris']['nama'])) {
                     array_push($temp['data'], $val['total']);
                     array_push($temp['label'], $val['notaris']['nama']);
-                    array_push($temp['color'], "rgb(".implode(',', $this->getColor($key. '4')).')');
+                    array_push($temp['color'], "rgb(".implode(',', $this->getColor($key)).')');
                 }
             }
             $covernote['notaris'] = $temp;
